@@ -1,0 +1,54 @@
+import gql from "graphql-tag";
+
+const schema = gql`
+  extend type Query {
+    notifications: [NotificationInfo]!
+    userInfo: UserInfo
+    uiState: UIState!
+  }
+
+  extend type Mutation {
+    pushNotification(message: String!): [NotificationInfo]!
+    shiftNotifications: NotificationInfo!
+
+    storeUserInfo(token: String!): UserInfo!
+    clearUserInfo: UserInfo
+
+    showLoginModal: Boolean
+    showSignUpModal: Boolean
+    hideAuthModal: Boolean
+  }
+
+  type UIState {
+    authModal: AuthModalState!
+  }
+
+  type AuthModalState {
+    open: Boolean!
+    mode: AuthModalMode
+  }
+
+  enum AuthModalMode {
+    LOGIN
+    SIGNUP
+  }
+
+  type UserInfo {
+    id: Int!
+    exp: Int!
+    iat: Int!
+    token: String!
+    username: String!
+    role: Role
+  }
+
+  enum Role {
+    ADMIN
+  }
+
+  type NotificationInfo {
+    message: String!
+  }
+`;
+
+export default schema;

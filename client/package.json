@@ -1,0 +1,45 @@
+{
+  "name": "movies-app-graphql-client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8000/",
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "apollo-boost": "^0.3.1",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-client": "^2.5.1",
+    "apollo-link-context": "^1.0.17",
+    "apollo-link-http": "^1.5.14",
+    "core-js": "^3.0.1",
+    "cross-fetch": "^3.0.2",
+    "dataloader": "^1.4.0",
+    "formik": "^1.5.4",
+    "graphql": "^14.2.1",
+    "graphql-tag": "^2.10.1",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.5",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-router-modal-gallery": "^1.0.4",
+    "react-scripts": "^3.0.0",
+    "react-virtualized": "^9.21.0",
+    "styled-components": "^4.2.0",
+    "yup": "^0.27.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "movies-app-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\"  \"npm run client\"",
+    "start": "npm run server",
+    "heroku-postbuild": "cd server && npm install && cd .. && cd client && npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
