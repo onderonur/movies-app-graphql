@@ -2,7 +2,7 @@
 import React from "react";
 import { DialogTitle, withMobileDialog } from "@material-ui/core";
 import styled from "styled-components";
-import GoBackButton from "components/GoBackButton";
+import CloseDialogButton from "components/CloseDialogButton";
 
 const StyledDialogTitle = styled(DialogTitle)`
   && {
@@ -22,7 +22,7 @@ const BaseDialogTitle = ({
 }) => (
   <StyledDialogTitle disableTypography>
     {showBackButton || fullScreen ? (
-      <GoBackButton style={{ marginRight: 8 }} onClick={onBackButtonClick} />
+      <CloseDialogButton style={{ marginRight: 8 }} onClick={onBackButtonClick} />
     ) : null}
     {children}
   </StyledDialogTitle>

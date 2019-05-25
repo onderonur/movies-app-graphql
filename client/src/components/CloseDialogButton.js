@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { ModalRouteContext } from "react-router-modal-gallery";
 import { IconButton } from "@material-ui/core";
-import ArrowBack from "@material-ui/icons/ArrowBack";
+import CloseIcon from "@material-ui/icons/Close";
 
-const GoBackButton = ({ style, onClick }) => {
+const CloseDialogButton = ({ style, onClick }) => {
   const { redirectToBack } = useContext(ModalRouteContext);
 
   return (
     <IconButton style={style} onClick={onClick || redirectToBack}>
-      <ArrowBack fontSize="small" />
+      <CloseIcon fontSize="small" />
     </IconButton>
   );
 };
 
-export default GoBackButton;
+export default CloseDialogButton;
