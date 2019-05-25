@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import useWindowHeight from "./useWindowHeight";
 
 const useInfiniteScroll = ({
-  hasNextPage,
   loading,
+  hasNextPage,
   loadMore,
   threshold = 150,
   checkInterval = 200
