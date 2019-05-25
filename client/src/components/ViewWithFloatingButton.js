@@ -10,6 +10,7 @@ const ViewWithFloatingButton = ({ children, buttonProps }) => {
       {...rest}
       styled={{
         position: "fixed",
+        right: "20px",
         bottom: "20px",
         zIndex: 100
       }}
