@@ -38,7 +38,7 @@ const BaseForm = ({
   children,
   ...formProps
 }) => (
-  <React.Fragment>
+  <>
     <FormikDirtyFormHandler />
     <StyledForm
       noValidate={noValidate}
@@ -47,7 +47,7 @@ const BaseForm = ({
     >
       {children}
     </StyledForm>
-  </React.Fragment>
+  </>
 );
 
 export default BaseForm;

@@ -14,7 +14,7 @@ import paths from "constants/paths";
 import { ModalLink } from "react-router-modal-gallery";
 
 const MovieListItem = ({ movie }) => (
-  <React.Fragment>
+  <>
     <ListItem
       button
       to={`${paths.MOVIES}/${movie.id}`}
@@ -45,7 +45,7 @@ const MovieListItem = ({ movie }) => (
         />
       </ListItemSecondaryAction>
     </ListItem>
-  </React.Fragment>
+  </>
 );
 
 export default MovieListItem;

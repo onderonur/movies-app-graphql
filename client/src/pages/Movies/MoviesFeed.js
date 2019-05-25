@@ -3,8 +3,6 @@ import React, { useCallback } from "react";
 import { GET_MOVIES } from "graphql/movie/queries";
 import MovieListQuery from "./MovieListQuery";
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper";
-import LoadingIndicator from "components/LoadingIndicator";
-import StyledBox from "styled/StyledBox";
 import MovieGridList from "./MovieGridList";
 
 const resolvePagingResponse = root => {
@@ -68,11 +66,6 @@ const Deneme = ({ movies, loading, fetchMore, endCursor, width }) => {
       >
         <MovieGridList movies={nodes} />
       </InfiniteScrollWrapper>
-      {loading && (
-        <StyledBox styled={{ margin: "12px" }}>
-          <LoadingIndicator />
-        </StyledBox>
-      )}
     </>
   );
 };

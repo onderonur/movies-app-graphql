@@ -28,7 +28,7 @@ const DirectorDetails = ({ director, loading, onEditClick }) => {
       <LoadingIndicator />
     </DialogContent>
   ) : (
-    <React.Fragment>
+    <>
       <BaseDialogTitle>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           {director.name}
@@ -54,7 +54,7 @@ const DirectorDetails = ({ director, loading, onEditClick }) => {
         onClose={hideDeleteConfirm}
         onCompleted={redirectToBack}
       />
-    </React.Fragment>
+    </>
   );
 };
 

@@ -43,7 +43,7 @@ const MovieDetails = ({ movie, loading, onEditClick }) => {
       <LoadingIndicator />
     </DialogContent>
   ) : (
-    <React.Fragment>
+    <>
       <BaseDialogTitle>
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           Movie Details
@@ -98,7 +98,7 @@ const MovieDetails = ({ movie, loading, onEditClick }) => {
 
         <StyledBox styled={{ padding: "16px" }}>
           {otherMovies.length ? (
-            <React.Fragment>
+            <>
               <Typography>
                 {otherMovies.length
                   ? `Other movies by `
@@ -106,7 +106,7 @@ const MovieDetails = ({ movie, loading, onEditClick }) => {
                 {directorLink}
               </Typography>
               <MovieList movies={otherMovies} />
-            </React.Fragment>
+            </>
           ) : (
             <Typography>
               {`There is no other movie by `}
@@ -122,7 +122,7 @@ const MovieDetails = ({ movie, loading, onEditClick }) => {
         onClose={hideDeleteConfirm}
         onCompleted={redirectToBack}
       />
-    </React.Fragment>
+    </>
   );
 };
 

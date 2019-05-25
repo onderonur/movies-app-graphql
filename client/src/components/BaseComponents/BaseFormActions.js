@@ -7,7 +7,7 @@ const BaseFormActions = ({
   submitText = "Save",
   cancelText = "Cancel"
 }) => (
-  <React.Fragment>
+  <>
     {onCancel ? (
       <BaseButton color="secondary" onClick={onCancel}>
         {cancelText}
@@ -16,7 +16,7 @@ const BaseFormActions = ({
     <BaseButton color="primary" type="submit" loading={isSubmitting}>
       {submitText}
     </BaseButton>
-  </React.Fragment>
+  </>
 );
 
 export default BaseFormActions;

@@ -15,7 +15,7 @@ const AccountMenu = () => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <IconButton color="inherit" onClick={handleOpenMenu}>
         <AccountCircle />
       </IconButton>
@@ -36,7 +36,7 @@ const AccountMenu = () => {
           {clearUserInfo => <MenuItem onClick={clearUserInfo}>Logout</MenuItem>}
         </LogoutMutation>
       </Menu>
-    </React.Fragment>
+    </>
   );
 };
 

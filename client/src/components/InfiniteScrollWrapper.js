@@ -1,6 +1,8 @@
 import React from "react";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { RootRef } from "@material-ui/core";
+import StyledBox from "styled/StyledBox";
+import LoadingIndicator from "./LoadingIndicator";
 
 const InfiniteScrollWrapper = ({
   itemCount,
@@ -16,7 +18,16 @@ const InfiniteScrollWrapper = ({
     loadMore
   });
 
-  return <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>;
+  return (
+    <>
+      <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>{" "}
+      {loading && (
+        <StyledBox styled={{ margin: "12px" }}>
+          <LoadingIndicator />
+        </StyledBox>
+      )}
+    </>
+  );
 };
 
 export default InfiniteScrollWrapper;

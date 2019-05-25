@@ -34,7 +34,7 @@ const BaseDialogForm = ({
     <DialogContent>{children}</DialogContent>
 
     {actions !== null ? (
-      <React.Fragment>
+      <>
         <Divider />
         <DialogActions>
           {actions ? (
@@ -52,7 +52,7 @@ const BaseDialogForm = ({
             />
           )}
         </DialogActions>
-      </React.Fragment>
+      </>
     ) : null}
   </BaseForm>
 );

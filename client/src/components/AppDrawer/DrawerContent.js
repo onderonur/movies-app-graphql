@@ -10,7 +10,7 @@ const DrawerContent = ({ isMobile, toggleDrawer }) => {
   const onItemClick = isMobile ? toggleDrawer : undefined;
 
   return (
-    <React.Fragment>
+    <>
       <List>
         <DrawerLinkItem
           to={paths.MOVIES}
@@ -26,7 +26,7 @@ const DrawerContent = ({ isMobile, toggleDrawer }) => {
         />
       </List>
       <Divider />
-    </React.Fragment>
+    </>
   );
 };
 

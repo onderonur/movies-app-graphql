@@ -5,7 +5,7 @@ import YouTubePlayer from "components/YoutubePlayer";
 import StyledBox from "styled/StyledBox";
 
 const YoutubeIdInput = ({ name, label, fullWidth, required, youtubeId }) => (
-  <React.Fragment>
+  <>
     <BaseTextField
       name={name}
       label={label}
@@ -19,7 +19,7 @@ const YoutubeIdInput = ({ name, label, fullWidth, required, youtubeId }) => (
     >
       <YouTubePlayer youtubeId={youtubeId} />
     </StyledBox>
-  </React.Fragment>
+  </>
 );
 
 export default YoutubeIdInput;

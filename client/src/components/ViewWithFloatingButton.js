@@ -19,7 +19,7 @@ const ViewWithFloatingButton = ({ children, buttonProps }) => {
   );
 
   return (
-    <React.Fragment>
+    <>
       <StyledBox styled={{ paddingBottom: "60px" }}>{children}</StyledBox>
       {allowedRolesToClick ? (
         <AccessControl allowedRoles={allowedRolesToClick}>
@@ -28,7 +28,7 @@ const ViewWithFloatingButton = ({ children, buttonProps }) => {
       ) : (
         button
       )}
-    </React.Fragment>
+    </>
   );
 };
 

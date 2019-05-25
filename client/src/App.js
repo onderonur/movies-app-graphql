@@ -25,11 +25,11 @@ const GlobayStyle = createGlobalStyle`
 export const NotificationContext = React.createContext();
 
 const App = () => (
-  <React.Fragment>
+  <>
     <GlobayStyle />
     <Mutation mutation={PUSH_NOTIFICATION}>
       {pushNotification => (
-        <React.Fragment>
+        <>
           <NotificationContext.Provider value={{ pushNotification }}>
             <Layout>
               <Routes />
@@ -48,10 +48,10 @@ const App = () => (
               </Mutation>
             )}
           </Query>
-        </React.Fragment>
+        </>
       )}
     </Mutation>
-  </React.Fragment>
+  </>
 );
 
 export default App;

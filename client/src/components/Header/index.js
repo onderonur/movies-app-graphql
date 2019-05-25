@@ -33,10 +33,10 @@ const Header = ({ toggleDrawer }) => (
           return isLoggedIn ? (
             <AccountMenu />
           ) : (
-            <React.Fragment>
+            <>
               <LoginButton />
               <SignUpButton />
-            </React.Fragment>
+            </>
           );
         }}
       </Query>

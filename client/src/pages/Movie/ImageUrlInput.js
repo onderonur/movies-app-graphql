@@ -4,7 +4,7 @@ import { BaseTextField } from "components/BaseComponents";
 import StyledImageContainer from "styled/StyledImageContainer";
 
 const ImageUrlInput = ({ name, label, fullWidth, required, imgSrc }) => (
-  <React.Fragment>
+  <>
     <BaseTextField
       name={name}
       label={label}
@@ -20,7 +20,7 @@ const ImageUrlInput = ({ name, label, fullWidth, required, imgSrc }) => (
         padding: "6px"
       }}
     />
-  </React.Fragment>
+  </>
 );
 
 export default ImageUrlInput;
