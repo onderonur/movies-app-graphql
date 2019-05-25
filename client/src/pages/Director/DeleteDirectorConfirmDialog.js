@@ -56,11 +56,12 @@ const DeleteDirectorConfirmDialog = ({
   return (
     <ConfirmDialog
       open={open}
-      title="Deleting Director"
+      title="Delete Director?"
       content={`Are you sure to delete ${
         director.name
       } and all of their movies?`}
       onClose={onClose}
+      okText="Delete"
       mutationProps={{
         mutation: DELETE_DIRECTOR,
         variables: {

@@ -44,7 +44,7 @@ const LoginForm = ({ onCancel, onCompleted }) => (
         onSubmit={values => signIn({ variables: values })}
       >
         <BaseForm>
-          <BaseDialogTitle>
+          <BaseDialogTitle fullScreen={false}>
             <Typography variant="h6">Login</Typography>
           </BaseDialogTitle>
           <DialogContent>

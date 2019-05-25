@@ -45,9 +45,10 @@ const DeleteMovieConfirmDialog = ({ open, movie, onClose, onCompleted }) => {
     movie && (
       <ConfirmDialog
         open={open}
-        title="Deleting Movie"
+        title="Delete Movie?"
         content={`Are you sure to delete ${movie.title}?`}
         onClose={onClose}
+        okText="Delete"
         mutationProps={{
           mutation: DELETE_MOVIE,
           variables: {

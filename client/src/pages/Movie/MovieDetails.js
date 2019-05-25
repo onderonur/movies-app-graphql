@@ -45,7 +45,7 @@ const MovieDetails = ({ movie, loading, onEditClick }) => {
   ) : (
     <React.Fragment>
       <BaseDialogTitle>
-        <Typography variant="h6" style={{ flexGrow: 1 }} noWrap>
+        <Typography variant="h6" style={{ flexGrow: 1 }}>
           Movie Details
         </Typography>
         <AccessControl allowedRoles={[roles.ADMIN]}>

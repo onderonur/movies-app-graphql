@@ -3,7 +3,7 @@ import { MOVIE_FRAGMENT } from "./fragments";
 
 export const GET_MOVIES = gql`
   query GetMovies($after: Cursor) {
-    movies(first: 10, after: $after) {
+    movies(first: 5, after: $after) {
       edges {
         node {
           ...movie

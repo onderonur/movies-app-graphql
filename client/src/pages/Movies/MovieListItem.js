@@ -32,15 +32,9 @@ const MovieListItem = ({ movie }) => (
       </ListItemAvatar>
 
       <ListItemText
-        primary={
-          <Typography color="primary" noWrap>
-            {movie.title}
-          </Typography>
-        }
+        primary={<Typography color="primary">{movie.title}</Typography>}
         secondary={
-          movie.director ? (
-            <Typography noWrap>{movie.director.name}</Typography>
-          ) : null
+          movie.director ? <Typography>{movie.director.name}</Typography> : null
         }
       />
 

@@ -10,7 +10,15 @@ import {
 import { Mutation } from "react-apollo";
 import { BaseButton } from "./BaseComponents";
 
-const ConfirmDialog = ({ open, onClose, title, content, mutationProps }) => (
+const ConfirmDialog = ({
+  open,
+  onClose,
+  title,
+  content,
+  mutationProps,
+  okText = "OK",
+  cancelText = "Cancel"
+}) => (
   <Dialog open={open} onClose={onClose}>
     <DialogTitle>{title}</DialogTitle>
     <DialogContent>
@@ -18,12 +26,12 @@ const ConfirmDialog = ({ open, onClose, title, content, mutationProps }) => (
     </DialogContent>
     <DialogActions>
       <BaseButton onClick={onClose} color="primary">
-        Cancel
+        {cancelText}
       </BaseButton>
       <Mutation {...mutationProps}>
         {(mutation, { loading }) => (
           <BaseButton color="primary" loading={loading} onClick={mutation}>
-            OK
+            {okText}
           </BaseButton>
         )}
       </Mutation>

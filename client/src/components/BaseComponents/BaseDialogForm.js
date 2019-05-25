@@ -23,11 +23,9 @@ const BaseDialogForm = ({
   defaultActions
 }) => (
   <BaseForm>
-    <BaseDialogTitle showBackButton onBackButtonClick={onCancel}>
+    <BaseDialogTitle>
       {typeof title === "string" ? (
-        <Typography variant="h6" noWrap>
-          {title}
-        </Typography>
+        <Typography variant="h6">{title}</Typography>
       ) : (
         title
       )}

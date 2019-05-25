@@ -1,13 +1,11 @@
 // OK
-import React from "react";
+import React, { useCallback } from "react";
 import { GET_MOVIES } from "graphql/movie/queries";
-import LoadingIndicator from "components/LoadingIndicator";
 import MovieListQuery from "./MovieListQuery";
-import { List } from "@material-ui/core";
-import MovieListItem from "./MovieListItem";
-import { BaseInfiniteScroll } from "components/BaseComponents";
-
-const ITEM_HEIGHT = 58;
+import InfiniteScrollWrapper from "components/InfiniteScrollWrapper";
+import LoadingIndicator from "components/LoadingIndicator";
+import StyledBox from "styled/StyledBox";
+import MovieGridList from "./MovieGridList";
 
 const resolvePagingResponse = root => {
   const edges = root ? root.edges : [];
@@ -19,84 +17,78 @@ const resolvePagingResponse = root => {
   return { nodes, hasNextPage };
 };
 
-const onLoadMore = (fetchMore, movies) => () => {
-  fetchMore({
-    query: GET_MOVIES,
-    variables: {
-      after: movies.pageInfo.endCursor
-    },
-    updateQuery: (previousResult, { fetchMoreResult }) => {
-      const newEdges = fetchMoreResult.movies.edges;
-      const pageInfo = fetchMoreResult.movies.pageInfo;
+const Deneme = ({ movies, loading, fetchMore, endCursor, width }) => {
+  const onLoadMore = useCallback(() => {
+    fetchMore({
+      query: GET_MOVIES,
+      variables: {
+        after: endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = fetchMoreResult.movies.edges;
+        const pageInfo = fetchMoreResult.movies.pageInfo;
 
-      // TODO: This is to fix the "duplicate items on fetchMore" bug.
-      // It occurs on too quick "fetchMore" + InfiniteScroll.
-      // Make "first" variable of "GET_MOVIES" query 1 or 2 etc.
-      // Make "threshold" of InfiniteScroll>InfiniteLoader 0.
-      // Remove this duplication filter and bug occurs.
-      const prevIds = previousResult.movies.edges.map(
-        prevEdge => prevEdge.node.id
-      );
-      const diff = newEdges.filter(edge => !prevIds.includes(edge.node.id));
+        // TODO: This is to fix the "duplicate items on fetchMore" bug of react-apollo.
+        // It occurs on too quick "fetchMore" + InfiniteScroll.
+        // Make "first" variable of "GET_MOVIES" query 1 or 2 etc.
+        // Make "threshold" of InfiniteScroll>InfiniteLoader 0.
+        // Remove this duplication filter and bug occurs.
+        const prevIds = previousResult.movies.edges.map(
+          prevEdge => prevEdge.node.id
+        );
+        const diff = newEdges.filter(edge => !prevIds.includes(edge.node.id));
 
-      if (!diff.length) {
-        console.log("Duplicate items on fetchMore: MoviesFeed");
-        return previousResult;
-      }
-
-      return {
-        // Put the new movies at the end of the list and update `pageInfo`
-        // so we have the new `endCursor` and `hasNextPage` values
-        movies: {
-          __typename: previousResult.movies.__typename,
-          edges: [...previousResult.movies.edges, ...diff],
-          pageInfo
+        if (!diff.length) {
+          console.log("Duplicate items on fetchMore: MoviesFeed");
+          return previousResult;
         }
-      };
-    }
-  });
+
+        return {
+          // Put the new movies at the end of the list and update `pageInfo`
+          // so we have the new `endCursor` and `hasNextPage` values
+          movies: {
+            __typename: previousResult.movies.__typename,
+            edges: [...previousResult.movies.edges, ...diff],
+            pageInfo
+          }
+        };
+      }
+    });
+  }, [fetchMore, endCursor]);
+
+  const { nodes, hasNextPage } = resolvePagingResponse(movies);
+
+  return (
+    <>
+      <InfiniteScrollWrapper
+        itemCount={nodes.length}
+        hasNextPage={hasNextPage}
+        loading={loading}
+        loadMore={onLoadMore}
+      >
+        <MovieGridList movies={nodes} />
+      </InfiniteScrollWrapper>
+      {loading && (
+        <StyledBox styled={{ margin: "12px" }}>
+          <LoadingIndicator />
+        </StyledBox>
+      )}
+    </>
+  );
 };
 
 const MoviesFeed = () => {
   return (
     <MovieListQuery>
       {({ loading, movies, fetchMore }) => {
-        if (loading && !movies) {
-          return <LoadingIndicator />;
-        }
-
-        const { nodes, hasNextPage } = resolvePagingResponse(movies);
-
+        const endCursor = movies ? movies.pageInfo.endCursor : null;
         return (
-          <List>
-            {/* <InfiniteScroll
-                hasNextPage={hasNextPage}
-                isNextPageLoading={loading}
-                loadNextPage={onLoadMore(fetchMore, movies)}
-                items={nodes}
-                itemRenderer={({ item }) => {
-                  const movie = item;
-
-                  return (
-                    <MovieListItem
-                      movie={movie}
-                    />
-                  );
-                }}
-              /> */}
-            <BaseInfiniteScroll
-              hasNextPage={hasNextPage}
-              isNextPageLoading={loading}
-              loadNextPage={onLoadMore(fetchMore, movies)}
-              rowHeight={ITEM_HEIGHT}
-              items={nodes}
-              itemRenderer={({ item }) => {
-                const movie = item;
-
-                return <MovieListItem movie={movie} />;
-              }}
-            />
-          </List>
+          <Deneme
+            loading={loading}
+            movies={movies}
+            fetchMore={fetchMore}
+            endCursor={endCursor}
+          />
         );
       }}
     </MovieListQuery>

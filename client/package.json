@@ -23,7 +23,6 @@
     "react-router-dom": "^5.0.0",
     "react-router-modal-gallery": "^1.0.4",
     "react-scripts": "^3.0.0",
-    "react-virtualized": "^9.21.0",
     "styled-components": "^4.2.0",
     "yup": "^0.27.0"
   },

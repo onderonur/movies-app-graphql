@@ -1,9 +1,9 @@
+import { isWidthUp } from "@material-ui/core/withWidth";
+
 export const checkIsMobile = width => {
-  switch (width) {
-    case "sm":
-    case "xs":
-      return true;
-    default:
-      return false;
+  if (isWidthUp("md", width, true)) {
+    return false;
   }
+
+  return true;
 };

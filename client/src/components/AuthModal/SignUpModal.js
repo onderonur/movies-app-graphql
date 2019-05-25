@@ -46,7 +46,7 @@ const SignUpModal = ({ onCancel, onCompleted }) => (
         okText="Submit"
       >
         <BaseForm>
-          <BaseDialogTitle>
+          <BaseDialogTitle fullScreen={false}>
             <Typography variant="h6">Sign Up</Typography>
           </BaseDialogTitle>
           <DialogContent>

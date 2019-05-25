@@ -13,7 +13,7 @@ const Movies = () => (
     <ViewWithFloatingButton
       buttonProps={{
         color: "primary",
-        size: "medium",
+        size: "large",
         component: ModalLink,
         to: `${paths.MOVIES}/new`,
         icon: <AddIcon />,

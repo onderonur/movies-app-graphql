@@ -5,7 +5,7 @@ import StyledBox from "styled/StyledBox";
 
 const LoadingIndicator = () => (
   <StyledBox styled={{ textAlign: "center" }}>
-    <CircularProgress />
+    <CircularProgress size={60}/>
   </StyledBox>
 );
 
