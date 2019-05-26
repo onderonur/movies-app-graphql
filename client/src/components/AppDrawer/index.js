@@ -1,6 +1,6 @@
 // OK
 import React, { useState, useEffect } from "react";
-import { Divider, Drawer, Toolbar, SwipeableDrawer } from "@material-ui/core";
+import { Divider, Toolbar, SwipeableDrawer } from "@material-ui/core";
 import styled, { css } from "styled-components";
 import { breakpoints } from "styled/media";
 import DetectMobile from "components/DetectMobile";
@@ -22,19 +22,11 @@ const StyledNav = styled.nav`
   }
 `;
 
-const drawerStyle = css`
+const StyledSwipeableDrawer = styled(SwipeableDrawer)`
   .drawerPaper {
     width: ${drawerWidth}px;
     background-color: ${props => props.theme.palette.background.paper};
   }
-`;
-
-const StyledDrawer = styled(Drawer)`
-  ${drawerStyle}
-`;
-
-const StyledSwipeableDrawer = styled(SwipeableDrawer)`
-  ${drawerStyle}
 `;
 
 const AppDrawer = ({ children, isMobile, location }) => {
@@ -50,42 +42,25 @@ const AppDrawer = ({ children, isMobile, location }) => {
     }
   }, [location.pathname, isMobile]);
 
-  const content = (
-    <>
-      <Toolbar>
-        <DrawerToggler toggleDrawer={toggleDrawer} />
-      </Toolbar>
-      <Divider />
-      <DrawerContent />
-    </>
-  );
-
-  const sharedDrawerProps = {
-    anchor: "left",
-    open,
-    classes: {
-      paper: "drawerPaper"
-    }
-  };
-
   return (
     <StyledNav drawerOpen={open}>
       <DetectMobile>
-        {({ isMobile }) =>
-          isMobile ? (
-            <StyledSwipeableDrawer
-              {...sharedDrawerProps}
-              onOpen={toggleDrawer}
-              onClose={toggleDrawer}
-            >
-              {content}
-            </StyledSwipeableDrawer>
-          ) : (
-            <StyledDrawer {...sharedDrawerProps} variant={"persistent"}>
-              {content}
-            </StyledDrawer>
-          )
-        }
+        {({ isMobile }) => (
+          <StyledSwipeableDrawer
+            variant={isMobile ? "temporary" : "persistent"}
+            anchor="left"
+            open={open}
+            onOpen={toggleDrawer}
+            onClose={toggleDrawer}
+            disableSwipeToOpen={!isMobile}
+          >
+            <Toolbar>
+              <DrawerToggler toggleDrawer={toggleDrawer} />
+            </Toolbar>
+            <Divider />
+            <DrawerContent />
+          </StyledSwipeableDrawer>
+        )}
       </DetectMobile>
       {children({ toggleDrawer })}
     </StyledNav>
