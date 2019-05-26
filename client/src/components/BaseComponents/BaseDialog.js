@@ -23,7 +23,6 @@ const CloseButton = ({ onClick }) => (
   </StyledBox>
 );
 
-// TODO: Bunu BaseDialog'a filan çevir
 const BaseDialog = ({
   open,
   onClose,

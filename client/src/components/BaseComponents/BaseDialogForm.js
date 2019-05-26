@@ -11,9 +11,6 @@ import {
   Divider
 } from "@material-ui/core";
 
-// TODO: İsmini değiştir.
-// BaseForm, BaseFormik, BaseDialogForm vs'yi bi düzenle.
-// Hatta belki BaseForm ve BaseFormik birleştirilebilir vs.
 const BaseDialogForm = ({
   title,
   children,
