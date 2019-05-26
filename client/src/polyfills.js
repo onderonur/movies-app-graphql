@@ -1,4 +1,3 @@
-// OK
 // IE11
 import "core-js/features/promise";
 import "core-js/features/object/assign";

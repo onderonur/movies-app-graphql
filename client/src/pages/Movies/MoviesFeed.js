@@ -25,27 +25,12 @@ const onLoadMore = (fetchMore, movies) => {
       const newEdges = fetchMoreResult.movies.edges;
       const pageInfo = fetchMoreResult.movies.pageInfo;
 
-      // TODO: This is to fix the "duplicate items on fetchMore" bug of react-apollo.
-      // It occurs on too quick "fetchMore" + InfiniteScroll.
-      // Make "first" variable of "GET_MOVIES" query 1 or 2 etc.
-      // Make "threshold" of InfiniteScroll>InfiniteLoader 0.
-      // Remove this duplication filter and bug occurs.
-      const prevIds = previousResult.movies.edges.map(
-        prevEdge => prevEdge.node.id
-      );
-      const diff = newEdges.filter(edge => !prevIds.includes(edge.node.id));
-
-      if (!diff.length) {
-        console.log("Duplicate items on fetchMore: MoviesFeed");
-        return previousResult;
-      }
-
       return {
         // Put the new movies at the end of the list and update `pageInfo`
         // so we have the new `endCursor` and `hasNextPage` values
         movies: {
           __typename: previousResult.movies.__typename,
-          edges: [...previousResult.movies.edges, ...diff],
+          edges: [...previousResult.movies.edges, ...newEdges],
           pageInfo
         }
       };
