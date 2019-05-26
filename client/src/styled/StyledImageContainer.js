@@ -16,9 +16,7 @@ const StyledImageContainer = styled(ImageContainer)`
       : "";
   }}
   img {
-    object-fit: contain;
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
   }
 `;
 
