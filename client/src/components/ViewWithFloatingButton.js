@@ -1,27 +1,24 @@
 import React from "react";
-import StyledBox from "styled/StyledBox";
 import FloatingButton from "./FloatingButton";
 import AccessControl from "./AccessControl";
+import { makeStyles } from "@material-ui/styles";
 
-const ViewWithFloatingButton = ({ children, buttonProps }) => {
+const useStyles = makeStyles(theme => ({
+  children: {
+    paddingBottom: theme.spacing(10)
+  }
+}));
+
+function ViewWithFloatingButton({ children, buttonProps }) {
+  const classes = useStyles();
+
   const { icon, allowedRolesToClick, ...rest } = buttonProps;
-  const button = (
-    <FloatingButton
-      {...rest}
-      styled={{
-        position: "fixed",
-        right: "20px",
-        bottom: "20px",
-        zIndex: 100
-      }}
-    >
-      {icon}
-    </FloatingButton>
-  );
+
+  const button = <FloatingButton {...rest}>{icon}</FloatingButton>;
 
   return (
     <>
-      <StyledBox styled={{ paddingBottom: "60px" }}>{children}</StyledBox>
+      <div className={classes.children}>{children}</div>
       {allowedRolesToClick ? (
         <AccessControl allowedRoles={allowedRolesToClick}>
           {button}
@@ -31,6 +28,6 @@ const ViewWithFloatingButton = ({ children, buttonProps }) => {
       )}
     </>
   );
-};
+}
 
 export default ViewWithFloatingButton;

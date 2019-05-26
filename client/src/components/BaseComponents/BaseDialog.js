@@ -2,28 +2,32 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, withMobileDialog, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import StyledBox from "styled/StyledBox";
-import styled from "styled-components";
+import { makeStyles } from "@material-ui/styles";
 
-const StyledCloseIcon = styled(CloseIcon)`
-  color: #fafafa;
-`;
+const useStyles = makeStyles(theme => ({
+  closeIcon: {
+    color: "#fafafa"
+  },
+  closeButtonContainer: {
+    position: "fixed",
+    top: 4,
+    right: 4
+  }
+}));
 
-const CloseButton = ({ onClick }) => (
-  <StyledBox
-    styled={{
-      position: "fixed",
-      top: "4px",
-      right: "4px"
-    }}
-  >
-    <IconButton onClick={onClick}>
-      <StyledCloseIcon />
-    </IconButton>
-  </StyledBox>
-);
+function CloseButton({ onClick }) {
+  const classes = useStyles();
 
-const BaseDialog = ({
+  return (
+    <div className={classes.closeButtonContainer}>
+      <IconButton className={classes.closeIcon} onClick={onClick}>
+        <CloseIcon />
+      </IconButton>
+    </div>
+  );
+}
+
+function BaseDialog({
   open,
   onClose,
   onExited,
@@ -32,25 +36,25 @@ const BaseDialog = ({
   hideCloseButton,
   children,
   ...rest
-}) => {
+}) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setShowModal(open);
   }, [open]);
 
-  const startExitAnimation = () => {
+  function startExitAnimation() {
     setShowModal(false);
     if (onClose) {
       onClose();
     }
-  };
+  }
 
-  const onExitAnimationEnd = () => {
+  function onExitAnimationEnd() {
     if (onExited) {
       onExited();
     }
-  };
+  }
 
   return (
     <Dialog
@@ -67,6 +71,6 @@ const BaseDialog = ({
       )}
     </Dialog>
   );
-};
+}
 
 export default withMobileDialog()(BaseDialog);

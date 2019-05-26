@@ -3,24 +3,26 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_USER_INFO } from "graphql/cache/queries";
 
-const AccessControl = ({ allowedRoles, children }) => (
-  <Query query={GET_USER_INFO}>
-    {({ data: { userInfo } }) => {
-      const isLoggedIn = !!userInfo;
+function AccessControl({ allowedRoles, children }) {
+  return (
+    <Query query={GET_USER_INFO}>
+      {({ data: { userInfo } }) => {
+        const isLoggedIn = !!userInfo;
 
-      if (!isLoggedIn) {
-        return null;
-      }
+        if (!isLoggedIn) {
+          return null;
+        }
 
-      const { role } = userInfo;
+        const { role } = userInfo;
 
-      if (!role || !allowedRoles.includes(role)) {
-        return null;
-      }
+        if (!role || !allowedRoles.includes(role)) {
+          return null;
+        }
 
-      return children;
-    }}
-  </Query>
-);
+        return children;
+      }}
+    </Query>
+  );
+}
 
 export default AccessControl;

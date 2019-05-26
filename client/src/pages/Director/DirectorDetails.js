@@ -11,17 +11,17 @@ import { ModalRouteContext } from "react-router-modal-gallery";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 
-const DirectorDetails = ({ director, loading, onEditClick }) => {
+function DirectorDetails({ director, loading, onEditClick }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const { redirectToBack } = useContext(ModalRouteContext);
 
-  const showDeleteConfirm = () => {
+  function showDeleteConfirm() {
     setDeleteConfirmVisible(true);
-  };
+  }
 
-  const hideDeleteConfirm = () => {
+  function hideDeleteConfirm() {
     setDeleteConfirmVisible(false);
-  };
+  }
 
   return loading ? (
     <DialogContent>
@@ -56,6 +56,6 @@ const DirectorDetails = ({ director, loading, onEditClick }) => {
       />
     </>
   );
-};
+}
 
 export default DirectorDetails;

@@ -3,11 +3,11 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { Field } from "formik";
 
-const MuiTextField = ({
+function MuiTextField({
   field, // {name, value, onChange, onBlur}
   form, // {touched, errors, values, setXXXX, handleXXXX, dirty, isValid, submitCount,status, etc.}
   ...props
-}) => {
+}) {
   const { name } = field;
   const { touched, errors } = form;
 
@@ -15,6 +15,7 @@ const MuiTextField = ({
   const isTouched = touched[name];
 
   const hasError = error && isTouched;
+
   return (
     <TextField
       {...field}
@@ -23,8 +24,10 @@ const MuiTextField = ({
       helperText={hasError ? error : ""}
     />
   );
-};
+}
 
-const BaseTextField = props => <Field {...props} component={MuiTextField} />;
+function BaseTextField(props) {
+  return <Field {...props} component={MuiTextField} />;
+}
 
 export default BaseTextField;

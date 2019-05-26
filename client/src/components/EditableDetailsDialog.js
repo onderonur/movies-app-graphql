@@ -4,23 +4,23 @@ import { ModalRouteContext } from "react-router-modal-gallery";
 import { Query } from "react-apollo";
 import { BaseDialog } from "./BaseComponents";
 
-const EditableDetailsDialog = ({
+function EditableDetailsDialog({
   id,
   renderDetails,
   renderForm,
   queryProps: { query, variables }
-}) => {
+}) {
   const isNew = id === "new";
   const { redirectToBack } = useContext(ModalRouteContext);
   const [editing, setEditing] = useState(isNew);
 
-  const startEditing = () => {
+  function startEditing() {
     setEditing(true);
-  };
+  }
 
-  const finishEditing = () => {
+  function finishEditing() {
     setEditing(false);
-  };
+  }
 
   return (
     <BaseDialog open onExited={redirectToBack}>
@@ -37,6 +37,6 @@ const EditableDetailsDialog = ({
       </Query>
     </BaseDialog>
   );
-};
+}
 
 export default EditableDetailsDialog;

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import LogoutMutation from "./LogoutMutation"
+import LogoutMutation from "./LogoutMutation";
 
-const AccountMenu = () => {
+function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleOpenMenu = e => {
+  function handleOpenMenu(e) {
     setAnchorEl(e.currentTarget);
-  };
+  }
 
-  const handleCloseMenu = () => {
+  function handleCloseMenu() {
     setAnchorEl(null);
-  };
+  }
 
   return (
     <>
@@ -38,6 +38,6 @@ const AccountMenu = () => {
       </Menu>
     </>
   );
-};
+}
 
 export default AccountMenu;

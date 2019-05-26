@@ -1,40 +1,42 @@
 // OK
 import React, { useState, useEffect } from "react";
-import { Divider, Toolbar, SwipeableDrawer } from "@material-ui/core";
-import styled, { css } from "styled-components";
-import { breakpoints } from "styled/media";
-import DetectMobile from "components/DetectMobile";
-import DrawerToggler from "./DrawerToggler";
+import {
+  Divider,
+  Toolbar,
+  SwipeableDrawer,
+  makeStyles
+} from "@material-ui/core";
 import DrawerContent from "./DrawerContent";
 import { withRouter } from "react-router-dom";
-import { withDetectMobile } from "hoc/withDetectMobile";
+import useDetectMobile from "hooks/useDetectMobile";
+import DrawerToggler from "./DrawerToggler";
 
-export const drawerWidth = 240;
+const DRAWER_WIDTH = 240;
 
-export const drawerSlideTransition = css`
-  transition: all 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
-`;
-
-const StyledNav = styled.nav`
-  ${drawerSlideTransition};
-  @media (min-width: ${breakpoints.md}px) {
-    width: ${props => (props.drawerOpen ? drawerWidth : 0)}px;
+const useStyles = makeStyles(theme => ({
+  nav: {
+    transition: theme.transitions.create("all", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    [theme.breakpoints.up("md")]: {
+      width: ({ open }) => (open ? DRAWER_WIDTH : 0)
+    }
+  },
+  drawerPaper: {
+    width: DRAWER_WIDTH,
+    backgrounColor: theme.palette.background.paper
   }
-`;
+}));
 
-const StyledSwipeableDrawer = styled(SwipeableDrawer)`
-  .drawerPaper {
-    width: ${drawerWidth}px;
-    background-color: ${props => props.theme.palette.background.paper};
-  }
-`;
-
-const AppDrawer = ({ children, isMobile, location }) => {
+function AppDrawer({ children, location }) {
   const [open, setOpen] = useState(false);
+  const classes = useStyles({ open });
+  const isMobile = useDetectMobile();
 
-  const toggleDrawer = () => {
+  function toggleDrawer() {
     setOpen(!open);
-  };
+  }
 
   useEffect(() => {
     if (isMobile) {
@@ -43,28 +45,27 @@ const AppDrawer = ({ children, isMobile, location }) => {
   }, [location.pathname, isMobile]);
 
   return (
-    <StyledNav drawerOpen={open}>
-      <DetectMobile>
-        {({ isMobile }) => (
-          <StyledSwipeableDrawer
-            variant={isMobile ? "temporary" : "persistent"}
-            anchor="left"
-            open={open}
-            onOpen={toggleDrawer}
-            onClose={toggleDrawer}
-            disableSwipeToOpen={!isMobile}
-          >
-            <Toolbar>
-              <DrawerToggler toggleDrawer={toggleDrawer} />
-            </Toolbar>
-            <Divider />
-            <DrawerContent />
-          </StyledSwipeableDrawer>
-        )}
-      </DetectMobile>
+    <nav className={classes.nav}>
+      <SwipeableDrawer
+        classes={{
+          paper: classes.drawerPaper
+        }}
+        variant={isMobile ? "temporary" : "persistent"}
+        anchor="left"
+        open={open}
+        onOpen={toggleDrawer}
+        onClose={toggleDrawer}
+        disableSwipeToOpen={!isMobile}
+      >
+        <Toolbar>
+          <DrawerToggler toggleDrawer={toggleDrawer} />
+        </Toolbar>
+        <Divider />
+        <DrawerContent />
+      </SwipeableDrawer>
       {children({ toggleDrawer })}
-    </StyledNav>
+    </nav>
   );
-};
+}
 
-export default withRouter(withDetectMobile(AppDrawer));
+export default withRouter(AppDrawer);

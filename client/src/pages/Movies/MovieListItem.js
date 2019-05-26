@@ -11,14 +11,15 @@ import {
 import ImageIcon from "@material-ui/icons/Image";
 import MovieLikeButton from "./MovieLikeButton";
 import paths from "constants/paths";
-import { ModalLink } from "react-router-modal-gallery";
+import { BaseLink } from "components/BaseComponents";
 
 const MovieListItem = ({ movie }) => (
   <>
     <ListItem
       button
       to={`${paths.MOVIES}/${movie.id}`}
-      component={ModalLink}
+      toModal
+      component={BaseLink}
       divider
     >
       <ListItemAvatar>

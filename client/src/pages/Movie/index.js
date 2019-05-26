@@ -8,12 +8,12 @@ import MovieForm from "./MovieForm";
 import MovieDetails from "./MovieDetails";
 import { BaseDialog } from "components/BaseComponents";
 
-const Movie = ({
+function Movie({
   match: {
     params: { movieId }
   },
   history
-}) => {
+}) {
   const isNewMovie = movieId === "new";
   const { redirectToBack } = useContext(ModalRouteContext);
 
@@ -33,7 +33,7 @@ const Movie = ({
               movie={movie}
               loading={loading}
               onSubmitCompleted={({ savedMovie }) => {
-                // Bu kısmı da editor'e al
+                // TODO: Bu kısmı da editor'e al
                 if (isNewMovie) {
                   history.replace({
                     pathname: `${paths.MOVIES}/${savedMovie.id}`,
@@ -43,7 +43,7 @@ const Movie = ({
 
                 finishEditing();
               }}
-              // Editore al bunu da
+              // TODO: Editore al bunu da
               onCancel={isNewMovie ? redirectToBack : finishEditing}
             />
           );
@@ -62,6 +62,6 @@ const Movie = ({
       />
     </BaseDialog>
   );
-};
+}
 
 export default Movie;

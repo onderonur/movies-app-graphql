@@ -1,31 +1,36 @@
 // OK
 import React from "react";
-import { DialogTitle, withMobileDialog } from "@material-ui/core";
-import styled from "styled-components";
+import { DialogTitle, withMobileDialog, makeStyles } from "@material-ui/core";
 import CloseDialogButton from "components/CloseDialogButton";
 
-const StyledDialogTitle = styled(DialogTitle)`
-  && {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid ${props => props.theme.palette.divider};
-    padding: ${props => props.theme.spacing.unit}px
-      ${props => props.theme.spacing.unit * 2}px;
+const useStyles = makeStyles(theme => ({
+  title: {
+    display: "flex",
+    alignItems: "center",
+    borderBottom: `1px solid ${theme.palette.divider}`,
+    padding: `${theme.spacing(1)}px ${theme.spacing(2)}px`
   }
-`;
+}));
 
-const BaseDialogTitle = ({
+function BaseDialogTitle({
   showBackButton,
   onBackButtonClick,
   fullScreen,
   children
-}) => (
-  <StyledDialogTitle disableTypography>
-    {showBackButton || fullScreen ? (
-      <CloseDialogButton style={{ marginRight: 8 }} onClick={onBackButtonClick} />
-    ) : null}
-    {children}
-  </StyledDialogTitle>
-);
+}) {
+  const classes = useStyles();
+
+  return (
+    <DialogTitle disableTypography className={classes.title}>
+      {showBackButton || fullScreen ? (
+        <CloseDialogButton
+          style={{ marginRight: 8 }}
+          onClick={onBackButtonClick}
+        />
+      ) : null}
+      {children}
+    </DialogTitle>
+  );
+}
 
 export default withMobileDialog()(BaseDialogTitle);

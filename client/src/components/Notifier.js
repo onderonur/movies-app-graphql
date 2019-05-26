@@ -11,7 +11,7 @@ const initialState = {
 const SHOW_MESSAGE = "SHOW_MESSAGE";
 const HIDE_MESSAGE = "HIDE_MESSAGE";
 
-const notifierReducer = (state, action) => {
+function notifierReducer(state, action) {
   switch (action.type) {
     case SHOW_MESSAGE:
       return {
@@ -24,19 +24,19 @@ const notifierReducer = (state, action) => {
     default:
       return state;
   }
-};
+}
 
-const Notifier = ({ queue, shiftNotifications }) => {
+function Notifier({ queue, shiftNotifications }) {
   const [state, dispatch] = useReducer(notifierReducer, initialState);
   const isVisible = useRef(false);
 
   const { open, notificationInfo } = state;
 
-  const handleClose = (event, reason) => {
+  function handleClose(event, reason) {
     if (reason !== "clickaway") {
       dispatch({ type: HIDE_MESSAGE });
     }
-  };
+  }
 
   const processQueue = useCallback(() => {
     if (queue.length) {
@@ -50,9 +50,9 @@ const Notifier = ({ queue, shiftNotifications }) => {
     }
   }, [queue.length, shiftNotifications]);
 
-  const handleExited = () => {
+  function handleExited() {
     processQueue();
-  };
+  }
 
   useEffect(() => {
     if (queue.length) {
@@ -84,6 +84,6 @@ const Notifier = ({ queue, shiftNotifications }) => {
       }
     />
   );
-};
+}
 
 export default Notifier;

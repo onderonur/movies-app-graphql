@@ -2,7 +2,7 @@
 import React from "react";
 import { Formik } from "formik";
 
-const BaseFormik = ({
+function BaseFormik({
   enableReinitialize = true,
   validateOnBlur = false,
   validateOnChange,
@@ -12,21 +12,23 @@ const BaseFormik = ({
   onReset,
   render,
   children
-}) => (
-  <Formik
-    // enableReinitialize: Fetch bittikten sonraki initialValue değerinin
-    // form'a verilebilmesi için (async).
-    enableReinitialize={enableReinitialize}
-    initialValues={initialValues}
-    validationSchema={validationSchema}
-    validateOnBlur={validateOnBlur}
-    validateOnChange={validateOnChange}
-    onSubmit={onSubmit}
-    onReset={onReset}
-    render={render}
-  >
-    {children}
-  </Formik>
-);
+}) {
+  return (
+    <Formik
+      // enableReinitialize: Fetch bittikten sonraki initialValue değerinin
+      // form'a verilebilmesi için (async).
+      enableReinitialize={enableReinitialize}
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      validateOnBlur={validateOnBlur}
+      validateOnChange={validateOnChange}
+      onSubmit={onSubmit}
+      onReset={onReset}
+      render={render}
+    >
+      {children}
+    </Formik>
+  );
+}
 
 export default BaseFormik;

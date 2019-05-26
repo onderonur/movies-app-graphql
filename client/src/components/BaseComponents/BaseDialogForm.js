@@ -11,47 +11,49 @@ import {
   Divider
 } from "@material-ui/core";
 
-const BaseDialogForm = ({
+function BaseDialogForm({
   title,
   children,
   isSubmitting,
   onCancel,
   actions,
   defaultActions
-}) => (
-  <BaseForm>
-    <BaseDialogTitle>
-      {typeof title === "string" ? (
-        <Typography variant="h6">{title}</Typography>
-      ) : (
-        title
-      )}
-    </BaseDialogTitle>
+}) {
+  return (
+    <BaseForm>
+      <BaseDialogTitle>
+        {typeof title === "string" ? (
+          <Typography variant="h6">{title}</Typography>
+        ) : (
+          title
+        )}
+      </BaseDialogTitle>
 
-    <DialogContent>{children}</DialogContent>
+      <DialogContent>{children}</DialogContent>
 
-    {actions !== null ? (
-      <>
-        <Divider />
-        <DialogActions>
-          {actions ? (
-            actions
-          ) : (
-            <BaseFormActions
-              isSubmitting={isSubmitting}
-              submitText={
-                defaultActions ? defaultActions.submitText : undefined
-              }
-              cancelText={
-                defaultActions ? defaultActions.cancelText : undefined
-              }
-              onCancel={onCancel}
-            />
-          )}
-        </DialogActions>
-      </>
-    ) : null}
-  </BaseForm>
-);
+      {actions !== null ? (
+        <>
+          <Divider />
+          <DialogActions>
+            {actions ? (
+              actions
+            ) : (
+              <BaseFormActions
+                isSubmitting={isSubmitting}
+                submitText={
+                  defaultActions ? defaultActions.submitText : undefined
+                }
+                cancelText={
+                  defaultActions ? defaultActions.cancelText : undefined
+                }
+                onCancel={onCancel}
+              />
+            )}
+          </DialogActions>
+        </>
+      ) : null}
+    </BaseForm>
+  );
+}
 
 export default BaseDialogForm;

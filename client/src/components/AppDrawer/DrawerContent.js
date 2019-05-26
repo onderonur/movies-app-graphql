@@ -6,7 +6,7 @@ import paths from "constants/paths";
 import MovieIcon from "@material-ui/icons/Movie";
 import PersonIcon from "@material-ui/icons/Person";
 
-const DrawerContent = ({ isMobile, toggleDrawer }) => {
+function DrawerContent({ isMobile, toggleDrawer }) {
   const onItemClick = isMobile ? toggleDrawer : undefined;
 
   return (
@@ -28,6 +28,6 @@ const DrawerContent = ({ isMobile, toggleDrawer }) => {
       <Divider />
     </>
   );
-};
+}
 
 export default DrawerContent;

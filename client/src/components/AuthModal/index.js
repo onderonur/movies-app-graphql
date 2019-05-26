@@ -9,7 +9,7 @@ import { BaseDialog } from "components/BaseComponents";
 const LOGIN = "LOGIN";
 const SIGNUP = "SIGNUP";
 
-const AuthModal = () => {
+function AuthModal() {
   return (
     <Query query={GET_AUTH_MODAL_STATE}>
       {({
@@ -21,11 +21,7 @@ const AuthModal = () => {
       }) => (
         <Mutation mutation={HIDE_AUTH_MODAL}>
           {hideAuthModal => (
-            <BaseDialog
-              open={open}
-              fullScreen={false}
-              onClose={hideAuthModal}
-            >
+            <BaseDialog open={open} fullScreen={false} onClose={hideAuthModal}>
               <Mutation mutation={STORE_USER_INFO}>
                 {storeUserInfo => {
                   const sharedProps = {
@@ -50,6 +46,6 @@ const AuthModal = () => {
       )}
     </Query>
   );
-};
+}
 
 export default AuthModal;

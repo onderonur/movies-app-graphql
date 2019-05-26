@@ -1,15 +1,17 @@
 import React from "react";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { RootRef } from "@material-ui/core";
-import StyledBox from "styled/StyledBox";
 import LoadingIndicator from "./LoadingIndicator";
+import { makeStyles } from "@material-ui/styles";
 
-const InfiniteScrollWrapper = ({
-  hasNextPage,
-  loading,
-  loadMore,
-  children
-}) => {
+const useStyles = makeStyles(theme => ({
+  loadingContainer: {
+    margin: theme.spacing(1)
+  }
+}));
+
+function InfiniteScrollWrapper({ hasNextPage, loading, loadMore, children }) {
+  const classes = useStyles();
   const infiniteContainerRef = useInfiniteScroll({
     hasNextPage,
     loading,
@@ -20,12 +22,12 @@ const InfiniteScrollWrapper = ({
     <>
       <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>
       {loading && (
-        <StyledBox styled={{ margin: "12px" }}>
+        <div className={classes.loadingContainer}>
           <LoadingIndicator />
-        </StyledBox>
+        </div>
       )}
     </>
   );
-};
+}
 
 export default InfiniteScrollWrapper;

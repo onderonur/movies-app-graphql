@@ -5,5 +5,6 @@ export { default as BaseDialogTitle } from "./BaseDialogTitle";
 export { default as BaseForm } from "./BaseForm";
 export { default as BaseFormActions } from "./BaseFormActions";
 export { default as BaseFormik } from "./BaseFormik";
+export { default as BaseLink } from "./BaseLink";
 export { default as BaseList } from "./BaseList";
 export { default as BaseTextField } from "./BaseTextField";

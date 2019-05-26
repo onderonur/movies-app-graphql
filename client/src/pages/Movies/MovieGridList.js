@@ -1,23 +1,35 @@
 import React from "react";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
-import withWidth, { isWidthUp } from "@material-ui/core/withWidth";
-import { ModalLink } from "react-router-modal-gallery";
 import paths from "constants/paths";
 import MovieLikeButton from "./MovieLikeButton";
-import styled from "styled-components";
 import placeholderPng from "assets/placeholder.png";
+import { makeStyles } from "@material-ui/styles";
+import useWidth from "hooks/useWidth";
+import { isWidthUp } from "@material-ui/core/withWidth";
+import { BaseLink } from "components/BaseComponents";
 
-const ImageBackground = styled.div`
-  width: 100%;
-  height: 100%;
-  background-image: url(${props => props.imageUrl});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`;
+// TODO: Bunu düz div içinde img'ye çevir
+const useStyles = makeStyles(theme => ({
+  imgBackground: {
+    width: "100%",
+    height: "100%",
+    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
+  }
+}));
 
-const MovieGridList = ({ width, movies }) => {
-  const getGridListCols = () => {
+function ImageBackground({ imageUrl }) {
+  const classes = useStyles({ imageUrl });
+
+  return <div className={classes.imgBackground} />;
+}
+
+function MovieGridList({ movies }) {
+  const width = useWidth();
+
+  function getGridListCols() {
     if (isWidthUp("xl", width)) {
       return 4;
     }
@@ -31,15 +43,15 @@ const MovieGridList = ({ width, movies }) => {
     }
 
     return 1;
-  };
+  }
 
   return (
     <GridList cellHeight={268} cols={getGridListCols()} spacing={2}>
       {movies.map(movie => (
         <GridListTile key={movie.id}>
-          <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
-            <ImageBackground imageUrl={movie.imageUrl || placeholderPng} />
-          </ModalLink>
+          <BaseLink toModal to={`${paths.MOVIES}/${movie.id}`}>
+            <ImageBackground imageUrl={/* movie.imageUrl ||*/ placeholderPng} />
+          </BaseLink>
           <GridListTileBar
             title={movie.title}
             subtitle={movie.director.name}
@@ -54,6 +66,6 @@ const MovieGridList = ({ width, movies }) => {
       ))}
     </GridList>
   );
-};
+}
 
-export default withWidth()(MovieGridList);
+export default MovieGridList;

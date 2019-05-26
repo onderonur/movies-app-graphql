@@ -1,13 +1,30 @@
 // OK
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import { BaseLink } from "components/BaseComponents";
+import { makeStyles } from "@material-ui/styles";
 
-const DrawerLinkItem = ({ to, title, icon, onClick }) => (
-  <ListItem to={to} button component={RouterLink} onClick={onClick}>
-    <ListItemIcon>{icon}</ListItemIcon>
-    <ListItemText primary={title} />
-  </ListItem>
-);
+const useStyles = makeStyles(theme => ({
+  item: {
+    color: theme.palette.text.primary
+  }
+}));
+
+function DrawerLinkItem({ to, title, icon, onClick }) {
+  const classes = useStyles();
+
+  return (
+    <ListItem
+      className={classes.item}
+      to={to}
+      button
+      component={BaseLink}
+      onClick={onClick}
+    >
+      <ListItemIcon>{icon}</ListItemIcon>
+      <ListItemText primary={title} />
+    </ListItem>
+  );
+}
 
 export default DrawerLinkItem;

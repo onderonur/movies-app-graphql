@@ -38,7 +38,7 @@ const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
   }
 };
 
-const DeleteMovieConfirmDialog = ({ open, movie, onClose, onCompleted }) => {
+function DeleteMovieConfirmDialog({ open, movie, onClose, onCompleted }) {
   const { pushNotification } = useContext(NotificationContext);
 
   return (
@@ -74,6 +74,6 @@ const DeleteMovieConfirmDialog = ({ open, movie, onClose, onCompleted }) => {
       />
     )
   );
-};
+}
 
 export default DeleteMovieConfirmDialog;

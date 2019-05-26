@@ -8,12 +8,12 @@ import EditableDetailsDialog from "components/EditableDetailsDialog";
 import { GET_DIRECTOR } from "graphql/director/queries";
 import { BaseDialog } from "components/BaseComponents";
 
-const Director = ({
+function Director({
   match: {
     params: { directorId }
   },
   history
-}) => {
+}) {
   const isNewDirector = directorId === "new";
   const { redirectToBack } = useContext(ModalRouteContext);
 
@@ -60,6 +60,6 @@ const Director = ({
       />
     </BaseDialog>
   );
-};
+}
 
 export default Director;

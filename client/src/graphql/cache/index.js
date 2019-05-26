@@ -3,16 +3,16 @@ import resolvers from "./resolvers";
 import { UserInfo, UIState, AuthModalState } from "constants/graphTypes";
 import localStorageKeys from "constants/localStorageKeys";
 
-const getUserInfo = () => {
+function getUserInfo() {
   const userInfo = localStorage.getItem(localStorageKeys.userInfo);
   if (userInfo) {
     const json = JSON.parse(userInfo);
     return { __typename: UserInfo, ...json };
   }
   return null;
-};
+}
 
-export const getDefaults = () => {
+export function getDefaults() {
   return {
     notifications: [],
     userInfo: getUserInfo(),
@@ -25,6 +25,6 @@ export const getDefaults = () => {
       }
     }
   };
-};
+}
 
 export { resolvers, schema };

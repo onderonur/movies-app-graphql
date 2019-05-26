@@ -8,7 +8,7 @@ import LoadingIndicator from "components/LoadingIndicator";
 import { DialogContent } from "@material-ui/core";
 import { BaseDialogForm } from "components/BaseComponents";
 
-const DirectorForm = ({ director, loading, onSubmitCompleted, onCancel }) => {
+function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
   const newDirector = !director;
 
   const handleSubmit = saveDirector => (values, { setSubmitting }) => {
@@ -54,6 +54,6 @@ const DirectorForm = ({ director, loading, onSubmitCompleted, onCancel }) => {
       )}
     </DirectorMutation>
   );
-};
+}
 
 export default DirectorForm;

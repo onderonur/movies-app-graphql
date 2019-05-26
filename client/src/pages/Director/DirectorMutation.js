@@ -7,12 +7,12 @@ import { NotificationContext } from "App";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
 
-const DirectorMutation = ({ director, onCompleted, children }) => {
+function DirectorMutation({ director, onCompleted, children }) {
   const { pushNotification } = useContext(NotificationContext);
 
   const newDirector = !director;
 
-  const handleCompleted = data => {
+  function handleCompleted(data) {
     const mutationResult = newDirector
       ? data.createDirector
       : data.updateDirector;
@@ -23,7 +23,7 @@ const DirectorMutation = ({ director, onCompleted, children }) => {
     if (success) {
       onCompleted({ savedDirector });
     }
-  };
+  }
 
   return (
     <AccessControl allowedRoles={[roles.ADMIN]}>
@@ -42,6 +42,6 @@ const DirectorMutation = ({ director, onCompleted, children }) => {
       </Mutation>
     </AccessControl>
   );
-};
+}
 
 export default DirectorMutation;

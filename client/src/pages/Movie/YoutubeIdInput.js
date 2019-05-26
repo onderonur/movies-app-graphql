@@ -2,24 +2,30 @@
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
 import YouTubePlayer from "components/YoutubePlayer";
-import StyledBox from "styled/StyledBox";
+import { makeStyles } from "@material-ui/styles";
 
-const YoutubeIdInput = ({ name, label, fullWidth, required, youtubeId }) => (
-  <>
-    <BaseTextField
-      name={name}
-      label={label}
-      fullWidth={fullWidth}
-      required={required}
-    />
-    <StyledBox
-      styled={{
-        marginTop: "6px"
-      }}
-    >
-      <YouTubePlayer youtubeId={youtubeId} />
-    </StyledBox>
-  </>
-);
+const useStyles = makeStyles(theme => ({
+  preview: {
+    marginTop: theme.spacing(1)
+  }
+}));
+
+function YoutubeIdInput({ name, label, fullWidth, required, youtubeId }) {
+  const classes = useStyles();
+
+  return (
+    <>
+      <BaseTextField
+        name={name}
+        label={label}
+        fullWidth={fullWidth}
+        required={required}
+      />
+      <div className={classes.preview}>
+        <YouTubePlayer youtubeId={youtubeId} />
+      </div>
+    </>
+  );
+}
 
 export default YoutubeIdInput;

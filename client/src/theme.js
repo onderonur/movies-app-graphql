@@ -1,4 +1,4 @@
-// OK
+// TODO: material-ui/color'u dene
 import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
@@ -11,9 +11,6 @@ const theme = createMuiTheme({
       main: "#d32f2f",
       contrastText: "#fff"
     }
-  },
-  typography: {
-    useNextVariants: true
   }
 });
 

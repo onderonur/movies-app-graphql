@@ -4,10 +4,9 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
-import { ThemeProvider } from "styled-components";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from "./serviceWorker";
-import theme from "./styled/theme";
+import theme from "./theme";
 import { getDefaults, schema, resolvers } from "./graphql/cache";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -107,11 +106,9 @@ client.onResetStore(() => {
 ReactDOM.render(
   <ApolloProvider client={client}>
     <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <App />
-        </Router>
-      </ThemeProvider>
+      <Router>
+        <App />
+      </Router>
     </MuiThemeProvider>
   </ApolloProvider>,
   document.getElementById("root")

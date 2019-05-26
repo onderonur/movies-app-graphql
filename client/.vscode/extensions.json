@@ -2,7 +2,6 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "kumar-harsh.graphql-for-vscode",
-    "jpoissonnier.vscode-styled-components"
+    "kumar-harsh.graphql-for-vscode"
   ]
 }

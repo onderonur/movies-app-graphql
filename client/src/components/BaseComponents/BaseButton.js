@@ -1,21 +1,26 @@
 // OK
 import React from "react";
-import { Button, CircularProgress } from "@material-ui/core";
-import styled from "styled-components";
+import { Button, CircularProgress, makeStyles } from "@material-ui/core";
 
-const StyledCircularProgress = styled(CircularProgress)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -12px;
-  margin-left: -12px;
-`;
+const useStyles = makeStyles(theme => ({
+  progress: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    marginTop: -12,
+    marginLeft: -12
+  }
+}));
 
-const BaseButton = ({ loading, disabled, children, ...props }) => (
-  <Button {...props} disabled={loading || disabled}>
-    {children}
-    {loading && <StyledCircularProgress size={24} />}
-  </Button>
-);
+function BaseButton({ loading, disabled, children, ...props }) {
+  const classes = useStyles();
+
+  return (
+    <Button {...props} disabled={loading || disabled}>
+      {children}
+      {loading && <CircularProgress size={24} className={classes.progress} />}
+    </Button>
+  );
+}
 
 export default BaseButton;

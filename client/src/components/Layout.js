@@ -1,27 +1,34 @@
 // OK
 import React from "react";
-import Header, { ToolbarSpace } from "./Header";
-import StyledBox from "styled/StyledBox";
-import styled from "styled-components";
+import Header from "./Header";
 import AppDrawer from "./AppDrawer";
+import { makeStyles } from "@material-ui/core/styles";
 
-const StyledMain = styled.main`
-  flex-grow: 1;
-  padding: ${props => props.theme.spacing.unit}px;
-`;
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex"
+  },
+  main: {
+    flexGrow: 1,
+    padding: theme.spacing(1)
+  },
+  toolbar: theme.mixins.toolbar
+}));
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
+  const classes = useStyles();
+
   return (
-    <StyledBox styled={{ display: "flex" }}>
+    <div className={classes.root}>
       <AppDrawer>
         {({ toggleDrawer }) => <Header toggleDrawer={toggleDrawer} />}
       </AppDrawer>
-      <StyledMain>
-        <ToolbarSpace />
+      <main className={classes.main}>
+        <div className={classes.toolbar} />
         {children}
-      </StyledMain>
-    </StyledBox>
+      </main>
+    </div>
   );
-};
+}
 
 export default Layout;

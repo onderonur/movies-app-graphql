@@ -3,7 +3,7 @@ import { ModalRouteContext } from "react-router-modal-gallery";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 
-const CloseDialogButton = ({ style, onClick }) => {
+function CloseDialogButton({ style, onClick }) {
   const { redirectToBack } = useContext(ModalRouteContext);
 
   return (
@@ -11,6 +11,6 @@ const CloseDialogButton = ({ style, onClick }) => {
       <CloseIcon fontSize="small" />
     </IconButton>
   );
-};
+}
 
 export default CloseDialogButton;

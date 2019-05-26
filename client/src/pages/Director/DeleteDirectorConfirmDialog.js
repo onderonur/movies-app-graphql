@@ -45,12 +45,7 @@ const cleanMoviesOfDirectorFromCache = directorId => cache => {
   }
 };
 
-const DeleteDirectorConfirmDialog = ({
-  open,
-  director,
-  onClose,
-  onCompleted
-}) => {
+function DeleteDirectorConfirmDialog({ open, director, onClose, onCompleted }) {
   const { pushNotification } = useContext(NotificationContext);
 
   return (
@@ -85,6 +80,6 @@ const DeleteDirectorConfirmDialog = ({
       }}
     />
   );
-};
+}
 
 export default DeleteDirectorConfirmDialog;

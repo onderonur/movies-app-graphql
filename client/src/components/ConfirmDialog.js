@@ -10,7 +10,7 @@ import {
 import { Mutation } from "react-apollo";
 import { BaseButton } from "./BaseComponents";
 
-const ConfirmDialog = ({
+function ConfirmDialog({
   open,
   onClose,
   title,
@@ -18,25 +18,27 @@ const ConfirmDialog = ({
   mutationProps,
   okText = "OK",
   cancelText = "Cancel"
-}) => (
-  <Dialog open={open} onClose={onClose}>
-    <DialogTitle>{title}</DialogTitle>
-    <DialogContent>
-      <DialogContentText>{content}</DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <BaseButton onClick={onClose} color="primary">
-        {cancelText}
-      </BaseButton>
-      <Mutation {...mutationProps}>
-        {(mutation, { loading }) => (
-          <BaseButton color="primary" loading={loading} onClick={mutation}>
-            {okText}
-          </BaseButton>
-        )}
-      </Mutation>
-    </DialogActions>
-  </Dialog>
-);
+}) {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText>{content}</DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <BaseButton onClick={onClose} color="primary">
+          {cancelText}
+        </BaseButton>
+        <Mutation {...mutationProps}>
+          {(mutation, { loading }) => (
+            <BaseButton color="primary" loading={loading} onClick={mutation}>
+              {okText}
+            </BaseButton>
+          )}
+        </Mutation>
+      </DialogActions>
+    </Dialog>
+  );
+}
 
 export default ConfirmDialog;
