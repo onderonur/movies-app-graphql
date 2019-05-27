@@ -2,7 +2,6 @@
 import React, { useState, useContext } from "react";
 import {
   Typography,
-  Link,
   DialogContent,
   IconButton,
   makeStyles
@@ -61,13 +60,9 @@ function MovieDetails({ movie, loading, onEditClick }) {
     : movie.director.movies.filter(item => item.id !== movie.id);
 
   const directorLink = loading ? null : (
-    <Link
-      to={`${paths.DIRECTORS}/${movie.director.id}`}
-      toModal
-      component={BaseLink}
-    >
+    <BaseLink to={`${paths.DIRECTORS}/${movie.director.id}`} toModal>
       {movie.director.name}
-    </Link>
+    </BaseLink>
   );
 
   return loading ? (
