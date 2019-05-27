@@ -13,40 +13,44 @@ import MovieLikeButton from "./MovieLikeButton";
 import paths from "constants/paths";
 import { BaseLink } from "components/BaseComponents";
 
-const MovieListItem = ({ movie }) => (
-  <>
-    <ListItem
-      button
-      to={`${paths.MOVIES}/${movie.id}`}
-      toModal
-      component={BaseLink}
-      divider
-    >
-      <ListItemAvatar>
-        {movie.imageUrl ? (
-          <Avatar src={movie.imageUrl} />
-        ) : (
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        )}
-      </ListItemAvatar>
+function MovieListItem({ movie }) {
+  return (
+    <>
+      <ListItem
+        button
+        to={`${paths.MOVIES}/${movie.id}`}
+        toModal
+        component={BaseLink}
+        divider
+      >
+        <ListItemAvatar>
+          {movie.imageUrl ? (
+            <Avatar src={movie.imageUrl} />
+          ) : (
+            <Avatar>
+              <ImageIcon />
+            </Avatar>
+          )}
+        </ListItemAvatar>
 
-      <ListItemText
-        primary={<Typography color="primary">{movie.title}</Typography>}
-        secondary={
-          movie.director ? <Typography>{movie.director.name}</Typography> : null
-        }
-      />
-
-      <ListItemSecondaryAction>
-        <MovieLikeButton
-          movieId={movie.id}
-          viewerHasLiked={movie.viewerHasLiked}
+        <ListItemText
+          primary={<Typography color="primary">{movie.title}</Typography>}
+          secondary={
+            movie.director ? (
+              <Typography>{movie.director.name}</Typography>
+            ) : null
+          }
         />
-      </ListItemSecondaryAction>
-    </ListItem>
-  </>
-);
+
+        <ListItemSecondaryAction>
+          <MovieLikeButton
+            movieId={movie.id}
+            viewerHasLiked={movie.viewerHasLiked}
+          />
+        </ListItemSecondaryAction>
+      </ListItem>
+    </>
+  );
+}
 
 export default MovieListItem;

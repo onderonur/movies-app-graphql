@@ -2,32 +2,29 @@
 import React, { useContext } from "react";
 import { NotificationContext } from "App";
 import { Mutation } from "react-apollo";
-import {
-  LIKE_MOVIE,
-  UNLIKE_MOVIE
-} from "graphql/movie/mutations";
+import { LIKE_MOVIE, UNLIKE_MOVIE } from "graphql/movie/mutations";
 import {
   MovieLikedMutationResponse,
   MovieLikedStatus
 } from "constants/graphTypes";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 
-const readMovieFragment = (cache, id) => {
+function readMovieFragment(cache, id) {
   return cache.readFragment({
     id: `Movie:${id}`,
     fragment: MOVIE_FRAGMENT
   });
-};
+}
 
-const writeMovieFragment = (cache, id, data) => {
+function writeMovieFragment(cache, id, data) {
   cache.writeFragment({
     id: `Movie:${id}`,
     fragment: MOVIE_FRAGMENT,
     data
   });
-};
+}
 
-const likeMovieUpdate = (
+function likeMovieUpdate(
   cache,
   {
     data: {
@@ -36,15 +33,15 @@ const likeMovieUpdate = (
       }
     }
   }
-) => {
+) {
   const movieFragment = readMovieFragment(cache, movieId);
 
   const data = { ...movieFragment, viewerHasLiked };
 
   writeMovieFragment(cache, movieId, data);
-};
+}
 
-const unlikeMovieUpdate = (
+function unlikeMovieUpdate(
   cache,
   {
     data: {
@@ -53,15 +50,15 @@ const unlikeMovieUpdate = (
       }
     }
   }
-) => {
+) {
   const movieFragment = readMovieFragment(cache, movieId);
 
   const data = { ...movieFragment, viewerHasLiked };
 
   writeMovieFragment(cache, movieId, data);
-};
+}
 
-const MovieLikeMutation = ({ movieId, viewerHasLiked, children }) => {
+function MovieLikeMutation({ movieId, viewerHasLiked, children }) {
   const { pushNotification } = useContext(NotificationContext);
 
   const optimisticResponse = {
@@ -84,15 +81,11 @@ const MovieLikeMutation = ({ movieId, viewerHasLiked, children }) => {
           ? { unlikeMovie: optimisticResponse }
           : { likeMovie: optimisticResponse }
       }
-      update={
-        viewerHasLiked ? unlikeMovieUpdate : likeMovieUpdate
-      }
+      update={viewerHasLiked ? unlikeMovieUpdate : likeMovieUpdate}
       onCompleted={data => {
         // Mutation name is reversed because of optimistic response.
         // It changes the "viewerHasLiked" prop before "onCompleted" runs.
-        const { message } = viewerHasLiked
-          ? data.likeMovie
-          : data.unlikeMovie;
+        const { message } = viewerHasLiked ? data.likeMovie : data.unlikeMovie;
 
         if (message) {
           pushNotification({ variables: { message } });
@@ -102,6 +95,6 @@ const MovieLikeMutation = ({ movieId, viewerHasLiked, children }) => {
       {mutation => children(mutation)}
     </Mutation>
   );
-};
+}
 
 export default MovieLikeMutation;

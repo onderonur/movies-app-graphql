@@ -3,7 +3,7 @@ import React from "react";
 import MovieListItem from "./MovieListItem";
 import { BaseList } from "components/BaseComponents";
 
-const MovieList = ({ movies, loading }) => {
+function MovieList({ movies, loading }) {
   return (
     <BaseList
       items={movies}
@@ -13,6 +13,6 @@ const MovieList = ({ movies, loading }) => {
       )}
     />
   );
-};
+}
 
 export default MovieList;

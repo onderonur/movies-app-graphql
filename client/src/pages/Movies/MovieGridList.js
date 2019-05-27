@@ -50,7 +50,7 @@ function MovieGridList({ movies }) {
       {movies.map(movie => (
         <GridListTile key={movie.id}>
           <BaseLink toModal to={`${paths.MOVIES}/${movie.id}`}>
-            <ImageBackground imageUrl={/* movie.imageUrl ||*/ placeholderPng} />
+            <ImageBackground imageUrl={movie.imageUrl || placeholderPng} />
           </BaseLink>
           <GridListTileBar
             title={movie.title}

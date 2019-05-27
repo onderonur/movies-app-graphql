@@ -17,10 +17,10 @@ import MovieMutation from "./MovieMutation";
 import { DialogContent } from "@material-ui/core";
 import LoadingIndicator from "components/LoadingIndicator";
 
-const MovieForm = ({ movie, loading, onSubmitCompleted, onCancel }) => {
+function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
   const { pushNotification } = useContext(NotificationContext);
 
-  const handleSubmitCompleted = data => {
+  function handleSubmitCompleted(data) {
     const mutationResult = movie ? data.updateMovie : data.createMovie;
     const { success, message, movie: savedMovie } = mutationResult;
     if (success) {
@@ -29,7 +29,7 @@ const MovieForm = ({ movie, loading, onSubmitCompleted, onCancel }) => {
     if (message) {
       pushNotification({ variables: { message } });
     }
-  };
+  }
 
   const handleSubmit = saveMovie => values => {
     const variables = movie
@@ -104,6 +104,6 @@ const MovieForm = ({ movie, loading, onSubmitCompleted, onCancel }) => {
       </MovieMutation>
     </AccessControl>
   );
-};
+}
 
 export default MovieForm;

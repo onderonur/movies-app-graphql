@@ -7,12 +7,7 @@ function LoginButton() {
   return (
     <Mutation mutation={SHOW_LOGIN_MODAL}>
       {showLoginModal => (
-        <BaseButton
-          color="inherit"
-          onClick={() => {
-            showLoginModal();
-          }}
-        >
+        <BaseButton color="inherit" onClick={showLoginModal}>
           Login
         </BaseButton>
       )}

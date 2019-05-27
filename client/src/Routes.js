@@ -26,13 +26,15 @@ const modalRoutesArray = modalRoutes.map(route => (
   <ModalRoute key={route.path} {...route} />
 ));
 
-const Routes = () => (
-  <ModalSwitch renderModal={() => modalRoutesArray}>
-    <Route exact path={paths.MOVIES} component={Movies} />
-    <Route exact path={paths.DIRECTORS} component={Directors} />
-    {modalRoutesArray}
-    <Route path="*" render={() => <Redirect to="/movies" />} />
-  </ModalSwitch>
-);
+function Routes() {
+  return (
+    <ModalSwitch renderModal={() => modalRoutesArray}>
+      <Route exact path={paths.MOVIES} component={Movies} />
+      <Route exact path={paths.DIRECTORS} component={Directors} />
+      {modalRoutesArray}
+      <Route path="*" render={() => <Redirect to="/movies" />} />
+    </ModalSwitch>
+  );
+}
 
 export default Routes;

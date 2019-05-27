@@ -3,7 +3,7 @@ import { Form, connect } from "formik";
 import { makeStyles } from "@material-ui/core";
 
 // TODO: Bak bu olaya bi ara
-const DirtyFormHandler = ({ formik }) => {
+function DirtyFormHandler({ formik }) {
   useEffect(() => {
     return () => {
       if (formik.dirty) {
@@ -13,7 +13,7 @@ const DirtyFormHandler = ({ formik }) => {
   }, [formik.dirty]);
 
   return null;
-};
+}
 
 const FormikDirtyFormHandler = connect(DirtyFormHandler);
 

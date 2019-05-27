@@ -5,7 +5,7 @@ import { UPDATE_MOVIE, CREATE_MOVIE } from "graphql/movie/mutations";
 import { GET_MOVIE, GET_MOVIES } from "graphql/movie/queries";
 import { MovieEdge } from "constants/graphTypes";
 
-const createMovieUpdate = (cache, { data: { createMovie } }) => {
+function createMovieUpdate(cache, { data: { createMovie } }) {
   const { success, movie } = createMovie;
 
   if (success) {
@@ -32,19 +32,21 @@ const createMovieUpdate = (cache, { data: { createMovie } }) => {
 
     cache.writeQuery({ query: GET_MOVIES, data });
   }
-};
+}
 
-const MovieMutation = ({ movie, onCompleted, children }) => (
-  <Mutation
-    mutation={movie ? UPDATE_MOVIE : CREATE_MOVIE}
-    onCompleted={onCompleted}
-    refetchQueries={
-      movie ? [{ query: GET_MOVIE, variables: { id: movie.id } }] : []
-    }
-    update={movie ? undefined : createMovieUpdate}
-  >
-    {saveMovie => children(saveMovie)}
-  </Mutation>
-);
+function MovieMutation({ movie, onCompleted, children }) {
+  return (
+    <Mutation
+      mutation={movie ? UPDATE_MOVIE : CREATE_MOVIE}
+      onCompleted={onCompleted}
+      refetchQueries={
+        movie ? [{ query: GET_MOVIE, variables: { id: movie.id } }] : []
+      }
+      update={movie ? undefined : createMovieUpdate}
+    >
+      {saveMovie => children(saveMovie)}
+    </Mutation>
+  );
+}
 
 export default MovieMutation;

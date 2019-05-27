@@ -6,19 +6,20 @@ import {
 } from "constants/graphTypes";
 import localStorageKeys from "constants/localStorageKeys";
 
-const decodeJWT = token =>
-  JSON.parse(decodeURIComponent(escape(atob(token.split(".")[1]))));
+function decodeJWT(token) {
+  return JSON.parse(decodeURIComponent(escape(atob(token.split(".")[1]))));
+}
 
-const storeUserInfoToStorage = userInfo => {
+function storeUserInfoToStorage(userInfo) {
   const jsonString = JSON.stringify(userInfo);
   localStorage.setItem(localStorageKeys.userInfo, jsonString);
-};
+}
 
-export const clearUserInfoFromStorage = () => {
+export function clearUserInfoFromStorage() {
   localStorage.clear(localStorageKeys.userInfo);
-};
+}
 
-export const pushNotificationToCache = (cache, message) => {
+export function pushNotificationToCache(cache, message) {
   const query = GET_NOTIFICATIONS;
 
   const cacheData = cache.readQuery({ query });
@@ -39,9 +40,9 @@ export const pushNotificationToCache = (cache, message) => {
   });
 
   return notifications;
-};
+}
 
-export const showAuthModal = (cache, mode) => {
+export function showAuthModal(cache, mode) {
   const cacheData = cache.readQuery({ query: GET_AUTH_MODAL_STATE });
 
   const data = {
@@ -57,7 +58,7 @@ export const showAuthModal = (cache, mode) => {
   };
 
   cache.writeData({ data });
-};
+}
 
 const resolvers = {
   Mutation: {

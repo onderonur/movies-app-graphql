@@ -6,23 +6,22 @@ import paths from "constants/paths";
 import MovieIcon from "@material-ui/icons/Movie";
 import PersonIcon from "@material-ui/icons/Person";
 
-function DrawerContent({ isMobile, toggleDrawer }) {
-  const onItemClick = isMobile ? toggleDrawer : undefined;
-
+function DrawerContent({ drawerOpen }) {
   return (
     <>
       <List>
         <DrawerLinkItem
           to={paths.MOVIES}
-          title="Movies"
+          text="Movies"
           icon={<MovieIcon />}
-          onClick={onItemClick}
+          aria-label="Movies"
+          drawerOpen={drawerOpen}
         />
         <DrawerLinkItem
           to={paths.DIRECTORS}
-          title="Directors"
+          text="Directors"
           icon={<PersonIcon />}
-          onClick={onItemClick}
+          drawerOpen={drawerOpen}
         />
       </List>
       <Divider />

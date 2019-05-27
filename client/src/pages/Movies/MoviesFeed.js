@@ -5,7 +5,7 @@ import MovieListQuery from "./MovieListQuery";
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper";
 import MovieGridList from "./MovieGridList";
 
-const resolvePagingResponse = root => {
+function resolvePagingResponse(root) {
   const edges = root ? root.edges : [];
   const nodes = edges.map(edge => edge.node);
 
@@ -13,9 +13,9 @@ const resolvePagingResponse = root => {
   const hasNextPage = pageInfo ? pageInfo.hasNextPage : null;
 
   return { nodes, hasNextPage };
-};
+}
 
-const onLoadMore = (fetchMore, movies) => {
+function onLoadMore(fetchMore, movies) {
   fetchMore({
     query: GET_MOVIES,
     variables: {
@@ -36,9 +36,9 @@ const onLoadMore = (fetchMore, movies) => {
       };
     }
   });
-};
+}
 
-const MoviesFeed = () => {
+function MoviesFeed() {
   return (
     <MovieListQuery>
       {({ loading, movies, fetchMore }) => {
@@ -55,6 +55,6 @@ const MoviesFeed = () => {
       }}
     </MovieListQuery>
   );
-};
+}
 
 export default MoviesFeed;

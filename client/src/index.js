@@ -91,9 +91,9 @@ const client = new ApolloClient({
   connectToDevTools: process.env.NODE_ENV !== "production"
 });
 
-const initializeCache = () => {
+function initializeCache() {
   client.writeData({ data: getDefaults() });
-};
+}
 
 // Initialize cache data by default states
 initializeCache();
