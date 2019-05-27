@@ -5,8 +5,8 @@ import AddIcon from "@material-ui/icons/Add";
 import paths from "constants/paths";
 import { roles } from "constants/roles";
 import ViewWithFloatingButton from "components/ViewWithFloatingButton";
-import { BaseLink } from "components/BaseComponents";
 import { makeStyles } from "@material-ui/styles";
+import { AdapterModalLink } from "components/BaseComponents/BaseLink";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +24,7 @@ function Directors() {
       <ViewWithFloatingButton
         buttonProps={{
           color: "primary",
-          toModal: true,
-          component: BaseLink,
+          component: AdapterModalLink,
           to: `${paths.DIRECTORS}/new`,
           icon: <AddIcon />,
           allowedRolesToClick: [roles.ADMIN]

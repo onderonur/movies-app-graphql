@@ -2,15 +2,14 @@
 import React from "react";
 import { ListItem, ListItemText, Typography } from "@material-ui/core";
 import paths from "constants/paths";
-import { BaseLink } from "components/BaseComponents";
+import { AdapterModalLink } from "components/BaseComponents/BaseLink";
 
 function DirectorListItem({ director }) {
   return (
     <ListItem
       button
       to={`${paths.DIRECTORS}/${director.id}`}
-      toModal
-      component={BaseLink}
+      component={AdapterModalLink}
       divider
     >
       <ListItemText

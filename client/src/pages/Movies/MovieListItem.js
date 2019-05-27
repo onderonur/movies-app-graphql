@@ -11,7 +11,7 @@ import {
 import ImageIcon from "@material-ui/icons/Image";
 import MovieLikeButton from "./MovieLikeButton";
 import paths from "constants/paths";
-import { BaseLink } from "components/BaseComponents";
+import { AdapterModalLink } from "components/BaseComponents/BaseLink";
 
 function MovieListItem({ movie }) {
   return (
@@ -19,8 +19,7 @@ function MovieListItem({ movie }) {
       <ListItem
         button
         to={`${paths.MOVIES}/${movie.id}`}
-        toModal
-        component={BaseLink}
+        component={AdapterModalLink}
         divider
       >
         <ListItemAvatar>

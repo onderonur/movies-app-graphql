@@ -6,7 +6,7 @@ import placeholderPng from "assets/placeholder.png";
 import { makeStyles } from "@material-ui/styles";
 import useWidth from "hooks/useWidth";
 import { isWidthUp } from "@material-ui/core/withWidth";
-import { ModalLink } from "react-router-modal-gallery";
+import { AdapterModalLink } from "components/BaseComponents/BaseLink";
 
 // TODO: Bunu düz div içinde img'ye çevir
 const useStyles = makeStyles(theme => ({
@@ -49,9 +49,9 @@ function MovieGridList({ movies }) {
     <GridList cellHeight={268} cols={getGridListCols()} spacing={2}>
       {movies.map(movie => (
         <GridListTile key={movie.id}>
-          <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
+          <AdapterModalLink to={`${paths.MOVIES}/${movie.id}`}>
             <ImageBackground imageUrl={movie.imageUrl || placeholderPng} />
-          </ModalLink>
+          </AdapterModalLink>
           <GridListTileBar
             title={movie.title}
             subtitle={movie.director.name}

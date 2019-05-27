@@ -5,8 +5,8 @@ import paths from "constants/paths";
 import { roles } from "constants/roles";
 import ViewWithFloatingButton from "components/ViewWithFloatingButton";
 import MoviesFeed from "./MoviesFeed";
-import { BaseLink } from "components/BaseComponents";
 import { makeStyles } from "@material-ui/core";
+import { AdapterModalLink } from "components/BaseComponents/BaseLink";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,8 +23,7 @@ function Movies() {
       <ViewWithFloatingButton
         buttonProps={{
           color: "primary",
-          toModal: true,
-          component: BaseLink,
+          component: AdapterModalLink,
           to: `${paths.MOVIES}/new`,
           icon: <AddIcon />,
           allowedRolesToClick: [roles.ADMIN]
