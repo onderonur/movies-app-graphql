@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   closeButtonContainer: {
     position: "fixed",
     top: 4,
-    right: 4
+    right: 20
   }
 }));
 
