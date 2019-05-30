@@ -1,4 +1,4 @@
-// OK
+// OK!!
 import React, { useState, useEffect } from "react";
 import { Dialog, withMobileDialog, IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -15,18 +15,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function CloseButton({ onClick }) {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.closeButtonContainer}>
-      <IconButton className={classes.closeIcon} onClick={onClick}>
-        <CloseIcon />
-      </IconButton>
-    </div>
-  );
-}
-
 function BaseDialog({
   open,
   onClose,
@@ -37,6 +25,7 @@ function BaseDialog({
   children,
   ...rest
 }) {
+  const classes = useStyles();
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -56,6 +45,16 @@ function BaseDialog({
     }
   }
 
+  function renderCloseButton() {
+    return (
+      <div className={classes.closeButtonContainer}>
+        <IconButton className={classes.closeIcon} onClick={startExitAnimation}>
+          <CloseIcon />
+        </IconButton>
+      </div>
+    );
+  }
+
   return (
     <Dialog
       {...rest}
@@ -66,9 +65,7 @@ function BaseDialog({
       onExited={onExitAnimationEnd}
     >
       {children}
-      {!hideCloseButton && !fullScreen && (
-        <CloseButton onClick={startExitAnimation} />
-      )}
+      {!hideCloseButton && !fullScreen && renderCloseButton()}
     </Dialog>
   );
 }

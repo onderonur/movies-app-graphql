@@ -6,7 +6,6 @@ import {
   IconButton,
   makeStyles
 } from "@material-ui/core";
-import MovieList from "pages/Movies/MovieList";
 import YouTubePlayer from "components/YoutubePlayer";
 import MovieLikeButton from "pages/Movies/MovieLikeButton";
 import { ModalRouteContext } from "react-router-modal-gallery";
@@ -20,6 +19,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
 import ImageContainer from "components/ImageContainer";
+import MovieGridList from "pages/Movies/MovieGridList";
 
 const useStyles = makeStyles(theme => ({
   top: {
@@ -122,7 +122,11 @@ function MovieDetails({ movie, loading, onEditClick }) {
                   : `There is no other movie by `}
                 {directorLink}
               </Typography>
-              <MovieList movies={otherMovies} />
+              <MovieGridList
+                direction="horizontal"
+                movies={otherMovies}
+                cols={2}
+              />
             </>
           ) : (
             <Typography>

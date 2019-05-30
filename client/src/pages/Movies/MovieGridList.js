@@ -1,60 +1,46 @@
 import React from "react";
-import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
+import {
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  makeStyles
+} from "@material-ui/core";
 import paths from "constants/paths";
 import MovieLikeButton from "./MovieLikeButton";
 import placeholderPng from "assets/placeholder.png";
-import { makeStyles } from "@material-ui/styles";
-import useWidth from "hooks/useWidth";
-import { isWidthUp } from "@material-ui/core/withWidth";
-import { AdapterModalLink } from "components/BaseComponents/BaseLink";
+import { ModalLink } from "react-router-modal-gallery";
+import useGridListCols from "hooks/useGridListCols";
+import ImageBackground from "components/ImageBackground";
 
-// TODO: Bunu düz div içinde img'ye çevir
 const useStyles = makeStyles(theme => ({
-  imgBackground: {
-    width: "100%",
-    height: "100%",
-    backgroundImage: ({ imageUrl }) => `url(${imageUrl})`,
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center"
+  horizontalGridList: {
+    flexWrap: "nowrap",
+    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
+    transform: "translateZ(0)"
   }
 }));
 
-function ImageBackground({ imageUrl }) {
-  const classes = useStyles({ imageUrl });
-
-  return <div className={classes.imgBackground} />;
-}
-
-function MovieGridList({ movies }) {
-  const width = useWidth();
-
-  function getGridListCols() {
-    if (isWidthUp("xl", width)) {
-      return 4;
-    }
-
-    if (isWidthUp("md", width)) {
-      return 3;
-    }
-
-    if (isWidthUp("sm", width)) {
-      return 2;
-    }
-
-    return 1;
-  }
+function MovieGridList({ direction = "vertical", movies, cols }) {
+  const classes = useStyles();
+  const defaultGridCols = useGridListCols();
 
   return (
-    <GridList cellHeight={268} cols={getGridListCols()} spacing={2}>
+    <GridList
+      className={
+        direction === "horizontal" ? classes.horizontalGridList : undefined
+      }
+      cellHeight={268}
+      cols={cols || defaultGridCols}
+      spacing={2}
+    >
       {movies.map(movie => (
         <GridListTile key={movie.id}>
-          <AdapterModalLink to={`${paths.MOVIES}/${movie.id}`}>
+          <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
             <ImageBackground imageUrl={movie.imageUrl || placeholderPng} />
-          </AdapterModalLink>
+          </ModalLink>
           <GridListTileBar
             title={movie.title}
-            subtitle={movie.director.name}
+            subtitle={movie.director ? movie.director.name : ""}
             actionIcon={
               <MovieLikeButton
                 movieId={movie.id}

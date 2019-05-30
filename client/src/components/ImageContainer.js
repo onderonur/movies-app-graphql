@@ -1,4 +1,4 @@
-// OK
+// TODO: Buna bi bak, boyutlama vs olayları
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 

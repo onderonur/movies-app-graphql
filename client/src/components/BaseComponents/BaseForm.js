@@ -1,3 +1,4 @@
+// OK!!
 import React, { useEffect } from "react";
 import { Form, connect } from "formik";
 import { makeStyles } from "@material-ui/core";
@@ -29,12 +30,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-/**
- * noValidate: HTML5 ile gelen validation error mesajlarını kapatmak için.
- * Bu kullanılmadığında, örneğin "TextField"a "required" prop'u verilince,
- * HTML'in kendi error mesajı çıkıyor submit'te.
- */
 function BaseForm({
+  // TODO: Bu açıklamayı düzelt araştırıp.
+  // noValidate: HTML5 ile gelen validation error mesajlarını kapatmak için.
+  // Bu kullanılmadığında, örneğin "TextField"a "required" prop'u verilince,
+  // HTML'in kendi error mesajı çıkıyor submit'te.
   noValidate = true,
   autoComplete = "off",
   children,

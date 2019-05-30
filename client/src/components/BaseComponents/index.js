@@ -1,5 +1,6 @@
 export { default as BaseButton } from "./BaseButton";
 export { default as BaseDialog } from "./BaseDialog";
+export { default as BaseDialogCloseButton } from "./BaseDialogCloseButton";
 export { default as BaseDialogForm } from "./BaseDialogForm";
 export { default as BaseDialogTitle } from "./BaseDialogTitle";
 export { default as BaseForm } from "./BaseForm";

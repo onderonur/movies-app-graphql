@@ -1,4 +1,4 @@
-// OK
+// OK!!
 import React, { useState, useEffect, useRef } from "react";
 import {
   Divider,
@@ -52,7 +52,6 @@ function AppDrawer({ children, location }) {
     setOpen(!open);
   }
 
-  // TODO: Bug vardı, bi bak OK mi
   useEffect(() => {
     if (isMobile && location !== prevLocation.current) {
       setOpen(false);

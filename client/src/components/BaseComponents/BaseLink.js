@@ -1,3 +1,4 @@
+// TODO: React-router-dom'da şu forwardRef olayına bi bak. Gerekiyosa modal-gallery'de ekle vs
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
@@ -7,9 +8,9 @@ export { RouterLink };
 
 // required for react-router-dom < 6.0.0
 // see https://github.com/ReactTraining/react-router/issues/6056#issuecomment-435524678
-export const AdapterLink = React.forwardRef((props, ref) => (
-  <RouterLink innerRef={ref} {...props} />
-));
+// export const AdapterLink = React.forwardRef((props, ref) => (
+//   <RouterLink innerRef={ref} {...props} />
+// ));
 
 export const AdapterModalLink = React.forwardRef((props, ref) => (
   <ModalLink innerRef={ref} {...props} />
@@ -22,7 +23,7 @@ const BaseLink = React.forwardRef((props, ref) => {
     <Link
       innerRef={ref}
       {...rest}
-      component={toModal ? AdapterModalLink : AdapterLink}
+      component={toModal ? AdapterModalLink : RouterLink}
     />
   );
 });

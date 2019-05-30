@@ -1,4 +1,4 @@
-// OK
+// OK!!
 import React from "react";
 import { Query } from "react-apollo";
 import { GET_DIRECTORS } from "graphql/director/queries";

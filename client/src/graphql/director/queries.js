@@ -1,10 +1,12 @@
 import gql from "graphql-tag";
 
+// TODO: Director'ü movie gibi fragment'a al
 export const GET_DIRECTORS = gql`
-  query GetDirectors{
+  query GetDirectors {
     directors {
       id
       name
+      imageUrl
     }
   }
 `;
@@ -14,6 +16,8 @@ export const GET_DIRECTOR = gql`
     director(id: $id) {
       id
       name
+      bio
+      imageUrl
       movies @include(if: $withMovies) {
         id
         title
@@ -23,5 +27,3 @@ export const GET_DIRECTOR = gql`
     }
   }
 `;
-
-

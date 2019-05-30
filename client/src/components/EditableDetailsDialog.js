@@ -1,4 +1,4 @@
-// Reusability
+// OK!!
 import React, { useState, useContext } from "react";
 import { ModalRouteContext } from "react-router-modal-gallery";
 import { Query } from "react-apollo";

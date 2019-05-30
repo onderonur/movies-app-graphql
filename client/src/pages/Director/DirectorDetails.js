@@ -1,7 +1,11 @@
 // Reusability
 import React, { useState, useContext } from "react";
-import { Typography, DialogContent, IconButton } from "@material-ui/core";
-import MovieList from "pages/Movies/MovieList";
+import {
+  Typography,
+  DialogContent,
+  IconButton,
+  Divider
+} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { BaseDialogTitle } from "components/BaseComponents";
@@ -10,6 +14,7 @@ import { roles } from "constants/roles";
 import { ModalRouteContext } from "react-router-modal-gallery";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
+import MovieGridList from "pages/Movies/MovieGridList";
 
 function DirectorDetails({ director, loading, onEditClick }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
@@ -44,8 +49,24 @@ function DirectorDetails({ director, loading, onEditClick }) {
       </BaseDialogTitle>
 
       <DialogContent>
+        {director.bio ? (
+          <>
+            <Typography variant="subtitle1">Bio</Typography>
+            {/* TODO: Buna bi bak daha doğru bi kullanımı var mı? */}
+            <Typography variant="body2" style={{ whiteSpace: "pre-line" }}>
+              {director.bio}
+            </Typography>
+          </>
+        ) : null}
+        <Divider />
         <Typography variant="subtitle1">Movies</Typography>
-        {director.movies.length ? <MovieList movies={director.movies} /> : null}
+        {director.movies.length ? (
+          <MovieGridList
+            direction="horizontal"
+            movies={director.movies}
+            cols={2}
+          />
+        ) : null}
       </DialogContent>
 
       <DeleteDirectorConfirmDialog

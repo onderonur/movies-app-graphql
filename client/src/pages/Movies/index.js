@@ -21,11 +21,11 @@ function Movies() {
   return (
     <div className={classes.root}>
       <ViewWithFloatingButton
-        buttonProps={{
+        fabProps={{
           color: "primary",
           component: AdapterModalLink,
           to: `${paths.MOVIES}/new`,
-          icon: <AddIcon />,
+          icon: AddIcon,
           allowedRolesToClick: [roles.ADMIN]
         }}
       >

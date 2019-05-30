@@ -24,10 +24,18 @@ export const seedData = async () => {
     });
   }
 
+  // TODO: IMDB'deki türkçe film isimleri vsleri kaldır buralardan
   const directors = [
     { name: "Joss Whedon" },
     { name: "Edgar Wright" },
-    { name: "David Fincher" },
+    {
+      name: "David Fincher",
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTc1NDkwMTQ2MF5BMl5BanBnXkFtZTcwMzY0ODkyMg@@._V1_.jpg",
+      bio: `David Fincher was born in 1962 in Denver, Colorado, and was raised in Marin County, California. When he was 18 years old he went to work for John Korty at Korty Films in Mill Valley. He subsequently worked at ILM (Industrial Light and Magic) from 1981-1983. Fincher left ILM to direct TV commercials and music videos after signing with N. Lee Lacy in Hollywood. He went on to found Propaganda in 1987 with fellow directors Dominic Sena, Greg Gold and Nigel Dick. Fincher has directed TV commercials for clients that include Nike, Coca-Cola, Budweiser, Heineken, Pepsi, Levi's, Converse, AT&T and Chanel. He has directed music videos for Madonna, Sting, The Rolling Stones, Michael Jackson, Aerosmith, George Michael, Iggy Pop, The Wallflowers, Billy Idol, Steve Winwood, The Motels and, most recently, A Perfect Circle.
+
+      As a film director, he has achieved huge success with Se7en (1995), Fight Club (1999) and, Panic Room (2002).`
+    },
     { name: "Christopher Nolan" },
     { name: "Peter Jackson" },
     { name: "George Lucas" },

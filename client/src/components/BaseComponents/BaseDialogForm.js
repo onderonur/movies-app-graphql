@@ -1,15 +1,11 @@
+// OK!! TODO: Şu "fullscreen" prop'unu bi düzenle genel. Context vs yap ya da
 import React from "react";
 import {
   BaseForm,
   BaseDialogTitle,
   BaseFormActions
 } from "components/BaseComponents";
-import {
-  DialogContent,
-  DialogActions,
-  Typography,
-  Divider
-} from "@material-ui/core";
+import { DialogContent, DialogActions, Divider } from "@material-ui/core";
 
 function BaseDialogForm({
   title,
@@ -17,20 +13,13 @@ function BaseDialogForm({
   isSubmitting,
   onCancel,
   actions,
-  defaultActions
+  defaultActions,
+  fullScreen
 }) {
   return (
     <BaseForm>
-      <BaseDialogTitle>
-        {typeof title === "string" ? (
-          <Typography variant="h6">{title}</Typography>
-        ) : (
-          title
-        )}
-      </BaseDialogTitle>
-
+      <BaseDialogTitle fullScreen={fullScreen}>{title}</BaseDialogTitle>
       <DialogContent>{children}</DialogContent>
-
       {actions !== null ? (
         <>
           <Divider />

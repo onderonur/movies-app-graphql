@@ -1,4 +1,4 @@
-// OK
+// OK!!
 import React from "react";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
@@ -6,12 +6,9 @@ import { SIGN_UP } from "graphql/user/mutations";
 import {
   BaseTextField,
   BaseFormik,
-  BaseForm,
-  BaseFormActions,
-  BaseDialogTitle
+  BaseDialogForm
 } from "components/BaseComponents";
 import { REQUIRED_ERROR } from "constants/formErrors";
-import { DialogContent, DialogActions, Typography } from "@material-ui/core";
 
 function SignUpModal({ onCancel, onCompleted }) {
   return (
@@ -42,57 +39,61 @@ function SignUpModal({ onCancel, onCompleted }) {
               .required(REQUIRED_ERROR)
               .oneOf([Yup.ref("password"), null], "Passwords don't match")
           })}
-          onSubmit={values => signUp({ variables: { input: values } })}
+          onSubmit={(values, { resetForm }) =>
+            signUp({ variables: { input: values } }).catch(() => {
+              resetForm({
+                ...values,
+                password: "",
+                passwordConfirmation: ""
+              });
+            })
+          }
           submitting={loading}
           okText="Submit"
         >
-          <BaseForm>
-            <BaseDialogTitle fullScreen={false}>
-              <Typography variant="h6">Sign Up</Typography>
-            </BaseDialogTitle>
-            <DialogContent>
-              <BaseTextField
-                name="firstname"
-                label="Firstname"
-                required
-                autoFocus
-                fullWidth
-              />
-              <BaseTextField
-                name="lastname"
-                label="Lastname"
-                required
-                fullWidth
-              />
-              <BaseTextField
-                name="username"
-                label="Username"
-                required
-                fullWidth
-              />
-              <BaseTextField
-                name="password"
-                label="Password"
-                type="password"
-                required
-                fullWidth
-              />
-              <BaseTextField
-                name="passwordConfirmation"
-                label="Password Confirmation"
-                type="password"
-                required
-                fullWidth
-              />
-            </DialogContent>
-            <DialogActions>
-              <BaseFormActions
-                isSubmitting={loading}
-                onCancel={onCancel}
-                submitText="Submit"
-              />
-            </DialogActions>
-          </BaseForm>
+          <BaseDialogForm
+            title={"Sign Up"}
+            fullScreen={false}
+            onCancel={onCancel}
+            isSubmitting={loading}
+            defaultActions={{
+              submitText: "Submit"
+            }}
+          >
+            <BaseTextField
+              name="username"
+              label="Username"
+              autoFocus
+              required
+              fullWidth
+            />
+            <BaseTextField
+              name="firstname"
+              label="Firstname"
+              required
+              fullWidth
+            />
+            <BaseTextField
+              name="lastname"
+              label="Lastname"
+              required
+              fullWidth
+            />
+            <BaseTextField
+              name="password"
+              label="Password"
+              type="password"
+              required
+              fullWidth
+            />
+            <BaseTextField
+              name="passwordConfirmation"
+              label="Password Confirmation"
+              type="password"
+              required
+              fullWidth
+            />
+          </BaseDialogForm>
         </BaseFormik>
       )}
     </Mutation>

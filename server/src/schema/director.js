@@ -4,11 +4,15 @@ export default gql`
   type Director {
     id: ID!
     name: String!
+    bio: String # TODO: Not Nullable yap
+    imageUrl: String
     movies: [Movie]
   }
 
   input DirectorInput {
     name: String!
+    bio: String!
+    imageUrl: String
   }
 
   type DirectorMutationResponse implements MutationResponse {

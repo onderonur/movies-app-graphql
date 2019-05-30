@@ -7,6 +7,19 @@ const director = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    bio: {
+      type: DataTypes.STRING(2048),
+      allowNull: true, // TODO: false yap
+      validate: {
+        notEmpty: true
+      }
+    },
+    imageUrl: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true
+      }
     }
   });
 

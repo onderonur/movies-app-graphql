@@ -1,20 +1,33 @@
+// OK!!
 import React from "react";
-import FloatingButton from "./FloatingButton";
 import AccessControl from "./AccessControl";
 import { makeStyles } from "@material-ui/styles";
+import { Fab } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   children: {
     paddingBottom: theme.spacing(10)
+  },
+  fab: {
+    position: "fixed",
+    right: 20,
+    bottom: 20,
+    zIndex: theme.zIndex.appBar
   }
 }));
 
-function ViewWithFloatingButton({ children, buttonProps }) {
+function ViewWithFloatingButton({ children, fabProps }) {
   const classes = useStyles();
 
-  const { icon, allowedRolesToClick, ...rest } = buttonProps;
+  const { icon, allowedRolesToClick, ...rest } = fabProps;
 
-  const button = <FloatingButton {...rest}>{icon}</FloatingButton>;
+  const FabIcon = icon;
+
+  const button = (
+    <Fab className={classes.fab} size="large" {...rest}>
+      <FabIcon />
+    </Fab>
+  );
 
   return (
     <>

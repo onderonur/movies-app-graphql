@@ -1,13 +1,9 @@
+// OK!!
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import LogoutMutation from "./LogoutMutation";
-
-const LogoutButton = React.forwardRef((props, ref) => (
-  <LogoutMutation {...props}>
-    {clearUserInfo => <MenuItem onClick={clearUserInfo}>Logout</MenuItem>}
-  </LogoutMutation>
-));
+import { Mutation } from "react-apollo";
+import { CLEAR_USER_INFO } from "graphql/cache/mutations";
 
 function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +34,9 @@ function AccountMenu() {
           horizontal: "right"
         }}
       >
-        <LogoutButton />
+        <Mutation mutation={CLEAR_USER_INFO}>
+          {clearUserInfo => <MenuItem onClick={clearUserInfo}>Logout</MenuItem>}
+        </Mutation>
       </Menu>
     </>
   );

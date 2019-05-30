@@ -1,4 +1,4 @@
-// OK
+// TODO: Grid yapısına göre düzenleme yapılabilir. MUI'a bak
 import React from "react";
 import Header from "./Header";
 import AppDrawer from "./AppDrawer";

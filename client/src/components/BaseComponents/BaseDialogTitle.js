@@ -1,7 +1,12 @@
-// OK
+// OK!!
 import React from "react";
-import { DialogTitle, withMobileDialog, makeStyles } from "@material-ui/core";
-import CloseDialogButton from "components/CloseDialogButton";
+import {
+  DialogTitle,
+  withMobileDialog,
+  makeStyles,
+  Typography
+} from "@material-ui/core";
+import BaseDialogCloseButton from "./BaseDialogCloseButton";
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -23,12 +28,14 @@ function BaseDialogTitle({
   return (
     <DialogTitle disableTypography className={classes.title}>
       {showBackButton || fullScreen ? (
-        <CloseDialogButton
-          style={{ marginRight: 8 }}
-          onClick={onBackButtonClick}
-        />
+        <BaseDialogCloseButton onClick={onBackButtonClick} />
       ) : null}
-      {children}
+
+      {typeof children === "string" ? (
+        <Typography variant="h5">{children}</Typography>
+      ) : (
+        children
+      )}
     </DialogTitle>
   );
 }

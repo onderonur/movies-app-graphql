@@ -22,6 +22,8 @@ export const UPDATE_DIRECTOR = gql`
       director {
         id
         name
+        bio
+        imageUrl
       }
     }
   }

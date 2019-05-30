@@ -1,25 +1,28 @@
-// OK
+// OK!!
 import React from "react";
 import {
-  ListItem,
   ListItemIcon,
   ListItemText,
-  Tooltip
+  Tooltip,
+  MenuItem
 } from "@material-ui/core";
 import useDetectMobile from "hooks/useDetectMobile";
-import { AdapterLink } from "components/BaseComponents/BaseLink";
+import { RouterLink } from "components/BaseComponents/BaseLink";
+import { withRouter } from "react-router-dom";
 
-function DrawerLinkItem({ to, text, icon, drawerOpen }) {
+function DrawerLinkItem({ to, text, icon, drawerOpen, location }) {
   const isMobile = useDetectMobile();
+
+  const isActive = location.pathname === to;
 
   return (
     <Tooltip title={!isMobile && !drawerOpen ? text : ""} placement="right">
-      <ListItem button component={AdapterLink} to={to}>
+      <MenuItem button component={RouterLink} to={to} selected={isActive}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />
-      </ListItem>
+      </MenuItem>
     </Tooltip>
   );
 }
 
-export default DrawerLinkItem;
+export default withRouter(DrawerLinkItem);

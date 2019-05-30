@@ -1,4 +1,4 @@
-// OK
+// OK!!
 import React from "react";
 import { Formik } from "formik";
 
@@ -15,6 +15,7 @@ function BaseFormik({
 }) {
   return (
     <Formik
+      // TODO: Bunun tanımına formik'ten bakıp onu yaz buraya
       // enableReinitialize: Fetch bittikten sonraki initialValue değerinin
       // form'a verilebilmesi için (async).
       enableReinitialize={enableReinitialize}

@@ -1,14 +1,12 @@
-// OK
+// OK!!
 import React from "react";
 import {
-  Dialog,
-  DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions
 } from "@material-ui/core";
-import { Mutation } from "react-apollo";
-import { BaseButton } from "./BaseComponents";
+import { BaseButton, BaseDialog, BaseDialogTitle } from "./BaseComponents";
+import ButtonWithMutation from "./ButtonWithMutation";
 
 function ConfirmDialog({
   open,
@@ -20,24 +18,25 @@ function ConfirmDialog({
   cancelText = "Cancel"
 }) {
   return (
-    <Dialog open={open} onClose={onClose}>
-      <DialogTitle>{title}</DialogTitle>
+    <BaseDialog
+      fullScreen={false}
+      hideCloseButton={true}
+      open={open}
+      onClose={onClose}
+    >
+      <BaseDialogTitle fullScreen={false}>{title}</BaseDialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <BaseButton onClick={onClose} color="primary">
+        <BaseButton onClick={onClose} color="secondary">
           {cancelText}
         </BaseButton>
-        <Mutation {...mutationProps}>
-          {(mutation, { loading }) => (
-            <BaseButton color="primary" loading={loading} onClick={mutation}>
-              {okText}
-            </BaseButton>
-          )}
-        </Mutation>
+        <ButtonWithMutation {...mutationProps} color="primary">
+          {okText}
+        </ButtonWithMutation>
       </DialogActions>
-    </Dialog>
+    </BaseDialog>
   );
 }
 
