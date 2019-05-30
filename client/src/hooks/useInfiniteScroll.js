@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useWindowSize from "./useWindowSize";
-import useInterval from "./useInterval";
+import { useInterval, useWindowSize } from ".";
 
 const WINDOW = "window";
 const PARENT = "parent";
@@ -32,6 +31,7 @@ function useInfiniteScroll({
     const parentNode = ref.current.parentNode;
     const parentRect = parentNode.getBoundingClientRect();
     const { top, bottom, left, right } = parentRect;
+
     return { top, bottom, left, right };
   }
 
@@ -40,6 +40,7 @@ function useInfiniteScroll({
 
     const bottom = rect.bottom;
     let bottomOffset = bottom - windowHeight;
+
     if (scrollContainer === PARENT) {
       const { bottom: parentBottom } = getParentSizes();
       // Distance between bottom of list and its parent
@@ -51,6 +52,7 @@ function useInfiniteScroll({
 
   function isParentInView() {
     const parent = ref.current ? ref.current.parentNode : null;
+
     if (parent) {
       const { left, right, top, bottom } = getParentSizes();
       if (left > windowWidth) {
@@ -63,6 +65,7 @@ function useInfiniteScroll({
         return false;
       }
     }
+
     return true;
   }
 
@@ -71,11 +74,12 @@ function useInfiniteScroll({
       if (ref.current) {
         if (scrollContainer === PARENT) {
           if (!isParentInView()) {
+            // Do nothing if the parent is out of screen
             return;
           }
         }
 
-        // Get if the distance between bottom of the container and bottom of the window
+        // Check if the distance between bottom of the container and bottom of the window or parent
         // is less than "threshold"
         const bottomOffset = getBottomOffset();
         const validOffset = bottomOffset < threshold;
