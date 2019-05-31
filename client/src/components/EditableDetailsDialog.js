@@ -23,7 +23,7 @@ function EditableDetailsDialog({
   }
 
   return (
-    <BaseDialog open onExited={redirectToBack}>
+    <BaseDialog open maxWidth="md" onExited={redirectToBack}>
       <Query query={query} variables={variables} skip={isNew}>
         {({ data, loading, error }) => {
           if (error) {

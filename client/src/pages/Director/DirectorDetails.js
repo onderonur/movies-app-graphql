@@ -1,11 +1,6 @@
 // Reusability
 import React, { useState, useContext } from "react";
-import {
-  Typography,
-  DialogContent,
-  IconButton,
-  Divider
-} from "@material-ui/core";
+import { Typography, DialogContent, IconButton, Grid } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { BaseDialogTitle } from "components/BaseComponents";
@@ -15,10 +10,19 @@ import { ModalRouteContext } from "react-router-modal-gallery";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 import MovieGridList from "pages/Movies/MovieGridList";
+import FlexImage from "components/FlexImage";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(theme => ({
+  profileImg: {
+    maxHeight: 400
+  }
+}));
 
 function DirectorDetails({ director, loading, onEditClick }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const { redirectToBack } = useContext(ModalRouteContext);
+  const classes = useStyles();
 
   function showDeleteConfirm() {
     setDeleteConfirmVisible(true);
@@ -49,24 +53,30 @@ function DirectorDetails({ director, loading, onEditClick }) {
       </BaseDialogTitle>
 
       <DialogContent>
-        {director.bio ? (
-          <>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <FlexImage className={classes.profileImg} src={director.imageUrl} />
+          </Grid>
+          <Grid item xs={12} sm={8}>
             <Typography variant="subtitle1">Bio</Typography>
             {/* TODO: Buna bi bak daha doğru bi kullanımı var mı? */}
             <Typography variant="body2" style={{ whiteSpace: "pre-line" }}>
               {director.bio}
             </Typography>
-          </>
-        ) : null}
-        <Divider />
-        <Typography variant="subtitle1">Movies</Typography>
-        {director.movies.length ? (
-          <MovieGridList
-            direction="horizontal"
-            movies={director.movies}
-            cols={2}
-          />
-        ) : null}
+          </Grid>
+          <Grid item xs={12}>
+            {director.movies.length ? (
+              <>
+                <Typography variant="subtitle1">Movies</Typography>
+                <MovieGridList
+                  direction="horizontal"
+                  movies={director.movies}
+                  cols={2.5}
+                />
+              </>
+            ) : null}
+          </Grid>
+        </Grid>
       </DialogContent>
 
       <DeleteDirectorConfirmDialog

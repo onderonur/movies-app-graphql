@@ -90,7 +90,7 @@ const port = process.env.PORT || 8000;
  * port for your GraphQL server. Before pushing your application to Heroku, push all recent changes to your GitHub repository.
  * After that, push all the changes to your Heroku remote repository as well, since you created a Heroku application before: git push heroku master.
  */
-sequelize.sync({ force: true }).then(async () => {
+sequelize.sync({ force: isProduction }).then(async () => {
   if (isProduction) {
     seedData();
   }

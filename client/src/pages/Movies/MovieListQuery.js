@@ -1,15 +1,13 @@
-// OK
+// OK!!
 import React from "react";
 import { Query } from "react-apollo";
 import { GET_MOVIES } from "graphql/movie/queries";
 
 function MovieListQuery({ children }) {
   return (
-    /**
-     * notifyOnNetworkStatusChange: To make "loading" true when "fetchMore" runs.
-     * loading is true only on the first request on default behavior.
-     * fetchMore doesn't affect "loading" by default.
-     */
+    // notifyOnNetworkStatusChange: To make "loading" true when "fetchMore" runs.
+    // loading is true only on the first request on default behavior.
+    // fetchMore doesn't affect "loading" by default.
     <Query query={GET_MOVIES} notifyOnNetworkStatusChange>
       {({ loading, error, data, fetchMore }) => {
         if (error) return `Error! ${error.message}`;

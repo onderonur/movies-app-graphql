@@ -24,7 +24,7 @@ function ConfirmDialog({
       open={open}
       onClose={onClose}
     >
-      <BaseDialogTitle fullScreen={false}>{title}</BaseDialogTitle>
+      <BaseDialogTitle>{title}</BaseDialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>

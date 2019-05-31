@@ -1,37 +1,28 @@
-// OK
+// OK!!
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import paths from "constants/paths";
 import { roles } from "constants/roles";
 import ViewWithFloatingButton from "components/ViewWithFloatingButton";
 import MoviesFeed from "./MoviesFeed";
-import { makeStyles } from "@material-ui/core";
 import { AdapterModalLink } from "components/BaseComponents/BaseLink";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    maxWidth: 600,
-    margin: "auto"
-  }
-}));
+import { Container } from "@material-ui/core";
 
 function Movies() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Container maxWidth="lg">
       <ViewWithFloatingButton
         fabProps={{
           color: "primary",
           component: AdapterModalLink,
           to: `${paths.MOVIES}/new`,
-          icon: AddIcon,
+          icon: <AddIcon />,
           allowedRolesToClick: [roles.ADMIN]
         }}
       >
         <MoviesFeed />
       </ViewWithFloatingButton>
-    </div>
+    </Container>
   );
 }
 

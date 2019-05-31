@@ -1,12 +1,8 @@
 // OK!!
-import React from "react";
-import {
-  DialogTitle,
-  withMobileDialog,
-  makeStyles,
-  Typography
-} from "@material-ui/core";
+import React, { useContext } from "react";
+import { DialogTitle, makeStyles, Typography } from "@material-ui/core";
 import BaseDialogCloseButton from "./BaseDialogCloseButton";
+import { BaseDialogContext } from "./BaseDialog";
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -17,13 +13,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function BaseDialogTitle({
-  showBackButton,
-  onBackButtonClick,
-  fullScreen,
-  children
-}) {
+function BaseDialogTitle({ showBackButton, onBackButtonClick, children }) {
   const classes = useStyles();
+  const { fullScreen } = useContext(BaseDialogContext);
 
   return (
     <DialogTitle disableTypography className={classes.title}>
@@ -40,4 +32,4 @@ function BaseDialogTitle({
   );
 }
 
-export default withMobileDialog()(BaseDialogTitle);
+export default BaseDialogTitle;

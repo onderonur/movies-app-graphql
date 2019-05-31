@@ -5,8 +5,7 @@ import DirectorListQuery from "./DirectorListQuery";
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 import paths from "constants/paths";
 import { ModalLink } from "react-router-modal-gallery";
-import ImageBackground from "components/ImageBackground";
-import placeholderPng from "assets/placeholder.png";
+import FlexImage from "components/FlexImage";
 import useGridListCols from "hooks/useGridListCols";
 
 function DirectorGridList() {
@@ -18,13 +17,11 @@ function DirectorGridList() {
         loading ? (
           <LoadingIndicator />
         ) : (
-          <GridList cellHeight={268} cols={cols} spacing={2}>
+          <GridList cellHeight="auto" cols={cols} spacing={2}>
             {directors.map(director => (
               <GridListTile key={director.id}>
                 <ModalLink to={`${paths.DIRECTORS}/${director.id}`}>
-                  <ImageBackground
-                    imageUrl={director.imageUrl || placeholderPng}
-                  />
+                  <FlexImage src={director.imageUrl} />
                 </ModalLink>
                 <GridListTileBar title={director.name} />
               </GridListTile>

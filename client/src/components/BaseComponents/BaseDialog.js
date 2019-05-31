@@ -1,6 +1,6 @@
 // OK!!
 import React, { useState, useEffect } from "react";
-import { Dialog, withMobileDialog, IconButton } from "@material-ui/core";
+import { Dialog, withMobileDialog } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/styles";
 
@@ -10,17 +10,20 @@ const useStyles = makeStyles(theme => ({
   },
   closeButtonContainer: {
     position: "fixed",
-    top: 4,
-    right: 20
+    top: theme.spacing(1),
+    right: theme.spacing(3),
+    cursor: "pointer"
   }
 }));
+
+export const BaseDialogContext = React.createContext();
 
 function BaseDialog({
   open,
   onClose,
   onExited,
-  fullScreen,
   scroll = "body",
+  fullScreen,
   hideCloseButton,
   children,
   ...rest
@@ -48,23 +51,23 @@ function BaseDialog({
   function renderCloseButton() {
     return (
       <div className={classes.closeButtonContainer}>
-        <IconButton className={classes.closeIcon} onClick={startExitAnimation}>
-          <CloseIcon />
-        </IconButton>
+        <CloseIcon className={classes.closeIcon} onClick={startExitAnimation} />
       </div>
     );
   }
 
   return (
     <Dialog
-      {...rest}
       scroll={scroll}
       fullScreen={fullScreen}
       open={showModal}
       onClose={startExitAnimation}
       onExited={onExitAnimationEnd}
+      {...rest}
     >
-      {children}
+      <BaseDialogContext.Provider value={{ fullScreen }}>
+        {children}
+      </BaseDialogContext.Provider>
       {!hideCloseButton && !fullScreen && renderCloseButton()}
     </Dialog>
   );

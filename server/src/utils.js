@@ -26,17 +26,52 @@ export const seedData = async () => {
 
   // TODO: IMDB'deki türkçe film isimleri vsleri kaldır buralardan
   const directors = [
-    { name: "Joss Whedon" },
-    { name: "Edgar Wright" },
+    {
+      name: "Joss Whedon",
+      bio: `Joss Whedon is the middle of five brothers - his younger brothers are Jed Whedon and Zack Whedon. Both his father, Tom Whedon and his grandfather, John Whedon were successful television writers. Joss' mother, Lee Stearns, was a history teacher and she also wrote novels as Lee Whedon. Whedon was raised in New York and was educated at Riverdale Country School, where his mother also taught. He also attended Winchester College in England for two years, before graduating with a film degree from Wesleyan University.
+
+    After relocating to Los Angeles, Whedon landed his first TV writing job on "Roseanne", and moved on to script a season of "Parenthood". He then developed a film script which went on to become Buffy the Vampire Slayer (1992). Whedon was very unhappy with the final film - his original script was extensively re-written and made lighter in tone. After this he earned screenwriting credits on such high profile productions as Alien Resurrection (1997) and Toy Story (1995), for which he was Oscar nominated. He also worked as a 'script doctor' on various features, notably Speed (1994). 
+    
+    In 1997, Whedon had the opportunity to resurrect his character Buffy in a television series on The WB Network. This time, as showrunner and executive producer, he retained full artistic control. The series, "Buffy the Vampire Slayer" was a popular and critical hit, which ran for several seasons, the last two on UPN. Whedon also produced a spin-off series, "Angel", which was also successful. A foray in to sci-fi television followed with "Firefly", which developed a cult following, but did not stay on air long. It did find an audience on DVD and through re-runs, and a spin-off feature film Serenity (2005) was released in 2005.
+    
+    Other projects have included comic book writing, the sci-fi drama "Dollhouse" and the screenplay for Marvel blockbuster The Avengers (2012).`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTg5MzQ0MDA4MF5BMl5BanBnXkFtZTcwNzUwOTk4OQ@@._V1_SY1000_CR0,0,754,1000_AL_.jpg"
+    },
+    {
+      name: "Edgar Wright",
+      bio: `Edgar Howard Wright (born 18 April 1974) is an English director, screenwriter, producer, and actor. He is best known for his comedic Three Flavours Cornetto film trilogy consisting of Shaun of the Dead (2004), Hot Fuzz (2007), and The World's End (2013), made with recurrent collaborators Simon Pegg, Nira Park and Nick Frost. He also collaborated with them as the director of the television series Spaced.`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTMxMjgyMjQ4NF5BMl5BanBnXkFtZTcwMTU0ODk2Mw@@._V1_.jpg"
+    },
     {
       name: "David Fincher",
-      imageUrl:
-        "https://m.media-amazon.com/images/M/MV5BMTc1NDkwMTQ2MF5BMl5BanBnXkFtZTcwMzY0ODkyMg@@._V1_.jpg",
       bio: `David Fincher was born in 1962 in Denver, Colorado, and was raised in Marin County, California. When he was 18 years old he went to work for John Korty at Korty Films in Mill Valley. He subsequently worked at ILM (Industrial Light and Magic) from 1981-1983. Fincher left ILM to direct TV commercials and music videos after signing with N. Lee Lacy in Hollywood. He went on to found Propaganda in 1987 with fellow directors Dominic Sena, Greg Gold and Nigel Dick. Fincher has directed TV commercials for clients that include Nike, Coca-Cola, Budweiser, Heineken, Pepsi, Levi's, Converse, AT&T and Chanel. He has directed music videos for Madonna, Sting, The Rolling Stones, Michael Jackson, Aerosmith, George Michael, Iggy Pop, The Wallflowers, Billy Idol, Steve Winwood, The Motels and, most recently, A Perfect Circle.
 
-      As a film director, he has achieved huge success with Se7en (1995), Fight Club (1999) and, Panic Room (2002).`
+      As a film director, he has achieved huge success with Se7en (1995), Fight Club (1999) and, Panic Room (2002).`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTc1NDkwMTQ2MF5BMl5BanBnXkFtZTcwMzY0ODkyMg@@._V1_.jpg"
     },
-    { name: "Christopher Nolan" },
+    {
+      name: "Christopher Nolan",
+      bio: `Best known for his cerebral, often nonlinear, storytelling, acclaimed writer-director Christopher Nolan was born on July 30, 1970 in London, England. Over the course of 15 years of filmmaking, Nolan has gone from low-budget independent films to working on some of the biggest blockbusters ever made.
+
+      At 7 years old, Nolan began making short movies with his father's Super-8 camera. While studying English Literature at University College London, he shot 16-millimetre films at U.C.L.'s film society, where he learned the guerrilla techniques he would later use to make his first feature, Following (1998), on a budget of around $6,000. The noir thriller was recognized at a number of international film festivals prior to its theatrical release, and gained Nolan enough credibility that he was able to gather substantial financing for his next film.
+      
+      Nolan's second film was Memento (2000), which he directed from his own screenplay based on a short story by his brother Jonathan. Starring Guy Pearce, the film brought Nolan numerous honors, including Academy Award and Golden Globe Award nominations for Best Original Screenplay. Nolan went on to direct the critically acclaimed psychological thriller, Insomnia (2002), starring Al Pacino, Robin Williams and Hilary Swank.
+      
+      The turning point in Nolan's career occurred when he was awarded the chance to revive the Batman franchise in 2005. In Batman Begins (2005), Nolan brought a level of gravitas back to the iconic hero, and his gritty, modern interpretation was greeted with praise from fans and critics alike. Before moving on to a Batman sequel, Nolan directed, co-wrote, and produced the mystery thriller The Prestige (2006), starring Christian Bale and Hugh Jackman as magicians whose obsessive rivalry leads to tragedy and murder.
+      
+      In 2008, Nolan directed, co-wrote, and produced The Dark Knight (2008) which went on to gross more than a billion dollars at the worldwide box office. Nolan was nominated for a Directors Guild of America (D.G.A.) Award, Writers Guild of America (W.G.A.) Award and Producers Guild of America (P.G.A.) Award, and the film also received eight Academy Award nominations.
+      
+      In 2010, Nolan captivated audiences with the sci-fi thriller Inception (2010), which he directed and produced from his own original screenplay. The thought-provoking drama was a worldwide blockbuster, earning more than $800,000,000 dollars and becoming one of the most discussed and debated films of the year. Among its many honors, Inception received four Academy Awards and eight nominations, including Best Picture and Best Screenplay. Nolan was recognized by his peers with D.G.A. and P.G.A. Award nominations, as well as a W.G.A. Award for his work on the film.
+      
+      One of the best-reviewed and highest-grossing movies of 2012, The Dark Knight Rises (2012) concluded Nolan's Batman trilogy. Due to his success rebooting the Batman character, Warner Bros. enlisted Nolan to produce their revamped Superman movie Man of Steel (2013), which opened in the summer of 2013. In 2014, Nolan directed, wrote, and produced the science fiction epic Interstellar (2014), starring Matthew McConaughey, Anne Hathaway and Jessica Chastain. Paramount Pictures and Warner Bros. released the film on November 5, 2014 to positive reviews and strong box-office results, grossing over $670 million dollars worldwide.
+      
+      Nolan resides in Los Angeles, California with his wife, producer Emma Thomas, and their children. Nolan and Thomas also have their own production company, Syncopy.`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BNjE3NDQyOTYyMV5BMl5BanBnXkFtZTcwODcyODU2Mw@@._V1_.jpg"
+    },
     { name: "Peter Jackson" },
     { name: "George Lucas" },
     { name: "Robert Zemeckis" }

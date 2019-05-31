@@ -1,9 +1,22 @@
-// OK
+// OK!!
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
-import ImageContainer from "components/ImageContainer";
+import FlexImage from "components/FlexImage";
+import { makeStyles } from "@material-ui/styles";
+
+const useStyles = makeStyles(theme => ({
+  img: {
+    width: "50%",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    marginLeft: "auto",
+    marginRight: "auto"
+  }
+}));
 
 function ImageUrlInput({ name, label, fullWidth, required, imgSrc }) {
+  const classes = useStyles();
+
   return (
     <>
       <BaseTextField
@@ -12,13 +25,8 @@ function ImageUrlInput({ name, label, fullWidth, required, imgSrc }) {
         fullWidth={fullWidth}
         required={required}
       />
-      <ImageContainer
-        src={imgSrc}
-        alt="Image input preview"
-        height={268}
-        width={182}
-        padding={6}
-      />
+        <FlexImage className={classes.img} src={imgSrc} />
+   
     </>
   );
 }

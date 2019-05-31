@@ -1,3 +1,4 @@
+// OK!!
 import React from "react";
 import {
   GridList,
@@ -7,13 +8,12 @@ import {
 } from "@material-ui/core";
 import paths from "constants/paths";
 import MovieLikeButton from "./MovieLikeButton";
-import placeholderPng from "assets/placeholder.png";
 import { ModalLink } from "react-router-modal-gallery";
 import useGridListCols from "hooks/useGridListCols";
-import ImageBackground from "components/ImageBackground";
+import FlexImage from "components/FlexImage";
 
 const useStyles = makeStyles(theme => ({
-  horizontalGridList: {
+  horizontal: {
     flexWrap: "nowrap",
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: "translateZ(0)"
@@ -26,17 +26,15 @@ function MovieGridList({ direction = "vertical", movies, cols }) {
 
   return (
     <GridList
-      className={
-        direction === "horizontal" ? classes.horizontalGridList : undefined
-      }
-      cellHeight={268}
+      className={direction === "horizontal" ? classes.horizontal : undefined}
+      cellHeight="auto"
       cols={cols || defaultGridCols}
       spacing={2}
     >
       {movies.map(movie => (
         <GridListTile key={movie.id}>
           <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
-            <ImageBackground imageUrl={movie.imageUrl || placeholderPng} />
+            <FlexImage src={movie.imageUrl} />
           </ModalLink>
           <GridListTileBar
             title={movie.title}

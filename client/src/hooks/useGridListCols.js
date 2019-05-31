@@ -5,7 +5,7 @@ function useGridListCols() {
   const width = useWidth();
 
   function getGridListCols() {
-    if (isWidthUp("xl", width)) {
+    if (isWidthUp("lg", width)) {
       return 4;
     }
 

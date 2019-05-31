@@ -22,7 +22,12 @@ function AuthModal() {
       }) => (
         <Mutation mutation={HIDE_AUTH_MODAL}>
           {hideAuthModal => (
-            <BaseDialog open={open} fullScreen={false} onClose={hideAuthModal}>
+            <BaseDialog
+              open={open}
+              fullScreen={false}
+              hideCloseButton
+              onClose={hideAuthModal}
+            >
               <Mutation mutation={STORE_USER_INFO}>
                 {storeUserInfo => {
                   const sharedProps = {

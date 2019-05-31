@@ -4,7 +4,8 @@ import {
   Typography,
   DialogContent,
   IconButton,
-  makeStyles
+  makeStyles,
+  Grid
 } from "@material-ui/core";
 import YouTubePlayer from "components/YoutubePlayer";
 import MovieLikeButton from "pages/Movies/MovieLikeButton";
@@ -18,8 +19,8 @@ import DeleteMovieConfirmDialog from "pages/Movie/DeleteMovieConfirmDialog";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
-import ImageContainer from "components/ImageContainer";
 import MovieGridList from "pages/Movies/MovieGridList";
+import FlexImage from "components/FlexImage";
 
 const useStyles = makeStyles(theme => ({
   top: {
@@ -55,13 +56,15 @@ function MovieDetails({ movie, loading, onEditClick }) {
     setDeleteConfirmVisible(false);
   }
 
+  const director = movie ? movie.director : null;
+
   const otherMovies = loading
     ? []
-    : movie.director.movies.filter(item => item.id !== movie.id);
+    : director.movies.filter(item => item.id !== movie.id);
 
   const directorLink = loading ? null : (
-    <BaseLink to={`${paths.DIRECTORS}/${movie.director.id}`} toModal>
-      {movie.director.name}
+    <BaseLink to={`${paths.DIRECTORS}/${director.id}`} toModal>
+      {director.name}
     </BaseLink>
   );
 
@@ -86,14 +89,11 @@ function MovieDetails({ movie, loading, onEditClick }) {
       </BaseDialogTitle>
 
       <DialogContent>
-        <div className={classes.top}>
-          <ImageContainer
-            src={movie.imageUrl}
-            alt="Movie poster"
-            height={268}
-            width={182}
-          />
-          <div className={classes.main}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <FlexImage src={movie.imageUrl} />
+          </Grid>
+          <Grid item xs={12} sm={8}>
             <div className={classes.title}>
               <Typography variant="h5">{movie.title}</Typography>
               <MovieLikeButton
@@ -101,40 +101,42 @@ function MovieDetails({ movie, loading, onEditClick }) {
                 viewerHasLiked={movie.viewerHasLiked}
               />
             </div>
-
             <Typography variant="subtitle1">{directorLink}</Typography>
+            <Typography variant="h6">Overview</Typography>
+            <Typography>{movie.description}</Typography>
+          </Grid>
 
-            <div>
-              <Typography variant="h6">Overview</Typography>
-              <Typography>{movie.description}</Typography>
-            </div>
-          </div>
-        </div>
+          {movie.youtubeId && (
+            <Grid item xs={12}>
+              <YouTubePlayer youtubeId={movie.youtubeId} />
+            </Grid>
+          )}
 
-        {movie.youtubeId && <YouTubePlayer youtubeId={movie.youtubeId} />}
-
-        <div className={classes.otherMovies}>
-          {otherMovies.length ? (
-            <>
+          <Grid item xs={12}>
+            {otherMovies.length ? (
+              <>
+                <Typography>
+                  {otherMovies.length
+                    ? `Other movies by `
+                    : `There is no other movie by `}
+                  {directorLink}
+                </Typography>
+                <MovieGridList
+                  direction="horizontal"
+                  movies={otherMovies}
+                  cols={2.5}
+                />
+              </>
+            ) : (
               <Typography>
-                {otherMovies.length
-                  ? `Other movies by `
-                  : `There is no other movie by `}
+                {`There is no other movie by `}
                 {directorLink}
               </Typography>
-              <MovieGridList
-                direction="horizontal"
-                movies={otherMovies}
-                cols={2}
-              />
-            </>
-          ) : (
-            <Typography>
-              {`There is no other movie by `}
-              {directorLink}
-            </Typography>
-          )}
-        </div>
+            )}
+          </Grid>
+        </Grid>
+
+        <div className={classes.otherMovies} />
       </DialogContent>
 
       <DeleteMovieConfirmDialog

@@ -1,22 +1,9 @@
 // OK!!
-import React, { useEffect } from "react";
-import { Form, connect } from "formik";
+import React from "react";
+import { Form } from "formik";
 import { makeStyles } from "@material-ui/core";
 
-// TODO: Bak bu olaya bi ara
-function DirtyFormHandler({ formik }) {
-  useEffect(() => {
-    return () => {
-      if (formik.dirty) {
-        console.log("DIRTY");
-      }
-    };
-  }, [formik.dirty]);
-
-  return null;
-}
-
-const FormikDirtyFormHandler = connect(DirtyFormHandler);
+// TODO: Modal kapanırken veya route'dan çıkarken "discard changes" confirm'i ekle
 
 // TODO: Mobile modal'da content'i full uzatıp action'ları en alta koymak için bu kısım
 // Daha iyi bi yöntem bulunursa o da olabilir
@@ -44,7 +31,6 @@ function BaseForm({
 
   return (
     <>
-      <FormikDirtyFormHandler />
       <Form
         className={classes.form}
         noValidate={noValidate}

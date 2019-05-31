@@ -9,6 +9,7 @@ import {
   BaseDialogForm
 } from "components/BaseComponents";
 import { REQUIRED_ERROR } from "constants/formErrors";
+import { Grid } from "@material-ui/core";
 
 function SignUpModal({ onCancel, onCompleted }) {
   return (
@@ -52,47 +53,58 @@ function SignUpModal({ onCancel, onCompleted }) {
           okText="Submit"
         >
           <BaseDialogForm
-            title={"Sign Up"}
-            fullScreen={false}
+            title="Sign Up"
             onCancel={onCancel}
             isSubmitting={loading}
             defaultActions={{
               submitText: "Submit"
             }}
           >
-            <BaseTextField
-              name="username"
-              label="Username"
-              autoFocus
-              required
-              fullWidth
-            />
-            <BaseTextField
-              name="firstname"
-              label="Firstname"
-              required
-              fullWidth
-            />
-            <BaseTextField
-              name="lastname"
-              label="Lastname"
-              required
-              fullWidth
-            />
-            <BaseTextField
-              name="password"
-              label="Password"
-              type="password"
-              required
-              fullWidth
-            />
-            <BaseTextField
-              name="passwordConfirmation"
-              label="Password Confirmation"
-              type="password"
-              required
-              fullWidth
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <BaseTextField
+                  name="username"
+                  label="Username"
+                  autoFocus
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <BaseTextField
+                  name="firstname"
+                  label="Firstname"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <BaseTextField
+                  name="lastname"
+                  label="Lastname"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <BaseTextField
+                  name="password"
+                  label="Password"
+                  type="password"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <BaseTextField
+                  name="passwordConfirmation"
+                  label="Password Confirmation"
+                  type="password"
+                  required
+                  fullWidth
+                />
+              </Grid>
+            </Grid>
           </BaseDialogForm>
         </BaseFormik>
       )}

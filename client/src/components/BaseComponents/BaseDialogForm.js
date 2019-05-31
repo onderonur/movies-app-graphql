@@ -1,4 +1,4 @@
-// OK!! TODO: Şu "fullscreen" prop'unu bi düzenle genel. Context vs yap ya da
+// OK!!
 import React from "react";
 import {
   BaseForm,
@@ -13,12 +13,11 @@ function BaseDialogForm({
   isSubmitting,
   onCancel,
   actions,
-  defaultActions,
-  fullScreen
+  defaultActions
 }) {
   return (
     <BaseForm>
-      <BaseDialogTitle fullScreen={fullScreen}>{title}</BaseDialogTitle>
+      <BaseDialogTitle>{title}</BaseDialogTitle>
       <DialogContent>{children}</DialogContent>
       {actions !== null ? (
         <>

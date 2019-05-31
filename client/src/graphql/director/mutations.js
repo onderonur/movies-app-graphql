@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { DIRECTOR_FRAGMENT } from "./fragment";
 
 // It is recommended to use a "operation name"
 // e.g., "CreateDirector" after the operation keyword "mutation"
@@ -20,13 +21,11 @@ export const UPDATE_DIRECTOR = gql`
       success
       message
       director {
-        id
-        name
-        bio
-        imageUrl
+        ...director
       }
     }
   }
+  ${DIRECTOR_FRAGMENT}
 `;
 
 export const DELETE_DIRECTOR = gql`

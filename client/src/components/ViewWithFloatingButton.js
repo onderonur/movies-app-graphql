@@ -21,11 +21,9 @@ function ViewWithFloatingButton({ children, fabProps }) {
 
   const { icon, allowedRolesToClick, ...rest } = fabProps;
 
-  const FabIcon = icon;
-
   const button = (
     <Fab className={classes.fab} size="large" {...rest}>
-      <FabIcon />
+      {icon}
     </Fab>
   );
 

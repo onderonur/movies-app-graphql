@@ -8,11 +8,19 @@ import {
   BaseFormik,
   BaseDialogForm
 } from "components/BaseComponents";
-import { Link } from "@material-ui/core";
+import { Link, makeStyles } from "@material-ui/core";
 import { SHOW_SIGNUP_MODAL } from "graphql/cache/mutations";
 import { REQUIRED_ERROR } from "constants/formErrors";
 
+const useStyles = makeStyles(theme => ({
+  signUpLink: {
+    margin: theme.spacing(1, 0)
+  }
+}));
+
 function LoginForm({ onCancel, onCompleted }) {
+  const classes = useStyles();
+
   return (
     <Mutation
       mutation={SIGN_IN}
@@ -44,8 +52,7 @@ function LoginForm({ onCancel, onCompleted }) {
           }}
         >
           <BaseDialogForm
-            title={"Login"}
-            fullScreen={false}
+            title="Login"
             onCancel={onCancel}
             isSubmitting={loading}
             defaultActions={{
@@ -56,6 +63,7 @@ function LoginForm({ onCancel, onCompleted }) {
               name="username"
               label="Username"
               required
+              margin="normal"
               autoFocus
               fullWidth
               inputProps={{
@@ -67,15 +75,16 @@ function LoginForm({ onCancel, onCompleted }) {
               label="Password"
               type="password"
               required
+              margin="normal"
               fullWidth
               inputProps={{
                 autoCapitalize: "none"
               }}
             />
-
             <Mutation mutation={SHOW_SIGNUP_MODAL}>
               {showSignUpModal => (
                 <Link
+                  className={classes.signUpLink}
                   component="button"
                   type="button"
                   onClick={showSignUpModal}
