@@ -71,7 +71,6 @@ function DirectorDetails({ director, loading, onEditClick }) {
                 <MovieGridList
                   direction="horizontal"
                   movies={director.movies}
-                  cols={2.5}
                 />
               </>
             ) : null}

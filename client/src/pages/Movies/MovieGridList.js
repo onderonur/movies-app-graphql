@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 function MovieGridList({ direction = "vertical", movies, cols }) {
   const classes = useStyles();
-  const defaultGridCols = useGridListCols();
+  const defaultGridCols = useGridListCols({ direction });
 
   return (
     <GridList

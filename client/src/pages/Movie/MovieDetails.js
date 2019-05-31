@@ -121,11 +121,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
                     : `There is no other movie by `}
                   {directorLink}
                 </Typography>
-                <MovieGridList
-                  direction="horizontal"
-                  movies={otherMovies}
-                  cols={2.5}
-                />
+                <MovieGridList direction="horizontal" movies={otherMovies} />
               </>
             ) : (
               <Typography>
