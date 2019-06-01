@@ -1,27 +1,19 @@
-import { useRef, useState, useEffect } from "react";
-import useInterval from "./useInterval";
+import { useState, useEffect } from "react";
+import useResizeObserver from "./useResizeObserver";
 
 function useCheckOverflow() {
-  const ref = useRef();
+  const [ref, { width, height }] = useResizeObserver();
   const [overflowedX, setOverflowedX] = useState();
   const [overflowedY, setOverflowedY] = useState();
 
-  function checkOverflow() {
+  useEffect(() => {
     const current = ref.current;
-    if (current) {
-      const rect = current.getBoundingClientRect();
-      const { height, width } = rect;
 
+    if (current) {
       setOverflowedX(current.scrollWidth > width);
       setOverflowedY(current.scrollHeight > height);
     }
-  }
-
-  useEffect(() => {
-    checkOverflow();
-  }, []);
-
-  useInterval(checkOverflow, 200);
+  }, [ref, height, width]);
 
   return [ref, { overflowedX, overflowedY }];
 }

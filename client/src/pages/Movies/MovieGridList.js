@@ -10,7 +10,7 @@ import paths from "constants/paths";
 import MovieLikeButton from "./MovieLikeButton";
 import { ModalLink } from "react-router-modal-gallery";
 import useGridListCols from "hooks/useGridListCols";
-import FlexImage from "components/FlexImage";
+import ImageBox from "components/ImageBox";
 
 const useStyles = makeStyles(theme => ({
   horizontal: {
@@ -34,7 +34,7 @@ function MovieGridList({ direction = "vertical", movies, cols }) {
       {movies.map(movie => (
         <GridListTile key={movie.id}>
           <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
-            <FlexImage src={movie.imageUrl} />
+            <ImageBox src={movie.imageUrl} />
           </ModalLink>
           <GridListTileBar
             title={movie.title}

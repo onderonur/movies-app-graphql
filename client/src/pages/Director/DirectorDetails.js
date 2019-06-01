@@ -10,7 +10,7 @@ import { ModalRouteContext } from "react-router-modal-gallery";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 import MovieGridList from "pages/Movies/MovieGridList";
-import FlexImage from "components/FlexImage";
+import ImageBox from "components/ImageBox";
 import { makeStyles } from "@material-ui/styles";
 import ShowMore from "components/ShowMore";
 
@@ -62,7 +62,7 @@ function DirectorDetails({ director, loading, onEditClick }) {
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <FlexImage className={classes.profileImg} src={director.imageUrl} />
+            <ImageBox className={classes.profileImg} src={director.imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Typography variant="h6">Bio</Typography>

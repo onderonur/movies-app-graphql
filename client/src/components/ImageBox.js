@@ -14,14 +14,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function FlexImage({ className, src = placeholderPng, alt = "Not Loaded" }) {
-  const classes = useStyles({ src });
+function ImageBox({ className, src, alt = "Not Loaded" }) {
+  const classes = useStyles();
 
   return (
     <div className={clsx(classes.container, className)}>
-      <img className={classes.img} src={placeholderPng} alt={alt} />
+      <img className={classes.img} src={src || placeholderPng} alt={alt} />
     </div>
   );
 }
 
-export default FlexImage;
+export default ImageBox;

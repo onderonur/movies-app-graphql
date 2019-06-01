@@ -23,6 +23,7 @@
     "react-router-dom": "^5.0.0",
     "react-router-modal-gallery": "^1.0.4",
     "react-scripts": "^3.0.1",
+    "resize-observer-polyfill": "^1.5.1",
     "yup": "^0.27.0"
   },
   "scripts": {

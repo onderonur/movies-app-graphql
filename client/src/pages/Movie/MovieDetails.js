@@ -20,7 +20,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
 import MovieGridList from "pages/Movies/MovieGridList";
-import FlexImage from "components/FlexImage";
+import ImageBox from "components/ImageBox";
 
 const useStyles = makeStyles(theme => ({
   top: {
@@ -91,7 +91,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <FlexImage src={movie.imageUrl} />
+            <ImageBox src={movie.imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
             <div className={classes.title}>
