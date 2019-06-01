@@ -74,18 +74,19 @@ function MovieDetails({ movie, loading, onEditClick }) {
     </DialogContent>
   ) : (
     <>
-      <BaseDialogTitle>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Movie Details
-        </Typography>
-        <AccessControl allowedRoles={[roles.ADMIN]}>
-          <IconButton onClick={onEditClick}>
-            <EditIcon fontSize="small" />
-          </IconButton>
-          <IconButton onClick={showDeleteConfirm}>
-            <DeleteIcon color="secondary" fontSize="small" />
-          </IconButton>
-        </AccessControl>
+      <BaseDialogTitle
+        extra={
+          <AccessControl allowedRoles={[roles.ADMIN]}>
+            <IconButton onClick={onEditClick}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+            <IconButton onClick={showDeleteConfirm}>
+              <DeleteIcon color="secondary" fontSize="small" />
+            </IconButton>
+          </AccessControl>
+        }
+      >
+        Movie Details
       </BaseDialogTitle>
 
       <DialogContent>

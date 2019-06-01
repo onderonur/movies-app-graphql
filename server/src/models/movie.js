@@ -11,7 +11,11 @@ const movie = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     },
     imageUrl: {
       type: DataTypes.STRING

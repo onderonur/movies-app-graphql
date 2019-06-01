@@ -72,9 +72,34 @@ export const seedData = async () => {
       imageUrl:
         "https://m.media-amazon.com/images/M/MV5BNjE3NDQyOTYyMV5BMl5BanBnXkFtZTcwODcyODU2Mw@@._V1_.jpg"
     },
-    { name: "Peter Jackson" },
-    { name: "George Lucas" },
-    { name: "Robert Zemeckis" }
+    {
+      name: "Peter Jackson",
+      bio: `Peter Jackson was born as an only child in a small coast-side town in New Zealand in 1961. When a friend of his parents bought him a super 8 movie camera (because she saw how much he enjoyed taking photos), the then eight-year-old Peter instantly grabbed the thing to start recording his own movies, which he made with his friends. They were usually short, but they already had the trademark that would make Jackson famous: impressive special effects, made at a very low cost. For example, for his film "World War Two" which he made as a teenager, he used to simulate a firing gun by punching little holes into the celluloid, so that, once projected, the gun gave the impression of displaying a small fire. Jackson's first step towards more serious film-making came with an entry in a local contest to stimulate amateur and children's films. For this film, he used stop-motion animation to create a monster that ruins a city in the style of Ray Harryhausen. Unfortunately, he didn't win. At twenty-two, he embarked on a movie-making adventure that would change his life. This film, Bad Taste (1987), was begun as any other Jackson film, in an amateur style, at a low budget and using friends and local people to star in his film. Jackson himself did nearly everything in the movie; he directed, produced, filmed and starred in it, in a number of roles, amongst them that of the hero, "Derek". And everything was filmed on a second-hand, $250 camera. It took Jackson and his friends four years to complete the movie. What had started as a joke in a group of friends, then became a cult classic. A friend of Jackson who was working in the movie industry convinced him the film had commercial prospects and arranged for it to be shown at the Cannes film festival, where it won a lot of acclaim, as well as a number of prizes. The movie soon became a hit because of its bizarre humor and overdose of special effects, some realistic, some comedically amateur. After the success of Bad Taste (1987), Jackson became recognized as a director and the door to fame and fortune was opened. He gave up his job at a local photographer's shop and became a well-known director of horror-movies, after the success of his first professionally made movie, Dead Alive (1992).`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTY1MzQ3NjA2OV5BMl5BanBnXkFtZTcwNTExOTA5OA@@._V1_SY1000_CR0,0,725,1000_AL_.jpg"
+    },
+    {
+      name: "George Lucas",
+      bio: `George Walton Lucas, Jr. was raised on a walnut ranch in Modesto, California. His father was a stationery store owner and he had three siblings. During his late teen years, he went to Thomas Downey High School and was very much interested in drag racing. He planned to become a professional racecar driver. However, a terrible car accident just after his high school graduation ended that dream permanently. The accident changed his views on life.
+
+    He decided to attend Modesto Junior College before enrolling in the University of Southern California film school. As a film student, he made several short films including Electronic Labyrinth THX 1138 4EB (1967) which won first prize at the 1967-68 National Student Film Festival. In 1967, he was awarded a scholarship by Warner Brothers to observe the making of Finian's Rainbow (1968) which was being directed by Francis Ford Coppola. Lucas and Coppola became good friends and formed American Zoetrope in 1969. The company's first project was Lucas' full-length version of THX 1138 (1971). In 1971, Coppola went into production for The Godfather (1972), and Lucas formed his own company, Lucasfilm Ltd.
+    
+    In 1973, he wrote and directed the semiautobiographical American Graffiti (1973) which won the Golden Globe and garnered five Academy Award nominations. This gave him the clout he needed for his next daring venture. From 1973 to 1974, he began writing the screenplay which became Star Wars: Episode IV - A New Hope (1977). He was inspired to make this movie from Flash Gordon and the Planet of the Apes films. In 1975, he established ILM. (Industrial Light & Magic) to produce the visual effects needed for the movie. Another company called Sprocket Systems was established to edit and mix Star Wars and later becomes known as Skywalker Sound. His movie was turned down by several studios until 20th Century Fox gave him a chance. Lucas agreed to forego his directing salary in exchange for 40% of the film's box-office take and all merchandising rights. The movie went on to break all box office records and earned seven Academy Awards. It redefined the term "blockbuster" and the rest is history.
+    
+    Lucas made the other Star Wars films and along with Steven Spielberg created the Indiana Jones series which made box office records of their own. From 1980 to 1985, Lucas was busy with the construction of Skywalker Ranch, built to accommodate the creative, technical, and administrative needs of Lucasfilm. Lucas also revolutionized movie theaters with the THX system which was created to maintain the highest quality standards in motion picture viewing.
+    
+    He went on to produce several more movies that have introduced major innovations in filmmaking technology. He is chairman of the board of the George Lucas Educational Foundation. In 1992, George Lucas was honored with the Irving G. Thalberg Award by the Board of Governors of the Academy of Motion Picture Arts and Sciences for his lifetime achievement.
+    
+    He reentered the directing chair with the production of the highly-anticipated Star Wars prequel trilogy beginning with Star Wars: Episode I - The Phantom Menace (1999) . The films have been polarizing for fans and critics alike, but were commercially successful and have become a part of culture. The animated spin-off series Star Wars: The Clone Wars (2008) was supervised by Lucas. He sold Lucasfilm to Disney in 2012, making co-chair Kathleen Kennedy president. He has attended the premieres of new Star Wars films and been generally supportive of them.`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTA0Mjc0NzExNzBeQTJeQWpwZ15BbWU3MDEzMzQ3MDI@._V1_.jpg"
+    },
+    {
+      name: "Robert Zemeckis",
+      bio: `A whiz-kid with special effects, Robert is from the Spielberg camp of film-making (Steven Spielberg produced many of his films). Usually working with writing partner Bob Gale, Robert's earlier films show he has a talent for zany comedy (Romancing the Stone (1984), 1941 (1979)) and special effect vehicles (Who Framed Roger Rabbit (1988) and Back to the Future (1985)). His later films have become more serious, with the hugely successful Tom Hanks vehicle Forrest Gump (1994) and the Jodie Foster film Contact (1997), both critically acclaimed movies. Again, these films incorporate stunning effects. Robert has proved he can work a serious story around great effects.`,
+      imageUrl:
+        "https://m.media-amazon.com/images/M/MV5BMTgyMTMzMDUyNl5BMl5BanBnXkFtZTcwODA0ODMyMw@@._V1_SY1000_CR0,0,665,1000_AL_.jpg"
+    }
   ];
 
   const savedDirectors = await Director.bulkCreate(directors, {

@@ -45,18 +45,19 @@ function DirectorDetails({ director, loading, onEditClick }) {
     </DialogContent>
   ) : (
     <>
-      <BaseDialogTitle>
-        <Typography variant="h5" style={{ flexGrow: 1 }}>
-          {director.name}
-        </Typography>
-        <AccessControl allowedRoles={[roles.ADMIN]}>
-          <IconButton onClick={onEditClick}>
-            <EditIcon fontSize="small" />
-          </IconButton>
-          <IconButton onClick={showDeleteConfirm}>
-            <DeleteIcon color="secondary" fontSize="small" />
-          </IconButton>
-        </AccessControl>
+      <BaseDialogTitle
+        extra={
+          <AccessControl allowedRoles={[roles.ADMIN]}>
+            <IconButton onClick={onEditClick}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+            <IconButton onClick={showDeleteConfirm}>
+              <DeleteIcon color="secondary" fontSize="small" />
+            </IconButton>
+          </AccessControl>
+        }
+      >
+        {director.name}
       </BaseDialogTitle>
 
       <DialogContent>
@@ -65,7 +66,7 @@ function DirectorDetails({ director, loading, onEditClick }) {
             <ImageBox className={classes.profileImg} src={director.imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <Typography variant="h6">Bio</Typography>
+            <Typography variant="h6">Biography</Typography>
             <ShowMore maxHeight={340}>
               <Typography className={classes.bio} variant="body2">
                 {director.bio}

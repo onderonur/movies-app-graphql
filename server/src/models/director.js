@@ -11,7 +11,7 @@ const director = (sequelize, DataTypes) => {
     bio: {
       // TODO: Düzelt max olayını
       type: DataTypes.STRING(9999),
-      allowNull: true, // TODO: false yap
+      allowNull: false,
       validate: {
         notEmpty: true
       }

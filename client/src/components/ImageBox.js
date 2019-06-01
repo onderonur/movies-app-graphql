@@ -20,7 +20,7 @@ function ImageBox({ className, src, alt = "Not Loaded" }) {
 
   return (
     <div className={clsx(classes.container, className)}>
-      <img className={classes.img} src={src || placeholderPng} alt={alt} />
+      <img className={classes.img} src={/*src ||*/ placeholderPng} alt={alt} />
     </div>
   );
 }

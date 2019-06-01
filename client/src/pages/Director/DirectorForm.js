@@ -7,6 +7,7 @@ import DirectorMutation from "./DirectorMutation";
 import LoadingIndicator from "components/LoadingIndicator";
 import { DialogContent } from "@material-ui/core";
 import { BaseDialogForm } from "components/BaseComponents";
+import ImageUrlInput from "pages/Movie/ImageUrlInput";
 
 function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
   const newDirector = !director;
@@ -28,14 +29,16 @@ function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
       {saveDirector => (
         <BaseFormik
           initialValues={{
-            name: director ? director.name : ""
+            name: director ? director.name : "",
+            bio: director ? director.bio : ""
           }}
           validationSchema={Yup.object().shape({
-            name: Yup.string().required(REQUIRED_ERROR)
+            name: Yup.string().required(REQUIRED_ERROR),
+            bio: Yup.string().required(REQUIRED_ERROR)
           })}
           onSubmit={handleSubmit(saveDirector)}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values }) => (
             <BaseDialogForm
               title="Director"
               isSubmitting={isSubmitting}
@@ -46,7 +49,23 @@ function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
                 label="Name"
                 required
                 fullWidth
+                margin="normal"
                 autoFocus
+              />
+              <BaseTextField
+                name="bio"
+                label="Biography"
+                required
+                fullWidth
+                margin="normal"
+                multiline
+                rowsMax={8}
+              />
+              <ImageUrlInput
+                name="imageUrl"
+                label="Image Url"
+                fullWidth
+                imgSrc={values.imageUrl}
               />
             </BaseDialogForm>
           )}
