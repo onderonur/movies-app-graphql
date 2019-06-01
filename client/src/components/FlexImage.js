@@ -14,16 +14,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function FlexImage({ className, src }) {
+function FlexImage({ className, src = placeholderPng, alt = "Not Loaded" }) {
   const classes = useStyles({ src });
 
   return (
     <div className={clsx(classes.container, className)}>
-      <img
-        className={classes.img}
-        src={src || placeholderPng}
-        alt={"Not Loaded"}
-      />
+      <img className={classes.img} src={placeholderPng} alt={alt} />
     </div>
   );
 }

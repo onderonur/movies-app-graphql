@@ -12,10 +12,17 @@ import LoadingIndicator from "components/LoadingIndicator";
 import MovieGridList from "pages/Movies/MovieGridList";
 import FlexImage from "components/FlexImage";
 import { makeStyles } from "@material-ui/styles";
+import ShowMore from "components/ShowMore";
 
 const useStyles = makeStyles(theme => ({
   profileImg: {
     maxHeight: 400
+  },
+  bio: {
+    /* TODO: Buna bi bak daha doğru bi kullanımı var mı?
+        Multiline text ve ilk satırları indent'li yapma vs genel bi bak */
+    whiteSpace: "pre-line",
+    textAlign: "justify"
   }
 }));
 
@@ -39,7 +46,7 @@ function DirectorDetails({ director, loading, onEditClick }) {
   ) : (
     <>
       <BaseDialogTitle>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
+        <Typography variant="h5" style={{ flexGrow: 1 }}>
           {director.name}
         </Typography>
         <AccessControl allowedRoles={[roles.ADMIN]}>
@@ -58,16 +65,17 @@ function DirectorDetails({ director, loading, onEditClick }) {
             <FlexImage className={classes.profileImg} src={director.imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <Typography variant="subtitle1">Bio</Typography>
-            {/* TODO: Buna bi bak daha doğru bi kullanımı var mı? */}
-            <Typography variant="body2" style={{ whiteSpace: "pre-line" }}>
-              {director.bio}
-            </Typography>
+            <Typography variant="h6">Bio</Typography>
+            <ShowMore maxHeight={340}>
+              <Typography className={classes.bio} variant="body2">
+                {director.bio}
+              </Typography>
+            </ShowMore>
           </Grid>
           <Grid item xs={12}>
             {director.movies.length ? (
               <>
-                <Typography variant="subtitle1">Movies</Typography>
+                <Typography variant="h6">Movies</Typography>
                 <MovieGridList
                   direction="horizontal"
                   movies={director.movies}

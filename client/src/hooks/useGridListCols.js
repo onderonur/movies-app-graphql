@@ -1,7 +1,7 @@
 import useWidth from "./useWidth";
 import { isWidthUp } from "@material-ui/core/withWidth";
 
-function useGridListCols({ direction }) {
+function useGridListCols({ direction = "vertical" } = {}) {
   const width = useWidth();
   const isHorizontal = direction === "horizontal";
 

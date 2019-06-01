@@ -12,35 +12,38 @@ import useDetectMobile from "hooks/useDetectMobile";
 import DrawerToggler from "./DrawerToggler";
 import clsx from "clsx";
 
-const DRAWER_WIDTH = 240;
-
 const widthTransition = theme =>
   theme.transitions.create("all", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   });
 
-const useStyles = makeStyles(theme => ({
-  nav: {
-    transition: widthTransition(theme),
-    [theme.breakpoints.up("md")]: {
-      width: ({ open }) => (open ? DRAWER_WIDTH : 0)
+const useStyles = makeStyles(theme => {
+  const DRAWER_WIDTH = 240;
+  const MINI_DRAWER_WIDTH = theme.spacing(7);
+
+  return {
+    nav: {
+      transition: widthTransition(theme),
+      [theme.breakpoints.up("md")]: {
+        width: ({ open }) => (open ? DRAWER_WIDTH : MINI_DRAWER_WIDTH)
+      }
+    },
+    drawerPaper: {
+      width: DRAWER_WIDTH,
+      backgroundColor: theme.palette.background.paper
+    },
+    drawerOpen: {
+      width: DRAWER_WIDTH,
+      transition: widthTransition(theme)
+    },
+    drawerClose: {
+      width: MINI_DRAWER_WIDTH,
+      overflowX: "hidden",
+      transition: widthTransition(theme)
     }
-  },
-  drawerPaper: {
-    width: DRAWER_WIDTH,
-    backgroundColor: theme.palette.background.paper
-  },
-  drawerOpen: {
-    width: DRAWER_WIDTH,
-    transition: widthTransition(theme)
-  },
-  drawerClose: {
-    width: theme.spacing(7) + 1,
-    overflowX: "hidden",
-    transition: widthTransition(theme)
-  }
-}));
+  };
+});
 
 function AppDrawer({ children, location }) {
   const [open, setOpen] = useState(false);
