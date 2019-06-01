@@ -1,5 +1,5 @@
 // Reusability
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Typography,
   DialogContent,
@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import YouTubePlayer from "components/YoutubePlayer";
 import MovieLikeButton from "pages/Movies/MovieLikeButton";
-import { ModalRouteContext } from "react-router-modal-gallery";
 import paths from "constants/paths";
 import { BaseDialogTitle } from "components/BaseComponents";
 import AccessControl from "components/AccessControl";
@@ -21,6 +20,7 @@ import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
 import MovieGridList from "pages/Movies/MovieGridList";
 import ImageBox from "components/ImageBox";
+import { useModalGallery } from "react-router-modal-gallery";
 
 const useStyles = makeStyles(theme => ({
   top: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 function MovieDetails({ movie, loading, onEditClick }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
-  const { redirectToBack } = useContext(ModalRouteContext);
+  const { redirectToBack } = useModalGallery();
   const classes = useStyles();
 
   function showDeleteConfirm() {

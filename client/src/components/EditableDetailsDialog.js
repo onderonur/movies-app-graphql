@@ -1,8 +1,8 @@
 // OK!!
-import React, { useState, useContext } from "react";
-import { ModalRouteContext } from "react-router-modal-gallery";
+import React, { useState } from "react";
 import { Query } from "react-apollo";
 import { BaseDialog } from "./BaseComponents";
+import { useModalGallery } from "react-router-modal-gallery";
 
 function EditableDetailsDialog({
   id,
@@ -11,7 +11,7 @@ function EditableDetailsDialog({
   queryProps: { query, variables }
 }) {
   const isNew = id === "new";
-  const { redirectToBack } = useContext(ModalRouteContext);
+  const { redirectToBack } = useModalGallery();
   const [editing, setEditing] = useState(isNew);
 
   function startEditing() {

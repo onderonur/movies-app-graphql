@@ -1,9 +1,9 @@
 // OK!!
-import React, { useContext } from "react";
-import { ModalRouteContext } from "react-router-modal-gallery";
+import React from "react";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/styles";
+import { useModalGallery } from "react-router-modal-gallery";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function BaseDialogCloseButton({ onClick }) {
-  const { redirectToBack } = useContext(ModalRouteContext);
+  const { redirectToBack } = useModalGallery();
   const classes = useStyles();
 
   return (

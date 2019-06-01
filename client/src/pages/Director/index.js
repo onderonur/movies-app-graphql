@@ -1,11 +1,11 @@
 // OK
-import React, { useContext } from "react";
+import React from "react";
 import DirectorDetails from "./DirectorDetails";
 import DirectorForm from "./DirectorForm";
 import paths from "constants/paths";
-import { ModalRouteContext } from "react-router-modal-gallery";
 import EditableDetailsDialog from "components/EditableDetailsDialog";
 import { GET_DIRECTOR } from "graphql/director/queries";
+import { useModalGallery } from "react-router-modal-gallery";
 
 function Director({
   match: {
@@ -14,7 +14,7 @@ function Director({
   history
 }) {
   const isNewDirector = directorId === "new";
-  const { redirectToBack } = useContext(ModalRouteContext);
+  const { redirectToBack } = useModalGallery();
 
   return (
     <EditableDetailsDialog

@@ -1,18 +1,18 @@
 // Reusability
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Typography, DialogContent, IconButton, Grid } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { BaseDialogTitle } from "components/BaseComponents";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
-import { ModalRouteContext } from "react-router-modal-gallery";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 import MovieGridList from "pages/Movies/MovieGridList";
 import ImageBox from "components/ImageBox";
 import { makeStyles } from "@material-ui/styles";
 import ShowMore from "components/ShowMore";
+import { useModalGallery } from "react-router-modal-gallery";
 
 const useStyles = makeStyles(theme => ({
   profileImg: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 
 function DirectorDetails({ director, loading, onEditClick }) {
   const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
-  const { redirectToBack } = useContext(ModalRouteContext);
+  const { redirectToBack } = useModalGallery();
   const classes = useStyles();
 
   function showDeleteConfirm() {
