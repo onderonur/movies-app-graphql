@@ -60,7 +60,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
             <Grid item xs={12}>
               {otherMovies.length ? (
                 <>
-                  <Typography variant="h6">
+                  <Typography variant="subtitle1">
                     {otherMovies.length
                       ? `Other movies by `
                       : `There is no other movie by `}
