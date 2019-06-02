@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
   closeIcon: {
-    color: "#fafafa"
+    color: theme.palette.grey[50]
   },
   closeButtonContainer: {
     position: "fixed",

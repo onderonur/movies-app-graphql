@@ -10,7 +10,7 @@ import {
 import YouTubePlayer from "components/YoutubePlayer";
 import MovieLikeButton from "pages/Movies/MovieLikeButton";
 import paths from "constants/paths";
-import { BaseDialogTitle } from "components/BaseComponents";
+import { BaseDialogTitle, BaseGridList } from "components/BaseComponents";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
 import EditIcon from "@material-ui/icons/Edit";
@@ -18,9 +18,9 @@ import DeleteMovieConfirmDialog from "pages/Movie/DeleteMovieConfirmDialog";
 import DeleteIcon from "@material-ui/icons/Delete";
 import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
-import MovieGridList from "pages/Movies/MovieGridList";
 import ImageBox from "components/ImageBox";
 import { useModalGallery } from "react-router-modal-gallery";
+import MovieGridListTile from "pages/Movies/MovieGridListTile";
 
 const useStyles = makeStyles(theme => ({
   top: {
@@ -122,7 +122,13 @@ function MovieDetails({ movie, loading, onEditClick }) {
                     : `There is no other movie by `}
                   {directorLink}
                 </Typography>
-                <MovieGridList direction="horizontal" movies={otherMovies} />
+                <BaseGridList
+                  items={director.movies}
+                  direction="horizontal"
+                  renderItem={({ item }) => (
+                    <MovieGridListTile key={item.id} movie={item} />
+                  )}
+                />
               </>
             ) : (
               <Typography>

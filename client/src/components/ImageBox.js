@@ -1,3 +1,4 @@
+// OK!!
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import placeholderPng from "assets/placeholder.png";
@@ -20,7 +21,7 @@ function ImageBox({ className, src, alt = "Not Loaded" }) {
 
   return (
     <div className={clsx(classes.container, className)}>
-      <img className={classes.img} src={/*src ||*/ placeholderPng} alt={alt} />
+      <img className={classes.img} src={src || placeholderPng} alt={alt} />
     </div>
   );
 }

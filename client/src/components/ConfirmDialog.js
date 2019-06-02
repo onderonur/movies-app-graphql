@@ -14,7 +14,7 @@ function ConfirmDialog({
   title,
   content,
   mutationProps,
-  okText = "OK",
+  confirmText = "OK",
   cancelText = "Cancel"
 }) {
   return (
@@ -33,7 +33,7 @@ function ConfirmDialog({
           {cancelText}
         </BaseButton>
         <ButtonWithMutation {...mutationProps} color="primary">
-          {okText}
+          {confirmText}
         </ButtonWithMutation>
       </DialogActions>
     </BaseDialog>

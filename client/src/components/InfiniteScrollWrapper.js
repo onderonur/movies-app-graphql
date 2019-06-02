@@ -2,7 +2,6 @@
 import React from "react";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { RootRef } from "@material-ui/core";
-import LoadingIndicator from "./LoadingIndicator";
 
 function InfiniteScrollWrapper({ hasNextPage, loading, loadMore, children }) {
   const infiniteContainerRef = useInfiniteScroll({
@@ -14,7 +13,6 @@ function InfiniteScrollWrapper({ hasNextPage, loading, loadMore, children }) {
   return (
     <>
       <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>
-      {loading && <LoadingIndicator />}
     </>
   );
 }

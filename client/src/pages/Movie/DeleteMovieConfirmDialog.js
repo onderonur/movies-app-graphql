@@ -48,7 +48,7 @@ function DeleteMovieConfirmDialog({ open, movie, onClose, onCompleted }) {
         title="Delete Movie?"
         content={`Are you sure to delete ${movie.title}?`}
         onClose={onClose}
-        okText="Delete"
+        confirmText="Delete"
         mutationProps={{
           mutation: DELETE_MOVIE,
           variables: {

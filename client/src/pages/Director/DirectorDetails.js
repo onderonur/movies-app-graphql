@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { Typography, DialogContent, IconButton, Grid } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { BaseDialogTitle } from "components/BaseComponents";
+import { BaseDialogTitle, BaseGridList } from "components/BaseComponents";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
-import MovieGridList from "pages/Movies/MovieGridList";
 import ImageBox from "components/ImageBox";
 import { makeStyles } from "@material-ui/styles";
 import ShowMore from "components/ShowMore";
 import { useModalGallery } from "react-router-modal-gallery";
+import MovieGridListTile from "pages/Movies/MovieGridListTile";
 
 const useStyles = makeStyles(theme => ({
   profileImg: {
@@ -68,18 +68,19 @@ function DirectorDetails({ director, loading, onEditClick }) {
           <Grid item xs={12} sm={8}>
             <Typography variant="h6">Biography</Typography>
             <ShowMore maxHeight={340}>
-              <Typography className={classes.bio} variant="body2">
-                {director.bio}
-              </Typography>
+              <Typography className={classes.bio}>{director.bio}</Typography>
             </ShowMore>
           </Grid>
           <Grid item xs={12}>
             {director.movies.length ? (
               <>
                 <Typography variant="h6">Movies</Typography>
-                <MovieGridList
+                <BaseGridList
+                  items={director.movies}
                   direction="horizontal"
-                  movies={director.movies}
+                  renderItem={({ item }) => (
+                    <MovieGridListTile key={item.id} movie={item} />
+                  )}
                 />
               </>
             ) : null}

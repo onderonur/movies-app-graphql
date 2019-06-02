@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DrawerContent({ drawerOpen }) {
+function DrawerContent({ isDrawerOpen }) {
   const classes = useStyles();
 
   return (
@@ -21,13 +21,13 @@ function DrawerContent({ drawerOpen }) {
         to={paths.MOVIES}
         text="Movies"
         icon={<MovieIcon />}
-        drawerOpen={drawerOpen}
+        isDrawerOpen={isDrawerOpen}
       />
       <DrawerLinkItem
         to={paths.DIRECTORS}
         text="Directors"
         icon={<PersonIcon />}
-        drawerOpen={drawerOpen}
+        isDrawerOpen={isDrawerOpen}
       />
     </MenuList>
   );

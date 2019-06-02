@@ -82,7 +82,7 @@ function AppDrawer({ children, location }) {
           <DrawerToggler toggleDrawer={toggleDrawer} />
         </Toolbar>
         <Divider />
-        <DrawerContent drawerOpen={open} />
+        <DrawerContent isDrawerOpen={open} />
       </SwipeableDrawer>
       {children({ toggleDrawer })}
     </nav>

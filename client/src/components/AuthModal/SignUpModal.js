@@ -50,7 +50,7 @@ function SignUpModal({ onCancel, onCompleted }) {
             })
           }
           submitting={loading}
-          okText="Submit"
+          confirmText="Submit"
         >
           <BaseDialogForm
             title="Sign Up"

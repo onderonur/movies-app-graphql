@@ -1,34 +1,21 @@
 // OK!!
 import React from "react";
-import LoadingIndicator from "components/LoadingIndicator";
 import DirectorListQuery from "./DirectorListQuery";
-import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
-import paths from "constants/paths";
-import { ModalLink } from "react-router-modal-gallery";
-import ImageBox from "components/ImageBox";
-import useGridListCols from "hooks/useGridListCols";
+import { BaseGridList } from "components/BaseComponents";
+import DirectorGridListTile from "./DirectorGridListTile";
 
 function DirectorGridList() {
-  const cols = useGridListCols();
-
   return (
     <DirectorListQuery>
-      {({ directors, loading }) =>
-        loading ? (
-          <LoadingIndicator />
-        ) : (
-          <GridList cellHeight="auto" cols={cols} spacing={2}>
-            {directors.map(director => (
-              <GridListTile key={director.id}>
-                <ModalLink to={`${paths.DIRECTORS}/${director.id}`}>
-                  <ImageBox src={director.imageUrl} />
-                </ModalLink>
-                <GridListTileBar title={director.name} />
-              </GridListTile>
-            ))}
-          </GridList>
-        )
-      }
+      {({ directors, loading }) => (
+        <BaseGridList
+          items={directors}
+          loading={loading}
+          renderItem={({ item }) => (
+            <DirectorGridListTile key={item.id} director={item} />
+          )}
+        />
+      )}
     </DirectorListQuery>
   );
 }

@@ -56,7 +56,7 @@ function DeleteDirectorConfirmDialog({ open, director, onClose, onCompleted }) {
         director.name
       } and all of their movies?`}
       onClose={onClose}
-      okText="Delete"
+      confirmText="Delete"
       mutationProps={{
         mutation: DELETE_DIRECTOR,
         variables: {
