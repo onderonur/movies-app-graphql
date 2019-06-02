@@ -19,8 +19,8 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 400
   },
   bio: {
-    /* TODO: Buna bi bak daha doğru bi kullanımı var mı?
-        Multiline text ve ilk satırları indent'li yapma vs genel bi bak */
+    // TODO: Buna bi bak daha doğru bi kullanımı var mı?
+    // Multiline text ve ilk satırları indent'li yapma vs genel bi bak
     whiteSpace: "pre-line",
     textAlign: "justify"
   }

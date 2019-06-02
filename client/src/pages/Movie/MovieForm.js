@@ -9,13 +9,13 @@ import {
   BaseFormik,
   BaseDialogForm
 } from "components/BaseComponents";
-import { REQUIRED_ERROR } from "constants/formErrors";
+import { REQUIRED_ERROR, INVALID_URL } from "constants/formErrors";
 import DirectorSelect from "./DirectorSelect";
-import YoutubeIdInput from "./YoutubeIdInput";
-import ImageUrlInput from "./ImageUrlInput";
 import MovieMutation from "./MovieMutation";
 import { DialogContent } from "@material-ui/core";
 import LoadingIndicator from "components/LoadingIndicator";
+import ImageUrlInput from "components/ImageUrlInput";
+import YoutubeIdInput from "components/YoutubeIdInput";
 
 function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
   const { pushNotification } = useContext(NotificationContext);
@@ -56,7 +56,8 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
             }}
             validationSchema={Yup.object().shape({
               title: Yup.string().required(REQUIRED_ERROR),
-              directorId: Yup.string().required(REQUIRED_ERROR)
+              directorId: Yup.string().required(REQUIRED_ERROR),
+              imageUrl: Yup.string().url(INVALID_URL)
             })}
             onSubmit={handleSubmit(saveMovie)}
           >
@@ -71,6 +72,7 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
                   label="Title"
                   fullWidth
                   required
+                  margin="normal"
                   autoFocus
                 />
                 <BaseTextField
@@ -78,23 +80,27 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
                   label="Description"
                   fullWidth
                   multiline
+                  margin="normal"
                 />
                 <DirectorSelect
                   name="directorId"
                   label="Director"
                   fullWidth
                   required
+                  margin="normal"
                 />
                 <ImageUrlInput
                   name="imageUrl"
                   label="Image Url"
                   fullWidth
+                  margin="normal"
                   imgSrc={values.imageUrl}
                 />
                 <YoutubeIdInput
                   name="youtubeId"
                   label="Youtube Id"
                   fullWidth
+                  margin="normal"
                   youtubeId={values.youtubeId}
                 />
               </BaseDialogForm>

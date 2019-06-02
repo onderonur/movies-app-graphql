@@ -1,20 +1,23 @@
-// OK!!
+// OK
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
-import ImageBox from "components/ImageBox";
+import YouTubePlayer from "components/YoutubePlayer";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
-  img: {
-    width: "50%",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    marginLeft: "auto",
-    marginRight: "auto"
+  preview: {
+    marginTop: theme.spacing(1)
   }
 }));
 
-function ImageUrlInput({ name, label, fullWidth, required, imgSrc }) {
+function YoutubeIdInput({
+  name,
+  label,
+  fullWidth,
+  required,
+  margin,
+  youtubeId
+}) {
   const classes = useStyles();
 
   return (
@@ -24,11 +27,13 @@ function ImageUrlInput({ name, label, fullWidth, required, imgSrc }) {
         label={label}
         fullWidth={fullWidth}
         required={required}
+        margin={margin}
       />
-        <ImageBox className={classes.img} src={imgSrc} />
-   
+      <div className={classes.preview}>
+        <YouTubePlayer youtubeId={youtubeId} />
+      </div>
     </>
   );
 }
 
-export default ImageUrlInput;
+export default YoutubeIdInput;

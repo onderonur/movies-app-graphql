@@ -5,7 +5,7 @@ import LoadingIndicator from "components/LoadingIndicator";
 import { MenuItem } from "@material-ui/core";
 import DirectorListQuery from "pages/Directors/DirectorListQuery";
 
-function DirectorSelect({ name, label, required, fullWidth }) {
+function DirectorSelect({ name, label, required, fullWidth, margin }) {
   return (
     <DirectorListQuery>
       {({ directors, loading }) => (
@@ -15,6 +15,7 @@ function DirectorSelect({ name, label, required, fullWidth }) {
           label={label}
           fullWidth={fullWidth}
           required={required}
+          margin={margin}
         >
           {loading ? (
             <LoadingIndicator />
