@@ -3,8 +3,6 @@ import React from "react";
 import { GET_MOVIES } from "graphql/movie/queries";
 import MovieListQuery from "./MovieListQuery";
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper";
-import BaseGridList from "components/BaseComponents/BaseGridList";
-import MovieGridListTile from "./MovieGridListTile";
 
 function resolvePagingResponse(root) {
   const edges = root ? root.edges : [];
@@ -39,7 +37,7 @@ function onLoadMore(fetchMore, movies) {
   });
 }
 
-function MoviesFeed() {
+function MoviesFeed({ children }) {
   return (
     <MovieListQuery>
       {({ loading, movies, fetchMore }) => {
@@ -50,12 +48,7 @@ function MoviesFeed() {
             loading={loading}
             loadMore={() => onLoadMore(fetchMore, movies)}
           >
-            <BaseGridList
-              items={nodes}
-              renderItem={({ item }) => (
-                <MovieGridListTile key={item.id} movie={item} />
-              )}
-            />
+            {children({ movies: nodes, loading })}
           </InfiniteScrollWrapper>
         );
       }}

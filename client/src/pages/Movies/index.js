@@ -1,28 +1,22 @@
 // OK!!
 import React from "react";
-import AddIcon from "@material-ui/icons/Add";
-import paths from "constants/paths";
-import { roles } from "constants/roles";
-import ViewWithFloatingButton from "components/ViewWithFloatingButton";
 import MoviesFeed from "./MoviesFeed";
-import { AdapterModalLink } from "components/BaseComponents/BaseLink";
-import { Container } from "@material-ui/core";
+import GridListContainer from "components/GridListContainer";
+import MovieGridListTile from "./MovieGridListTile";
 
 function Movies() {
   return (
-    <Container maxWidth="lg">
-      <ViewWithFloatingButton
-        fabProps={{
-          color: "primary",
-          component: AdapterModalLink,
-          to: `${paths.MOVIES}/new`,
-          icon: <AddIcon />,
-          allowedRolesToClick: [roles.ADMIN]
-        }}
-      >
-        <MoviesFeed />
-      </ViewWithFloatingButton>
-    </Container>
+    <MoviesFeed>
+      {({ movies, loading }) => (
+        <GridListContainer
+          items={movies}
+          loading={loading}
+          renderItem={({ item }) => (
+            <MovieGridListTile key={item.id} movie={item} />
+          )}
+        />
+      )}
+    </MoviesFeed>
   );
 }
 
