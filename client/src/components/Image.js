@@ -20,7 +20,7 @@ function Image({ className, src, alt = "Not Loaded", maxHeight = "none" }) {
   return (
     <img
       className={clsx(classes.img, className)}
-      src={/*src ||*/ placeholderPng}
+      src={src || placeholderPng}
       alt={alt}
     />
   );
