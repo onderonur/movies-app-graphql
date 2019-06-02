@@ -1,7 +1,7 @@
 // OK!!
 import React from "react";
-import useInfiniteScroll from "hooks/useInfiniteScroll";
 import { RootRef } from "@material-ui/core";
+import { useInfiniteScroll } from "react-infinite-scroll-hook";
 
 function InfiniteScrollWrapper({ hasNextPage, loading, loadMore, children }) {
   const infiniteContainerRef = useInfiniteScroll({
