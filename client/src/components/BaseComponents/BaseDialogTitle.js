@@ -31,12 +31,16 @@ function BaseDialogTitle({
         <BaseDialogCloseButton onClick={onBackButtonClick} />
       ) : null}
 
-      {typeof children === "string" ? (
-        <Typography variant="h6" className={classes.title}>
-          {children}
-        </Typography>
+      {children ? (
+        typeof children === "string" ? (
+          <Typography variant="h6" className={classes.title}>
+            {children}
+          </Typography>
+        ) : (
+          children
+        )
       ) : (
-        children
+        <div className={classes.title} />
       )}
       {extra}
     </DialogTitle>

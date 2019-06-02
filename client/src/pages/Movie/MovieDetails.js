@@ -33,11 +33,6 @@ const useStyles = makeStyles(theme => ({
     padding: "0 16px",
     flex: 1 /* IE11 fix */
   },
-  title: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
   otherMovies: {
     padding: 16
   }
@@ -76,17 +71,23 @@ function MovieDetails({ movie, loading, onEditClick }) {
     <>
       <BaseDialogTitle
         extra={
-          <AccessControl allowedRoles={[roles.ADMIN]}>
-            <IconButton onClick={onEditClick}>
-              <EditIcon fontSize="small" />
-            </IconButton>
-            <IconButton onClick={showDeleteConfirm}>
-              <DeleteIcon color="secondary" fontSize="small" />
-            </IconButton>
-          </AccessControl>
+          <>
+            <MovieLikeButton
+              movieId={movie.id}
+              viewerHasLiked={movie.viewerHasLiked}
+            />
+            <AccessControl allowedRoles={[roles.ADMIN]}>
+              <IconButton onClick={onEditClick}>
+                <EditIcon fontSize="small" />
+              </IconButton>
+              <IconButton onClick={showDeleteConfirm}>
+                <DeleteIcon color="secondary" fontSize="small" />
+              </IconButton>
+            </AccessControl>
+          </>
         }
       >
-        Movie Details
+        {movie.title}
       </BaseDialogTitle>
 
       <DialogContent>
@@ -95,14 +96,8 @@ function MovieDetails({ movie, loading, onEditClick }) {
             <ImageBox src={movie.imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <div className={classes.title}>
-              <Typography variant="h5">{movie.title}</Typography>
-              <MovieLikeButton
-                movieId={movie.id}
-                viewerHasLiked={movie.viewerHasLiked}
-              />
-            </div>
-            <Typography variant="subtitle1">{directorLink}</Typography>
+            <Typography variant="h6">Directed by</Typography>
+            <Typography>{directorLink}</Typography>
             <Typography variant="h6">Overview</Typography>
             <Typography>{movie.description}</Typography>
           </Grid>
@@ -116,7 +111,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
           <Grid item xs={12}>
             {otherMovies.length ? (
               <>
-                <Typography>
+                <Typography variant="h6">
                   {otherMovies.length
                     ? `Other movies by `
                     : `There is no other movie by `}
