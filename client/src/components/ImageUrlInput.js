@@ -1,7 +1,7 @@
 // OK!!
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
-import ImageBox from "components/ImageBox";
+import Image from "components/Image";
 import { makeStyles } from "@material-ui/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +26,7 @@ function ImageUrlInput({ name, label, fullWidth, required, margin, imgSrc }) {
         required={required}
         margin={margin}
       />
-      <ImageBox className={classes.img} src={imgSrc} />
+      <Image className={classes.img} src={imgSrc} />
     </>
   );
 }

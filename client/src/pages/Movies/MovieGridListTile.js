@@ -4,7 +4,7 @@ import { GridListTile, GridListTileBar } from "@material-ui/core";
 import paths from "constants/paths";
 import MovieLikeButton from "./MovieLikeButton";
 import { ModalLink } from "react-router-modal-gallery";
-import ImageBox from "components/ImageBox";
+import Image from "components/Image";
 
 function MovieGridListTile({
   movie,
@@ -15,7 +15,7 @@ function MovieGridListTile({
   return (
     <GridListTile style={style}>
       <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
-        <ImageBox src={movie.imageUrl} />
+        <Image src={movie.imageUrl} />
       </ModalLink>
       <GridListTileBar
         title={movie.title}

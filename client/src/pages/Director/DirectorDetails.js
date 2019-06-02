@@ -1,23 +1,14 @@
-// Reusability
-import React, { useState } from "react";
-import { Typography, DialogContent, IconButton, Grid } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { BaseDialogTitle, BaseGridList } from "components/BaseComponents";
-import AccessControl from "components/AccessControl";
-import { roles } from "constants/roles";
+import React from "react";
+import { Typography, DialogContent, Grid } from "@material-ui/core";
+import { BaseGridList } from "components/BaseComponents";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
-import ImageBox from "components/ImageBox";
 import { makeStyles } from "@material-ui/styles";
-import ShowMore from "components/ShowMore";
 import { useModalGallery } from "react-router-modal-gallery";
 import MovieGridListTile from "pages/Movies/MovieGridListTile";
+import Details from "components/Details";
 
 const useStyles = makeStyles(theme => ({
-  profileImg: {
-    maxHeight: 400
-  },
   bio: {
     // TODO: Buna bi bak daha doğru bi kullanımı var mı?
     // Multiline text ve ilk satırları indent'li yapma vs genel bi bak
@@ -27,50 +18,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function DirectorDetails({ director, loading, onEditClick }) {
-  const [deleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
   const { redirectToBack } = useModalGallery();
   const classes = useStyles();
-
-  function showDeleteConfirm() {
-    setDeleteConfirmVisible(true);
-  }
-
-  function hideDeleteConfirm() {
-    setDeleteConfirmVisible(false);
-  }
 
   return loading ? (
     <DialogContent>
       <LoadingIndicator />
     </DialogContent>
   ) : (
-    <>
-      <BaseDialogTitle
-        extra={
-          <AccessControl allowedRoles={[roles.ADMIN]}>
-            <IconButton onClick={onEditClick}>
-              <EditIcon fontSize="small" />
-            </IconButton>
-            <IconButton onClick={showDeleteConfirm}>
-              <DeleteIcon color="secondary" fontSize="small" />
-            </IconButton>
-          </AccessControl>
-        }
-      >
-        {director.name}
-      </BaseDialogTitle>
-
-      <DialogContent>
+    <Details
+      title={director.name}
+      imageUrl={director.imageUrl}
+      topSection={
+        <>
+          <Typography variant="h6">Biography</Typography>
+          <Typography className={classes.bio}>{director.bio}</Typography>
+        </>
+      }
+      bottomSection={
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={4}>
-            <ImageBox className={classes.profileImg} src={director.imageUrl} />
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <Typography variant="h6">Biography</Typography>
-            <ShowMore maxHeight={340}>
-              <Typography className={classes.bio}>{director.bio}</Typography>
-            </ShowMore>
-          </Grid>
           <Grid item xs={12}>
             {director.movies.length ? (
               <>
@@ -86,15 +52,17 @@ function DirectorDetails({ director, loading, onEditClick }) {
             ) : null}
           </Grid>
         </Grid>
-      </DialogContent>
-
-      <DeleteDirectorConfirmDialog
-        open={deleteConfirmVisible}
-        director={director}
-        onClose={hideDeleteConfirm}
-        onCompleted={redirectToBack}
-      />
-    </>
+      }
+      onEditClick={onEditClick}
+      renderDeleteConfirmModal={({ open, hideDeleteConfirm }) => (
+        <DeleteDirectorConfirmDialog
+          open={open}
+          director={director}
+          onClose={hideDeleteConfirm}
+          onCompleted={redirectToBack}
+        />
+      )}
+    />
   );
 }
 

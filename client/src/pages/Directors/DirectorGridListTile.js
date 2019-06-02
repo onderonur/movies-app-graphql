@@ -3,7 +3,7 @@ import React from "react";
 import { GridListTile, GridListTileBar } from "@material-ui/core";
 import paths from "constants/paths";
 import { ModalLink } from "react-router-modal-gallery";
-import ImageBox from "components/ImageBox";
+import Image from "components/Image";
 
 function DirectorGridListTile({
   director,
@@ -14,7 +14,7 @@ function DirectorGridListTile({
   return (
     <GridListTile style={style}>
       <ModalLink to={`${paths.DIRECTORS}/${director.id}`}>
-        <ImageBox src={director.imageUrl} />
+        <Image src={director.imageUrl} />
       </ModalLink>
       <GridListTileBar title={director.name} />
     </GridListTile>
