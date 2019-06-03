@@ -16,9 +16,6 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Image from "components/Image";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ShowMore from "./ShowMore";
-
-const TOP_SECTION_MAX_HEIGHT = 400;
 
 const useStyles = makeStyles(theme => ({
   deleteText: {
@@ -105,10 +102,10 @@ function Details({
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <Image maxHeight={TOP_SECTION_MAX_HEIGHT} src={imageUrl} />
+            <Image maxHeight={400} src={imageUrl} />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <ShowMore maxHeight={TOP_SECTION_MAX_HEIGHT}>{topSection}</ShowMore>
+            {topSection}
           </Grid>
         </Grid>
         {bottomSection}

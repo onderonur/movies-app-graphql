@@ -3,23 +3,13 @@ import { Typography, DialogContent, Grid } from "@material-ui/core";
 import { BaseGridList } from "components/BaseComponents";
 import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
-import { makeStyles } from "@material-ui/styles";
 import { useModalGallery } from "react-router-modal-gallery";
 import MovieGridListTile from "pages/Movies/MovieGridListTile";
 import Details from "components/Details";
-
-const useStyles = makeStyles(theme => ({
-  bio: {
-    // TODO: Buna bi bak daha doğru bi kullanımı var mı?
-    // Multiline text ve ilk satırları indent'li yapma vs genel bi bak
-    whiteSpace: "pre-line",
-    textAlign: "justify"
-  }
-}));
+import ReadMore from "components/ReadMore";
 
 function DirectorDetails({ director, loading, onEditClick }) {
   const { redirectToBack } = useModalGallery();
-  const classes = useStyles();
 
   return loading ? (
     <DialogContent>
@@ -32,7 +22,9 @@ function DirectorDetails({ director, loading, onEditClick }) {
       topSection={
         <>
           <Typography variant="h6">Biography</Typography>
-          <Typography className={classes.bio}>{director.bio}</Typography>
+          <ReadMore maxLine={15} hasFade={false}>
+            {director.bio}
+          </ReadMore>
         </>
       }
       bottomSection={
