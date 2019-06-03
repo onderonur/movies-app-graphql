@@ -56,7 +56,7 @@ function ReadMore({
       >
         {children}
       </Typography>
-      {hasFade && overflowedY && !isExpanded ? (
+      {hasFade && overflowedY ? (
         <div className={classes.fade} />
       ) : null}
       {overflowedY || isExpanded ? (
