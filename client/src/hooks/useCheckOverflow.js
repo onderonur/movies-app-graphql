@@ -8,7 +8,7 @@ function useCheckOverflow() {
 
   useEffect(() => {
     const current = ref.current;
-    console.log(current.scrollHeight, current.offsetHeight);
+
     if (current) {
       setOverflowedX(current.scrollWidth > current.offsetWidth);
       setOverflowedY(current.scrollHeight > current.offsetHeight);
