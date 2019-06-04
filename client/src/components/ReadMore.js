@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useCheckOverflow from "hooks/useCheckOverflow";
 import { makeStyles } from "@material-ui/styles";
 import { fade } from "@material-ui/core/styles";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Box } from "@material-ui/core";
 import clsx from "clsx";
 
 const LINE_HEIGHT = 1.5;
@@ -24,10 +24,6 @@ const useStyles = makeStyles(theme => ({
     height: 100,
     marginTop: -100,
     position: "relative"
-  },
-  toggle: {
-    display: "flex",
-    justifyContent: "flex-end"
   }
 }));
 
@@ -56,15 +52,13 @@ function ReadMore({
       >
         {children}
       </Typography>
-      {hasFade && overflowedY ? (
-        <div className={classes.fade} />
-      ) : null}
+      {hasFade && overflowedY ? <div className={classes.fade} /> : null}
       {overflowedY || isExpanded ? (
-        <div className={classes.toggle}>
+        <Box display="flex" justifyContent="flex-end">
           <Button size="small" color="primary" onClick={toggleReadMore}>
             {`Show ${overflowedY ? "More" : "Less"}`}
           </Button>
-        </div>
+        </Box>
       ) : null}
     </>
   );

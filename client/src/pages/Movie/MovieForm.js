@@ -45,7 +45,7 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
   ) : (
     <AccessControl allowedRoles={[roles.ADMIN]}>
       <MovieMutation movie={movie} onCompleted={handleSubmitCompleted}>
-        {saveMovie => (
+        {(saveMovie, { loading }) => (
           <BaseFormik
             initialValues={{
               title: movie ? movie.title : "",
@@ -61,10 +61,10 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
             })}
             onSubmit={handleSubmit(saveMovie)}
           >
-            {({ values, isSubmitting }) => (
+            {({ values }) => (
               <BaseDialogForm
                 title="Movie"
-                isSubmitting={isSubmitting}
+                isSubmitting={loading}
                 onCancel={onCancel}
               >
                 <BaseTextField

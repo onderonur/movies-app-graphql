@@ -29,7 +29,7 @@ function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
   ) : (
     <AccessControl allowedRoles={[roles.ADMIN]}>
       <DirectorMutation director={director} onCompleted={onSubmitCompleted}>
-        {saveDirector => (
+        {(saveDirector, { loading }) => (
           <BaseFormik
             initialValues={{
               name: director ? director.name : "",
@@ -43,10 +43,10 @@ function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
             })}
             onSubmit={handleSubmit(saveDirector)}
           >
-            {({ isSubmitting, values }) => (
+            {({ values }) => (
               <BaseDialogForm
                 title="Director"
-                isSubmitting={isSubmitting}
+                isSubmitting={loading}
                 onCancel={onCancel}
               >
                 <BaseTextField

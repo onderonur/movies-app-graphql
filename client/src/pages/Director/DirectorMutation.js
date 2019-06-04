@@ -38,7 +38,7 @@ function DirectorMutation({ director, onCompleted, children }) {
         }
         onCompleted={handleCompleted}
       >
-        {saveDirector => children(saveDirector)}
+        {(saveDirector, { loading }) => children(saveDirector, { loading })}
       </Mutation>
     </AccessControl>
   );

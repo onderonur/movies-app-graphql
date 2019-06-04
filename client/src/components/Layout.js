@@ -3,12 +3,9 @@ import React from "react";
 import Header from "./Header";
 import AppDrawer from "./AppDrawer";
 import { makeStyles } from "@material-ui/core/styles";
-import { Container } from "@material-ui/core";
+import { Container, Box } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex"
-  },
   main: {
     flex: 1,
     padding: theme.spacing(2)
@@ -20,7 +17,7 @@ function Layout({ children }) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Box display="flex">
       <AppDrawer>
         {({ toggleDrawer }) => <Header toggleDrawer={toggleDrawer} />}
       </AppDrawer>
@@ -28,7 +25,7 @@ function Layout({ children }) {
         <div className={classes.toolbar} />
         {children}
       </Container>
-    </div>
+    </Box>
   );
 }
 

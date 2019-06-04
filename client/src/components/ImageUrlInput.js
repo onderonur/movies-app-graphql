@@ -26,7 +26,7 @@ function ImageUrlInput({ name, label, fullWidth, required, margin, imgSrc }) {
         required={required}
         margin={margin}
       />
-      <Image className={classes.img} src={imgSrc} />
+      <Image className={classes.img} src={imgSrc} maxHeight={300} />
     </>
   );
 }

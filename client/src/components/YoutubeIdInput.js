@@ -2,13 +2,7 @@
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
 import YouTubePlayer from "components/YoutubePlayer";
-import { makeStyles } from "@material-ui/styles";
-
-const useStyles = makeStyles(theme => ({
-  preview: {
-    marginTop: theme.spacing(1)
-  }
-}));
+import { Box } from "@material-ui/core";
 
 function YoutubeIdInput({
   name,
@@ -18,8 +12,6 @@ function YoutubeIdInput({
   margin,
   youtubeId
 }) {
-  const classes = useStyles();
-
   return (
     <>
       <BaseTextField
@@ -29,9 +21,9 @@ function YoutubeIdInput({
         required={required}
         margin={margin}
       />
-      <div className={classes.preview}>
+      <Box mt={1}>
         <YouTubePlayer youtubeId={youtubeId} />
-      </div>
+      </Box>
     </>
   );
 }

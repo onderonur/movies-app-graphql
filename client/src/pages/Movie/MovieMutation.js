@@ -44,7 +44,7 @@ function MovieMutation({ movie, onCompleted, children }) {
       }
       update={movie ? undefined : createMovieUpdate}
     >
-      {saveMovie => children(saveMovie)}
+      {(saveMovie, { loading }) => children(saveMovie, { loading })}
     </Mutation>
   );
 }
