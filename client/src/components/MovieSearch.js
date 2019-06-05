@@ -4,6 +4,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import { withRouter } from "react-router-dom";
 import paths from "constants/paths";
 import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MovieSearch({ history }) {
+function MovieSearch({ history, className }) {
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState("");
 
@@ -42,7 +43,7 @@ function MovieSearch({ history }) {
   }
 
   return (
-    <Paper className={classes.root}>
+    <Paper className={clsx(classes.root, className)}>
       <InputBase
         className={classes.input}
         placeholder="Search"

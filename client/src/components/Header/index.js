@@ -14,6 +14,9 @@ import MovieSearch from "components/MovieSearch";
 const useStyles = makeStyles(theme => ({
   appBar: {
     zIndex: theme.zIndex.drawer + 1
+  },
+  movieSearch: {
+    marginRight: theme.spacing(1)
   }
 }));
 
@@ -24,7 +27,7 @@ function Header({ toggleDrawer }) {
     <AppBar position="fixed" color="inherit" className={classes.appBar}>
       <Toolbar>
         <DrawerToggler toggleDrawer={toggleDrawer} />
-        <MovieSearch />
+        <MovieSearch className={classes.movieSearch} />
         <Query query={GET_USER_INFO}>
           {({ data: { userInfo } }) => {
             const isLoggedIn = !!userInfo;
