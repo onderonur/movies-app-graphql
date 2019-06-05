@@ -8,9 +8,6 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles(theme => ({
   toggleButton: {
     marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
   }
 }));
 
@@ -26,7 +23,7 @@ function DrawerToggler({ toggleDrawer }) {
       >
         <MenuIcon />
       </IconButton>
-      <Typography className={classes.title} variant="h6" color="inherit">
+      <Typography variant="h6" color="inherit">
         MoviesApp
       </Typography>
     </>
