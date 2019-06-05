@@ -13,7 +13,7 @@ import DrawerToggler from "./DrawerToggler";
 import clsx from "clsx";
 
 const widthTransition = theme =>
-  theme.transitions.create("all", {
+  theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen
   });

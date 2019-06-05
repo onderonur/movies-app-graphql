@@ -46,6 +46,7 @@ function Header({ toggleDrawer }) {
         ) : (
           <>
             <DrawerToggler toggleDrawer={toggleDrawer} />
+
             <Box flex={1} display="flex" justifyContent="flex-end">
               {isMobile ? (
                 <IconButton onClick={handleToggleSearchMode}>
@@ -55,6 +56,7 @@ function Header({ toggleDrawer }) {
                 <MovieSearch />
               )}
             </Box>
+
             <Query query={GET_USER_INFO}>
               {({ data: { userInfo } }) => {
                 const isLoggedIn = !!userInfo;
