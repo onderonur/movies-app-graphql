@@ -36,8 +36,8 @@ function MovieSearch({ history }) {
           placeholder="Search"
           fullWidth
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
+            endAdornment: (
+              <InputAdornment position="end">
                 <IconButton type="submit">
                   <SearchIcon />
                 </IconButton>
