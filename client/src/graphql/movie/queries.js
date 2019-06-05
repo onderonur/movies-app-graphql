@@ -2,8 +2,8 @@ import gql from "graphql-tag";
 import { MOVIE_FRAGMENT } from "./fragments";
 
 export const GET_MOVIES = gql`
-  query GetMovies($after: Cursor) {
-    movies(first: 5, after: $after) {
+  query GetMovies($first: Int, $after: Cursor, $title: String) {
+    movies(first: $first, after: $after, title: $title) {
       edges {
         node {
           ...movie

@@ -80,6 +80,7 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
                   label="Description"
                   fullWidth
                   multiline
+                  required
                   margin="normal"
                 />
                 <DirectorSelect

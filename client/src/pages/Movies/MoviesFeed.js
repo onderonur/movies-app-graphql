@@ -14,10 +14,11 @@ function resolvePagingResponse(root) {
   return { nodes, hasNextPage };
 }
 
-function onLoadMore(fetchMore, movies) {
+function onLoadMore(fetchMore, movies, variables) {
   fetchMore({
     query: GET_MOVIES,
     variables: {
+      ...variables,
       after: movies.pageInfo.endCursor
     },
     updateQuery: (previousResult, { fetchMoreResult }) => {
@@ -37,16 +38,22 @@ function onLoadMore(fetchMore, movies) {
   });
 }
 
-function MoviesFeed({ children }) {
+function MoviesFeed({ searcyQuery, children }) {
+  const title = searcyQuery.title;
+  const variables = {
+    first: 10,
+    title
+  };
+
   return (
-    <MovieListQuery>
+    <MovieListQuery variables={variables}>
       {({ loading, movies, fetchMore }) => {
         const { nodes, hasNextPage } = resolvePagingResponse(movies);
         return (
           <InfiniteScrollWrapper
             hasNextPage={hasNextPage}
             loading={loading}
-            loadMore={() => onLoadMore(fetchMore, movies)}
+            loadMore={() => onLoadMore(fetchMore, movies, variables)}
           >
             {children({ movies: nodes, loading })}
           </InfiniteScrollWrapper>

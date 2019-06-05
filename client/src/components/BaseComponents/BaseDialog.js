@@ -58,7 +58,7 @@ function BaseDialog({
 
   return (
     <Dialog
-      scroll={scroll}
+      scroll={fullScreen ? "paper" : scroll}
       fullScreen={fullScreen}
       open={showModal}
       onClose={startExitAnimation}

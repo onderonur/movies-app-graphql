@@ -1,12 +1,14 @@
 // OK!!
-import React from "react";
+import React, { useMemo } from "react";
 import MoviesFeed from "./MoviesFeed";
 import GridListContainer from "components/GridListContainer";
 import MovieGridListTile from "./MovieGridListTile";
+import queryString from "query-string";
 
-function Movies() {
+function Movies({ location: { search } }) {
+  const searcyQuery = useMemo(() => queryString.parse(search), [search]);
   return (
-    <MoviesFeed>
+    <MoviesFeed searcyQuery={searcyQuery}>
       {({ movies, loading }) => (
         <GridListContainer
           items={movies}

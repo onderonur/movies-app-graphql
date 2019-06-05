@@ -17,10 +17,7 @@ const director = (sequelize, DataTypes) => {
       }
     },
     imageUrl: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true
-      }
+      type: DataTypes.STRING
     }
   });
 

@@ -1,4 +1,4 @@
-import Sequelize from "sequelize";
+import { Op } from "sequelize";
 import { combineResolvers } from "graphql-resolvers";
 import { isAuthenticated, isAdmin } from "./authorization";
 
@@ -20,15 +20,6 @@ export default {
       return false;
     }
   },
-  MovieConnection: {
-    edges: ({ edges }) => edges,
-    pageInfo: ({ pageInfo }) => pageInfo,
-    totalCount: ({ totalCount }) => totalCount()
-  },
-  MovieEdge: {
-    node: ({ node }) => node,
-    cursor: ({ cursor }) => cursor
-  },
   PageInfo: {
     startCursor: ({ startCursor }) => startCursor,
     endCursor: ({ endCursor }) => endCursor,
@@ -36,40 +27,58 @@ export default {
     hasNextPage: ({ hasNextPage }) => hasNextPage()
   },
   Query: {
-    movies: async (parent, { before, after, first, last }, { models }) => {
+    movies: async (
+      parent,
+      { before, after, first, last, title },
+      { models }
+    ) => {
       // All the sorting and "$lt" "$gt" conditions are reversed.
       // Because we want to return the movies from new to old.
-      const filter = after
-        ? { id: { [Sequelize.Op.lt]: after } }
+
+      // Because that we bulk create all of the movies, all of them have the same "createdAt" value.
+      // Thus, we can't use this value for pagination.
+      let filter = after
+        ? { id: { [Op.lt]: after } }
         : before
-        ? { id: { [Sequelize.Op.gt]: before } }
-        : null;
+        ? { id: { [Op.gt]: before } }
+        : {};
+
+      if (title) {
+        filter = {
+          ...filter,
+          title: {
+            [Op.iLike]: `%${title}%` // Op.iLike: Case insensitive (PG Only)
+          }
+        };
+      }
 
       const limit = first || last;
 
-      let movies = await models.Movie.findAll({
+      // Getting the paginated result and the total count
+      let moviesWithTotalCount = await models.Movie.findAndCountAll({
         where: filter,
         order: [["id", last ? "ASC" : "DESC"]],
         limit
       });
 
-      movies = movies.sort((a, b) => b.id - a.id);
+      const movies = moviesWithTotalCount.rows;
+      const totalCount = moviesWithTotalCount.count;
 
       const edges = movies.map(movie => ({
         node: movie,
         cursor: movie.id
       }));
 
-      const startCursor = edges.length > 0 ? edges[0].cursor : null;
+      const startCursor = edges.length ? edges[0].cursor : null;
 
-      const endCursor =
-        edges.length > 0 ? edges[edges.length - 1].cursor : null;
+      const endCursor = edges.length ? edges[edges.length - 1].cursor : null;
 
       return {
         edges,
+        totalCount,
         pageInfo: {
-          startCursor: startCursor,
-          endCursor: endCursor,
+          startCursor,
+          endCursor,
           hasNextPage() {
             if (!before) {
               if (last || (first && movies.length < first)) {
@@ -79,7 +88,7 @@ export default {
             return models.Movie.findOne({
               where: {
                 id: {
-                  [Sequelize.Op.lt]: endCursor
+                  [Op.lt]: endCursor
                 }
               }
             }).then(movie => !!movie);
@@ -93,14 +102,11 @@ export default {
             return models.Movie.findOne({
               where: {
                 id: {
-                  [Sequelize.Op.gt]: startCursor
+                  [Op.gt]: startCursor
                 }
               }
             }).then(movie => !!movie);
           }
-        },
-        totalCount() {
-          return models.Movie.count().then(count => count);
         }
       };
     },

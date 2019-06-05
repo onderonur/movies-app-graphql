@@ -9,6 +9,7 @@ import { Query } from "react-apollo";
 import { makeStyles } from "@material-ui/core";
 import ButtonWithMutation from "components/ButtonWithMutation";
 import { SHOW_LOGIN_MODAL, SHOW_SIGNUP_MODAL } from "graphql/cache/mutations";
+import MovieSearch from "components/MovieSearch";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -23,7 +24,7 @@ function Header({ toggleDrawer }) {
     <AppBar position="fixed" color="inherit" className={classes.appBar}>
       <Toolbar>
         <DrawerToggler toggleDrawer={toggleDrawer} />
-
+        <MovieSearch />
         <Query query={GET_USER_INFO}>
           {({ data: { userInfo } }) => {
             const isLoggedIn = !!userInfo;

@@ -1,6 +1,11 @@
 // OK!!
 import React from "react";
-import { GridList, GridListTile, makeStyles } from "@material-ui/core";
+import {
+  GridList,
+  GridListTile,
+  makeStyles,
+  Typography
+} from "@material-ui/core";
 import useGridListCols from "hooks/useGridListCols";
 import LoadingIndicator from "components/LoadingIndicator";
 
@@ -24,7 +29,9 @@ function BaseGridList({
 
   const isHorizontal = direction === "horizontal";
 
-  return (
+  return !loading && !items.length ? (
+    <Typography variant="h6">Nothing Found</Typography>
+  ) : (
     <>
       <GridList
         className={direction === "horizontal" ? classes.horizontal : undefined}

@@ -9,8 +9,13 @@ function createMovieUpdate(cache, { data: { createMovie } }) {
   const { success, movie } = createMovie;
 
   if (success) {
-    const getMoviesQuery = { query: GET_MOVIES };
-    const cacheData = cache.readQuery(getMoviesQuery);
+    const query = {
+      query: GET_MOVIES,
+      variables: {
+        first: 10
+      }
+    };
+    const cacheData = cache.readQuery(query);
 
     const {
       movies: { edges }
@@ -30,7 +35,7 @@ function createMovieUpdate(cache, { data: { createMovie } }) {
       }
     };
 
-    cache.writeQuery({ query: GET_MOVIES, data });
+    cache.writeQuery({ ...query, data });
   }
 }
 

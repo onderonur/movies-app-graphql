@@ -53,6 +53,7 @@ export default gql`
       after: Cursor
       first: Int
       last: Int
+      title: String
     ): MovieConnection
     movie(id: ID!): Movie
   }

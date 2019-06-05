@@ -9,12 +9,15 @@ const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
   const { success, movie: deletedMovie } = deleteMovie;
 
   if (success) {
-    const getMoviesQuery = {
-      query: GET_MOVIES
+    const query = {
+      query: GET_MOVIES,
+      variables: {
+        first: 10
+      }
     };
 
     // Read the data from our cache for this query.
-    const cacheData = cache.readQuery(getMoviesQuery);
+    const cacheData = cache.readQuery(query);
     const { movies } = cacheData;
 
     const deletedMovieId = deletedMovie.id;
@@ -32,7 +35,7 @@ const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
 
     // Write our data back to the cache.
     cache.writeQuery({
-      ...getMoviesQuery,
+      ...query,
       data: newData
     });
   }
