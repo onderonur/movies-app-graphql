@@ -4,7 +4,7 @@ export default gql`
   type Director {
     id: ID!
     name: String!
-    bio: String # TODO: Not Nullable yap
+    bio: String!
     imageUrl: String
     movies: [Movie]
   }

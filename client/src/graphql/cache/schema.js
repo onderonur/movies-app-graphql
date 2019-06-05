@@ -49,6 +49,14 @@ const schema = gql`
   type NotificationInfo {
     message: String!
   }
+
+  type Movie {
+    __deleted: Boolean
+  }
+
+  type Director {
+    __deleted: Boolean
+  }
 `;
 
 export default schema;

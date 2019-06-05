@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { IconButton, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { withRouter } from "react-router-dom";
@@ -14,8 +14,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MovieSearch({ history }) {
+function MovieSearch({ history, enableAutoFocus = false }) {
   const classes = useStyles();
+  const ref = useRef();
+
+  useEffect(() => {
+    if (enableAutoFocus && ref.current) {
+      ref.current.focus();
+    }
+  }, [enableAutoFocus]);
 
   function handleSearch({ searchValue }) {
     history.push(
@@ -35,6 +42,7 @@ function MovieSearch({ history }) {
           name="searchValue"
           placeholder="Search"
           fullWidth
+          inputRef={ref}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">

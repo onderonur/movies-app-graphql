@@ -1,5 +1,5 @@
 // OK!!
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import UserMenu from "./UserMenu";
@@ -25,6 +25,10 @@ function Header({ toggleDrawer }) {
   const isMobile = useDetectMobile();
   const [mobileSearchMode, setMobileSearchMode] = useState();
 
+  useEffect(() => {
+    setMobileSearchMode(false);
+  }, [isMobile]);
+
   function handleToggleSearchMode() {
     setMobileSearchMode(!mobileSearchMode);
   }
@@ -32,12 +36,12 @@ function Header({ toggleDrawer }) {
   return (
     <AppBar position="fixed" color="inherit" className={classes.appBar}>
       <Toolbar>
-        {mobileSearchMode ? (
+        {isMobile && mobileSearchMode ? (
           <>
             <IconButton onClick={handleToggleSearchMode}>
               <CloseIcon />
             </IconButton>
-            <MovieSearch />
+            <MovieSearch enableAutoFocus />
           </>
         ) : (
           <>

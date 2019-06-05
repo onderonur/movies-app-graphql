@@ -4,37 +4,37 @@ import { NotificationContext } from "App";
 import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_DIRECTOR } from "graphql/director/mutations";
 import { GET_DIRECTORS } from "graphql/director/queries";
-import { GET_MOVIES } from "graphql/movie/queries";
+import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 
+// TODO: Buradaki açıklamaları düzelt
 // When a director is deleted, it cascades and all of related movies are delete from DB.
 // Thus, we need to clean this movies from the cache too.
-const cleanMoviesOfDirectorFromCache = directorId => cache => {
+const cleanMoviesOfDirectorFromCache = director => cache => {
   // The readQuery method is very similar to the query method on ApolloClient except that
   // readQuery will never make a request to your GraphQL server. The query method, on the other hand,
   // may send a request to your server if the appropriate data is not in your cache whereas
   // readQuery will throw an error if the data is not in your cache. readQuery will always
   // read from the cache.
   try {
-    const query = { query: GET_MOVIES, variables: { first: 10 } };
-    // TODO: Bu açıklamayı değiştir. "first" default olarak 10 değil artık.
-    // The root query that gets movies has is movies({first: 10}) by default.
-    // All of the "fetchMore" on the MovieFeed adds request result to this query.
-    // Thus, when we use GET_MOVIES, which has the "first: 10" variable in it by default,
-    // we can get all of the movies in the cache.
-    const cacheData = cache.readQuery({ query });
-    const restEdges = cacheData.movies.edges.filter(
-      edge => edge.node.director.id !== directorId
-    );
+    const directorMovies = director.movies;
 
-    const cleanedData = {
-      ...cacheData,
-      movies: {
-        ...cacheData.movies,
-        edges: restEdges
-      }
-    };
+    directorMovies.forEach(movie => {
+      const cachedData = cache.readFragment({
+        id: `Movie:${movie.id}`,
+        fragment: MOVIE_FRAGMENT
+      });
 
-    cache.writeQuery({ ...query, data: cleanedData });
+      const movieWithDeletedFlag = {
+        ...cachedData,
+        __deleted: true
+      };
+
+      cache.writeFragment({
+        id: `Movie:${movie.id}`,
+        fragment: MOVIE_FRAGMENT,
+        data: movieWithDeletedFlag
+      });
+    });
   } catch (err) {
     console.log(err);
   }
@@ -58,7 +58,7 @@ function DeleteDirectorConfirmDialog({ open, director, onClose, onCompleted }) {
           directorId: director.id
         },
         refetchQueries: [{ query: GET_DIRECTORS }],
-        update: cleanMoviesOfDirectorFromCache(director.id),
+        update: cleanMoviesOfDirectorFromCache(director),
         onCompleted: ({ deleteDirector }) => {
           const { success, message } = deleteDirector;
           if (success) {

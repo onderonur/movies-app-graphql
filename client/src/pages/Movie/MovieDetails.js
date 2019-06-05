@@ -10,27 +10,32 @@ import { BaseLink } from "components/BaseComponents";
 import { useModalGallery } from "react-router-modal-gallery";
 import MovieGridListTile from "pages/Movies/MovieGridListTile";
 import Details from "components/Details";
+import { getNonDeletedItems } from "utils";
 
 function MovieDetails({ movie, loading, onEditClick }) {
   const { redirectToBack } = useModalGallery();
 
   const director = movie ? movie.director : null;
 
-  const otherMovies = loading
-    ? []
-    : director.movies.filter(item => item.id !== movie.id);
+  let otherMovies =
+    loading || !director
+      ? []
+      : director.movies.filter(item => item.id !== movie.id);
 
-  const directorLink = loading ? null : (
-    <BaseLink to={`${paths.DIRECTORS}/${director.id}`} toModal>
-      {director.name}
-    </BaseLink>
-  );
+  otherMovies = getNonDeletedItems(otherMovies);
+
+  const directorLink =
+    loading || !director ? null : (
+      <BaseLink to={`${paths.DIRECTORS}/${director.id}`} toModal>
+        {director.name}
+      </BaseLink>
+    );
 
   return loading ? (
     <DialogContent>
       <LoadingIndicator />
     </DialogContent>
-  ) : (
+  ) : movie ? (
     <>
       <Details
         title={movie.title}
@@ -67,7 +72,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
                     {directorLink}
                   </Typography>
                   <BaseGridList
-                    items={director.movies}
+                    items={otherMovies}
                     direction="horizontal"
                     renderItem={({ item }) => (
                       <MovieGridListTile key={item.id} movie={item} />
@@ -94,6 +99,10 @@ function MovieDetails({ movie, loading, onEditClick }) {
         )}
       />
     </>
+  ) : (
+    <DialogContent>
+      <Typography variant="h5">Not Found</Typography>
+    </DialogContent>
   );
 }
 

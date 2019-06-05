@@ -3,40 +3,27 @@ import React, { useContext } from "react";
 import { NotificationContext } from "App";
 import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_MOVIE } from "graphql/movie/mutations";
-import { GET_MOVIES } from "graphql/movie/queries";
+import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 
 const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
   const { success, movie: deletedMovie } = deleteMovie;
 
   if (success) {
-    const query = {
-      query: GET_MOVIES,
-      variables: {
-        first: 10
-      }
-    };
+    const movie = cache.readFragment({
+      id: `Movie:${deletedMovie.id}`,
+      fragment: MOVIE_FRAGMENT
+    });
 
-    // Read the data from our cache for this query.
-    const cacheData = cache.readQuery(query);
-    const { movies } = cacheData;
-
-    const deletedMovieId = deletedMovie.id;
-    // Remove the deleted movie from the cache
-    const remainingEdges = movies.edges.filter(
-      edge => edge.node.id !== deletedMovieId
-    );
-
-    const newData = {
-      movies: {
-        ...movies,
-        edges: remainingEdges
-      }
+    let movieWithDeletedFlag = {
+      ...movie,
+      __deleted: true
     };
 
     // Write our data back to the cache.
-    cache.writeQuery({
-      ...query,
-      data: newData
+    cache.writeFragment({
+      id: `Movie:${deletedMovie.id}`,
+      fragment: MOVIE_FRAGMENT,
+      data: movieWithDeletedFlag
     });
   }
 };

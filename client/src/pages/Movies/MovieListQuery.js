@@ -12,7 +12,13 @@ function MovieListQuery({ variables, children }) {
       {({ loading, error, data, fetchMore }) => {
         if (error) return `Error! ${error.message}`;
 
-        const movies = data ? data.movies : null;
+        const movies =
+          data && data.movies
+            ? {
+                ...data.movies,
+                edges: data.movies.edges.filter(edge => !edge.node.__deleted)
+              }
+            : null;
 
         return children({ loading, movies, fetchMore });
       }}

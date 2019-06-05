@@ -7,9 +7,11 @@ import { useModalGallery } from "react-router-modal-gallery";
 import MovieGridListTile from "pages/Movies/MovieGridListTile";
 import Details from "components/Details";
 import ReadMore from "components/ReadMore";
+import { getNonDeletedItems } from "utils";
 
 function DirectorDetails({ director, loading, onEditClick }) {
   const { redirectToBack } = useModalGallery();
+  const directorMovies = director ? getNonDeletedItems(director.movies) : [];
 
   return loading ? (
     <DialogContent>
@@ -28,11 +30,11 @@ function DirectorDetails({ director, loading, onEditClick }) {
       bottomSection={
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            {director.movies.length ? (
+            {directorMovies.length ? (
               <>
                 <Typography variant="h6">Movies</Typography>
                 <BaseGridList
-                  items={director.movies}
+                  items={directorMovies}
                   direction="horizontal"
                   renderItem={({ item }) => (
                     <MovieGridListTile key={item.id} movie={item} />

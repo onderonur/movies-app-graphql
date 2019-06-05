@@ -5,6 +5,8 @@ import {
   AuthModalState
 } from "constants/graphTypes";
 import localStorageKeys from "constants/localStorageKeys";
+import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
+import { DIRECTOR_FRAGMENT } from "graphql/director/fragment";
 
 function decodeJWT(token) {
   return JSON.parse(decodeURIComponent(escape(atob(token.split(".")[1]))));
@@ -58,6 +60,15 @@ export function showAuthModal(cache, mode) {
   };
 
   cache.writeData({ data });
+}
+
+function getDeletedFlag(cache, type, id, fragment) {
+  const cachedData = cache.readFragment({
+    id: `${type}:${id}`,
+    fragment: fragment
+  });
+
+  return cachedData ? cachedData.__deleted : null;
 }
 
 const resolvers = {
@@ -158,6 +169,16 @@ const resolvers = {
       client.writeData({ data });
 
       return null;
+    }
+  },
+  Movie: {
+    __deleted: ({ id }, args, { cache }) => {
+      return getDeletedFlag(cache, "Movie", id, MOVIE_FRAGMENT);
+    }
+  },
+  Director: {
+    __deleted: ({ id }, args, { cache }) => {
+      return getDeletedFlag(cache, "Director", id, DIRECTOR_FRAGMENT);
     }
   }
 };
