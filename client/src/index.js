@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ApolloProvider } from "react-apollo";
-import { MuiThemeProvider } from "@material-ui/core/styles";
 import * as serviceWorker from "./serviceWorker";
 import theme from "./theme";
 import { getDefaults, schema, resolvers } from "./graphql/cache";
@@ -21,6 +20,7 @@ import {
   pushNotificationToCache,
   showAuthModal
 } from "./graphql/cache/resolvers";
+import { ThemeProvider } from "@material-ui/styles";
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -105,11 +105,11 @@ client.onResetStore(() => {
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <MuiThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <Router>
         <App />
       </Router>
-    </MuiThemeProvider>
+    </ThemeProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );
