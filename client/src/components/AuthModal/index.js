@@ -15,9 +15,7 @@ function AuthModal() {
     <Query query={GET_AUTH_MODAL_STATE}>
       {({
         data: {
-          uiState: {
-            authModal: { open, mode }
-          }
+          authModal: { open, mode }
         }
       }) => (
         <Mutation mutation={HIDE_AUTH_MODAL}>

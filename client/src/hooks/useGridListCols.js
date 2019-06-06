@@ -21,7 +21,7 @@ function useGridListCols({ direction = "vertical" } = {}) {
     return !isHorizontal ? 1 : 1.5;
   }
 
-  return getGridListCols();
+  return getGridListCols;
 }
 
 export default useGridListCols;

@@ -47,7 +47,12 @@ function Header({ toggleDrawer }) {
           <>
             <DrawerToggler toggleDrawer={toggleDrawer} />
 
-            <Box flex={1} display="flex" justifyContent="flex-end">
+            <Box
+              flex={1}
+              display="flex"
+              justifyContent={isMobile ? "flex-end" : "center"}
+              mx={isMobile ? 0 : 2}
+            >
               {isMobile ? (
                 <IconButton onClick={handleToggleSearchMode}>
                   <SearchIcon />

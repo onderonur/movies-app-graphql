@@ -18,7 +18,7 @@ function GridListPage({
 }) {
   return (
     <Container maxWidth={maxWidth}>
-      <Box display="flex" justifyContent="flex-end" my={1}>
+      <Box display="flex" justifyContent="flex-end" mb={1}>
         <AccessControl allowedRoles={[roles.ADMIN]}>
           <Button
             color="primary"

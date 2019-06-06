@@ -4,7 +4,7 @@ const schema = gql`
   extend type Query {
     notifications: [NotificationInfo]!
     userInfo: UserInfo
-    uiState: UIState!
+    authModal: AuthModalState!
   }
 
   extend type Mutation {
@@ -17,10 +17,6 @@ const schema = gql`
     showLoginModal: Boolean
     showSignUpModal: Boolean
     hideAuthModal: Boolean
-  }
-
-  type UIState {
-    authModal: AuthModalState!
   }
 
   type AuthModalState {

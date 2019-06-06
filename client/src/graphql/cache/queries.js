@@ -21,11 +21,9 @@ export const GET_USER_INFO = gql`
 
 export const GET_AUTH_MODAL_STATE = gql`
   query GetAuthModalState {
-    uiState @client {
-      authModal {
-        open
-        mode
-      }
+    authModal @client {
+      open
+      mode
     }
   }
 `;

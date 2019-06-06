@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function BaseGridList({
+  cellHeight = "auto",
   direction = "vertical",
   items = [],
   renderItem,
@@ -29,24 +30,26 @@ function BaseGridList({
 
   const isHorizontal = direction === "horizontal";
 
+  const loadingGridTile = (
+    <GridListTile>
+      <LoadingIndicator />
+    </GridListTile>
+  );
+
   return !loading && !items.length ? (
     <Typography variant="h6">Nothing Found</Typography>
   ) : (
     <>
       <GridList
         className={direction === "horizontal" ? classes.horizontal : undefined}
-        cellHeight="auto"
-        cols={cols || defaultGridCols}
+        cellHeight={cellHeight}
+        cols={cols || defaultGridCols()}
         spacing={2}
       >
         {items.map(item => renderItem({ item }))}
-        {loading && isHorizontal ? (
-          <GridListTile>
-            <LoadingIndicator />
-          </GridListTile>
-        ) : null}
+        {loading && isHorizontal ? loadingGridTile : null}
       </GridList>
-      {loading && !isHorizontal ? <LoadingIndicator /> : null}
+      {loading && !isHorizontal ? loadingGridTile : null}
     </>
   );
 }

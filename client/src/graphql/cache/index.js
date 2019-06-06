@@ -1,6 +1,6 @@
 import schema from "./schema";
 import resolvers from "./resolvers";
-import { UserInfo, UIState, AuthModalState } from "constants/graphTypes";
+import { UserInfo, AuthModalState } from "constants/graphTypes";
 import localStorageKeys from "constants/localStorageKeys";
 
 function getUserInfo() {
@@ -16,13 +16,10 @@ export function getDefaults() {
   return {
     notifications: [],
     userInfo: getUserInfo(),
-    uiState: {
-      __typename: UIState,
-      authModal: {
-        __typename: AuthModalState,
-        open: false,
-        mode: null
-      }
+    authModal: {
+      __typename: AuthModalState,
+      open: false,
+      mode: null
     }
   };
 }

@@ -49,13 +49,10 @@ export function showAuthModal(cache, mode) {
 
   const data = {
     ...cacheData,
-    uiState: {
-      ...cacheData.uiState,
-      authModal: {
-        __typename: AuthModalState,
-        open: true,
-        mode
-      }
+    authModal: {
+      __typename: AuthModalState,
+      open: true,
+      mode
     }
   };
 
@@ -156,13 +153,10 @@ const resolvers = {
 
       const data = {
         ...cacheData,
-        uiState: {
-          ...cacheData.uiState,
-          authModal: {
-            __typename: AuthModalState,
-            open: false,
-            mode: null
-          }
+        authModal: {
+          __typename: AuthModalState,
+          open: false,
+          mode: null
         }
       };
 
