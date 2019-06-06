@@ -29,7 +29,7 @@ function onLoadMore(fetchMore, movies, variables) {
         // Put the new movies at the end of the list and update `pageInfo`
         // so we have the new `endCursor` and `hasNextPage` values
         movies: {
-          __typename: previousResult.movies.__typename,
+          ...previousResult.movies,
           edges: [...previousResult.movies.edges, ...newEdges],
           pageInfo
         }

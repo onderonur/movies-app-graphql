@@ -1,7 +1,6 @@
 // OK!!
 import React from "react";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from "@material-ui/core";
 
 function LoadingIndicator() {
   return (

@@ -10,11 +10,7 @@ function InfiniteScrollWrapper({ hasNextPage, loading, loadMore, children }) {
     loadMore
   });
 
-  return (
-    <>
-      <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>
-    </>
-  );
+  return <RootRef rootRef={infiniteContainerRef}>{children}</RootRef>;
 }
 
 export default InfiniteScrollWrapper;

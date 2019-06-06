@@ -7,6 +7,7 @@ import queryString from "query-string";
 
 function Movies({ location: { search } }) {
   const searcyQuery = useMemo(() => queryString.parse(search), [search]);
+
   return (
     <MoviesFeed searcyQuery={searcyQuery}>
       {({ movies, loading }) => (
