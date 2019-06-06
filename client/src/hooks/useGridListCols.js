@@ -1,24 +1,34 @@
 import useWidth from "./useWidth";
 import { isWidthUp } from "@material-ui/core/withWidth";
 
-function useGridListCols({ direction = "vertical" } = {}) {
+function addHalf(number) {
+  return number + 0.5;
+}
+
+function useGridListCols({
+  direction = "vertical",
+  lg = 5,
+  md = 4,
+  sm = 3,
+  xs = 2
+} = {}) {
   const width = useWidth();
   const isHorizontal = direction === "horizontal";
 
   function getGridListCols() {
-    if (isWidthUp("lg", width)) {
-      return !isHorizontal ? 4 : 4.5;
+    if (lg && isWidthUp("lg", width)) {
+      return !isHorizontal ? lg : addHalf(lg);
     }
 
-    if (isWidthUp("md", width)) {
-      return !isHorizontal ? 3 : 3.5;
+    if (md && isWidthUp("md", width)) {
+      return !isHorizontal ? md : addHalf(md);
     }
 
-    if (isWidthUp("sm", width)) {
-      return !isHorizontal ? 2 : 2.5;
+    if (sm && isWidthUp("sm", width)) {
+      return !isHorizontal ? sm : addHalf(sm);
     }
 
-    return !isHorizontal ? 1 : 1.5;
+    return !isHorizontal ? xs : addHalf(xs);
   }
 
   return getGridListCols;
