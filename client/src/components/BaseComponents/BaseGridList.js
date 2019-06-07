@@ -30,12 +30,6 @@ function BaseGridList({
 
   const isHorizontal = direction === "horizontal";
 
-  const loadingGridTile = (
-    <GridListTile>
-      <LoadingIndicator />
-    </GridListTile>
-  );
-
   return !loading && !items.length ? (
     <Typography variant="h6">Nothing Found</Typography>
   ) : (
@@ -47,9 +41,13 @@ function BaseGridList({
         spacing={2}
       >
         {items.map(item => renderItem({ item }))}
-        {loading && isHorizontal ? loadingGridTile : null}
+        {loading && isHorizontal ? (
+          <GridListTile>
+            <LoadingIndicator />
+          </GridListTile>
+        ) : null}
       </GridList>
-      {loading && !isHorizontal ? loadingGridTile : null}
+      {loading && !isHorizontal ? <LoadingIndicator /> : null}
     </>
   );
 }

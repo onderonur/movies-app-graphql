@@ -9,10 +9,10 @@ import { Query } from "react-apollo";
 import { makeStyles, Box, IconButton } from "@material-ui/core";
 import ButtonWithMutation from "components/ButtonWithMutation";
 import { SHOW_LOGIN_MODAL, SHOW_SIGNUP_MODAL } from "graphql/cache/mutations";
-import MovieSearch from "components/MovieSearch";
 import useDetectMobile from "hooks/useDetectMobile";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
+import MovieAutoSearch from "components/MovieAutoSearch";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -41,7 +41,7 @@ function Header({ toggleDrawer }) {
             <IconButton onClick={handleToggleSearchMode}>
               <CloseIcon />
             </IconButton>
-            <MovieSearch enableAutoFocus />
+            <MovieAutoSearch autoFocus />
           </>
         ) : (
           <>
@@ -58,7 +58,9 @@ function Header({ toggleDrawer }) {
                   <SearchIcon />
                 </IconButton>
               ) : (
-                <MovieSearch />
+                <Box width="100%" maxWidth={640}>
+                  <MovieAutoSearch />
+                </Box>
               )}
             </Box>
 

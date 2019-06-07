@@ -3,12 +3,17 @@ import React from "react";
 import { Query } from "react-apollo";
 import { GET_MOVIES } from "graphql/movie/queries";
 
-function MovieListQuery({ variables, children }) {
+function MovieListQuery({ variables, skip, children }) {
   return (
     // notifyOnNetworkStatusChange: To make "loading" true when "fetchMore" runs.
     // loading is true only on the first request on default behavior.
     // fetchMore doesn't affect "loading" by default.
-    <Query query={GET_MOVIES} variables={variables} notifyOnNetworkStatusChange>
+    <Query
+      query={GET_MOVIES}
+      variables={variables}
+      skip={skip}
+      notifyOnNetworkStatusChange
+    >
       {({ loading, error, data, fetchMore }) => {
         if (error) return `Error! ${error.message}`;
 

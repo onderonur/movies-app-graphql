@@ -1,3 +1,4 @@
+export { default as BaseAutoSearch } from "./BaseAutoSearch";
 export { default as BaseButton } from "./BaseButton";
 export { default as BaseDialog } from "./BaseDialog";
 export { default as BaseDialogCloseButton } from "./BaseDialogCloseButton";
