@@ -7,10 +7,10 @@ function addHalf(number) {
 
 function useGridListCols({
   direction = "vertical",
-  lg = 5,
-  md = 4,
-  sm = 3,
-  xs = 2
+  lg = 4,
+  md = 3,
+  sm = 2,
+  xs = 1
 } = {}) {
   const width = useWidth();
   const isHorizontal = direction === "horizontal";
