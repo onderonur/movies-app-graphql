@@ -14,7 +14,7 @@ function DirectorGridListTile({
   return (
     <GridListTile style={style}>
       <ModalLink to={`${paths.DIRECTORS}/${director.id}`}>
-        <BaseImage src={director.imageUrl} />
+        <BaseImage src={director.imageUrl} aspectRatio="1:1" />
       </ModalLink>
       <GridListTileBar title={director.name} />
     </GridListTile>

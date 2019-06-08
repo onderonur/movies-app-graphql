@@ -27,13 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ReadMore({
-  className,
-  align = "justify",
-  maxLine,
-  hasFade = true,
-  children
-}) {
+function ReadMore({ className, maxLine, hasFade = true, children }) {
   const [ref, { overflowedY }] = useCheckOverflow();
   const [isExpanded, setIsExpanded] = useState(false);
   const classes = useStyles({ maxLine, isExpanded });
@@ -45,11 +39,7 @@ function ReadMore({
 
   return (
     <>
-      <Typography
-        ref={ref}
-        className={clsx(classes.text, className)}
-        align={align}
-      >
+      <Typography ref={ref} className={clsx(classes.text, className)}>
         {children}
       </Typography>
       {hasFade && overflowedY ? <div className={classes.fade} /> : null}

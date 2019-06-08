@@ -15,7 +15,7 @@ function MovieGridListTile({
   return (
     <GridListTile style={style}>
       <ModalLink to={`${paths.MOVIES}/${movie.id}`}>
-        <BaseImage src={movie.imageUrl} />
+        <BaseImage src={movie.imageUrl} aspectRatio="2:3" />
       </ModalLink>
       <GridListTileBar
         title={movie.title}
