@@ -1,22 +1,9 @@
 // OK!!
 import React from "react";
-import { BaseTextField } from "components/BaseComponents";
-import Image from "components/Image";
-import { makeStyles } from "@material-ui/styles";
-
-const useStyles = makeStyles(theme => ({
-  img: {
-    width: "50%",
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    marginLeft: "auto",
-    marginRight: "auto"
-  }
-}));
+import { BaseTextField, BaseImage } from "components/BaseComponents";
+import { Box } from "@material-ui/core";
 
 function ImageUrlInput({ name, label, fullWidth, required, margin, imgSrc }) {
-  const classes = useStyles();
-
   return (
     <>
       <BaseTextField
@@ -26,7 +13,9 @@ function ImageUrlInput({ name, label, fullWidth, required, margin, imgSrc }) {
         required={required}
         margin={margin}
       />
-      <Image className={classes.img} src={imgSrc} maxHeight={300} />
+      <Box width="50%" my={2} mx="auto">
+        <BaseImage src={imgSrc} />
+      </Box>
     </>
   );
 }

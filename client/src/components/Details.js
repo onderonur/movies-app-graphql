@@ -9,12 +9,11 @@ import {
   ListItemText,
   makeStyles
 } from "@material-ui/core";
-import { BaseDialogTitle } from "components/BaseComponents";
+import { BaseDialogTitle, BaseImage } from "components/BaseComponents";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import Image from "components/Image";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles(theme => ({
@@ -102,7 +101,7 @@ function Details({
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <Image maxHeight={400} src={imageUrl} />
+            <BaseImage src={imageUrl} aspectRatio="original" />
           </Grid>
           <Grid item xs={12} sm={8}>
             {topSection}

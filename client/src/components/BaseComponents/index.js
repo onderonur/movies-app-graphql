@@ -8,5 +8,6 @@ export { default as BaseForm } from "./BaseForm";
 export { default as BaseFormActions } from "./BaseFormActions";
 export { default as BaseFormik } from "./BaseFormik";
 export { default as BaseGridList } from "./BaseGridList";
+export { default as BaseImage } from "./BaseImage";
 export { default as BaseLink } from "./BaseLink";
 export { default as BaseTextField } from "./BaseTextField";
