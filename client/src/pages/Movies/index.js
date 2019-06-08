@@ -7,9 +7,12 @@ import queryString from "query-string";
 
 function Movies({ location: { search } }) {
   const searcyQuery = useMemo(() => queryString.parse(search), [search]);
+  const filter = {
+    title: searcyQuery.title
+  };
 
   return (
-    <MoviesFeed searcyQuery={searcyQuery}>
+    <MoviesFeed filter={filter}>
       {({ movies, loading }) => (
         <GridListContainer
           items={movies}

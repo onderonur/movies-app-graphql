@@ -38,11 +38,10 @@ function onLoadMore(fetchMore, movies, variables) {
   });
 }
 
-function MoviesFeed({ searcyQuery, children }) {
-  const title = searcyQuery.title;
+function MoviesFeed({ filter, children }) {
   const variables = {
     first: 10,
-    title
+    ...filter
   };
 
   return (
