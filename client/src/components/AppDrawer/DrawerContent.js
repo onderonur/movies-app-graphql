@@ -42,15 +42,17 @@ function DrawerContent({ isDrawerOpen }) {
           isDrawerOpen={isDrawerOpen}
         />
       </MenuList>
-      <MenuList className={classes.menuList}>
-        <MenuItem disableRipple>
-          <ListItemIcon>
-            <WbSunny />
-          </ListItemIcon>
-          <ListItemText className={classes.noShrink} primary="Dark Theme" />
-          <ThemeToggle />
-        </MenuItem>
-      </MenuList>
+      {isDrawerOpen ? (
+        <MenuList className={classes.menuList}>
+          <MenuItem disableRipple>
+            <ListItemIcon>
+              <WbSunny />
+            </ListItemIcon>
+            <ListItemText className={classes.noShrink} primary="Dark Theme" />
+            <ThemeToggle />
+          </MenuItem>
+        </MenuList>
+      ) : null}
     </>
   );
 }
