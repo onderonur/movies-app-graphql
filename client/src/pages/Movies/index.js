@@ -17,8 +17,8 @@ function Movies({ location: { search } }) {
         <GridListContainer
           items={movies}
           loading={loading}
-          renderItem={({ item }) => (
-            <MovieGridListTile key={item.id} movie={item} />
+          renderItem={movie => (
+            <MovieGridListTile key={movie.id} movie={movie} />
           )}
         />
       )}

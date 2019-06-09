@@ -34,13 +34,13 @@ function BaseGridList({
     <Typography variant="h6">Nothing Found</Typography>
   ) : (
     <>
-      <GridList 
+      <GridList
         className={direction === "horizontal" ? classes.horizontal : undefined}
         cellHeight={cellHeight}
         cols={cols || defaultGridCols()}
         spacing={2}
       >
-        {items.map(item => renderItem({ item }))}
+        {items.map((item, index) => renderItem(item, index))}
         {loading && isHorizontal ? (
           <GridListTile>
             <LoadingIndicator />

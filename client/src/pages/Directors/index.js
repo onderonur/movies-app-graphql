@@ -11,8 +11,8 @@ function Directors() {
         <GridListContainer
           loading={loading}
           items={directors}
-          renderItem={({ item }) => (
-            <DirectorGridListTile key={item.id} director={item} />
+          renderItem={director => (
+            <DirectorGridListTile key={director.id} director={director} />
           )}
         />
       )}
