@@ -50,9 +50,6 @@ function AutoSearchSuggestion({
 }
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
   container: {
     flexGrow: 1,
     position: "relative"
@@ -78,9 +75,9 @@ function BaseAutoSearch({
   placeholder = "Search",
   loading,
   suggestions = [],
-  onSelect,
   onInputValueChange,
-  onEnter,
+  onItemSelect,
+  onPressEnter,
   debounceMs = 250,
   autoFocus
 }) {
@@ -109,98 +106,95 @@ function BaseAutoSearch({
   }
 
   return (
-    <div className={classes.root}>
-      <Downshift
-        inputValue={inputValue}
-        onSelect={onSelect}
-        itemToString={item => (item ? item.title : "")}
-      >
-        {({
-          getInputProps,
-          getItemProps,
-          getLabelProps,
-          getMenuProps,
-          highlightedIndex,
-          isOpen,
-          openMenu,
-          closeMenu,
-          selectedItem
-        }) => {
-          const { onChange, onBlur, onFocus, ...inputProps } = getInputProps({
-            placeholder
-          });
+    <Downshift
+      inputValue={inputValue}
+      onSelect={onItemSelect}
+      itemToString={item => (item ? item.title : "")}
+    >
+      {({
+        getInputProps,
+        getItemProps,
+        getLabelProps,
+        getMenuProps,
+        highlightedIndex,
+        isOpen,
+        openMenu,
+        closeMenu,
+        selectedItem
+      }) => {
+        const { onChange, onBlur, onFocus, ...inputProps } = getInputProps({
+          placeholder
+        });
 
-          return (
-            <div className={classes.container}>
-              <AutoSearchInput
-                fullWidth={true}
-                classes={classes}
-                label={label}
-                autoFocus={autoFocus}
-                InputLabelProps={getLabelProps({ shrink: true })}
-                InputProps={{
-                  ...inputProps,
-                  onChange: event => {
-                    openMenu();
-                    handleInputChange(event);
-                    return onChange;
-                  },
-                  onBlur,
-                  onFocus: e => {
-                    openMenu();
-                    return onFocus;
-                  },
-                  onKeyPress: e => {
-                    if (e.key === "Enter") {
-                      onEnter(inputValue);
-                      closeMenu();
-                    }
-                  },
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        type="submit"
-                        onClick={() => {
-                          onEnter(inputValue);
-                          closeMenu();
-                        }}
-                      >
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
+        return (
+          <div className={classes.container}>
+            <AutoSearchInput
+              fullWidth={true}
+              classes={classes}
+              label={label}
+              autoFocus={autoFocus}
+              InputLabelProps={getLabelProps({ shrink: true })}
+              InputProps={{
+                ...inputProps,
+                onChange: event => {
+                  openMenu();
+                  handleInputChange(event);
+                  return onChange;
+                },
+                onBlur,
+                onFocus: e => {
+                  openMenu();
+                  return onFocus;
+                },
+                onKeyPress: e => {
+                  if (e.key === "Enter") {
+                    onPressEnter(inputValue);
+                    closeMenu();
+                  }
+                },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => {
+                        onPressEnter(inputValue);
+                        closeMenu();
+                      }}
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
 
-              <div {...getMenuProps()}>
-                {isOpen ? (
-                  <Paper className={classes.paper} square>
-                    {loading ? (
-                      <LoadingIndicator />
-                    ) : (
-                      suggestions.map((suggestion, index) => {
-                        return (
-                          <AutoSearchSuggestion
-                            key={suggestion.id}
-                            suggestion={suggestion}
-                            index={index}
-                            itemProps={getItemProps({
-                              item: suggestion
-                            })}
-                            highlightedIndex={highlightedIndex}
-                            selectedItem={selectedItem}
-                          />
-                        );
-                      })
-                    )}
-                  </Paper>
-                ) : null}
-              </div>
+            <div {...getMenuProps()}>
+              {isOpen ? (
+                <Paper className={classes.paper} square>
+                  {loading ? (
+                    <LoadingIndicator />
+                  ) : (
+                    suggestions.map((suggestion, index) => {
+                      return (
+                        <AutoSearchSuggestion
+                          key={suggestion.id}
+                          suggestion={suggestion}
+                          index={index}
+                          itemProps={getItemProps({
+                            item: suggestion
+                          })}
+                          highlightedIndex={highlightedIndex}
+                          selectedItem={selectedItem}
+                        />
+                      );
+                    })
+                  )}
+                </Paper>
+              ) : null}
             </div>
-          );
-        }}
-      </Downshift>
-    </div>
+          </div>
+        );
+      }}
+    </Downshift>
   );
 }
 

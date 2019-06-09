@@ -32,8 +32,8 @@ function MovieAutoComplete({ history, autoFocus }) {
           <BaseAutoSearch
             suggestions={nodes}
             loading={loading}
-            onEnter={handleRedirect}
-            onSelect={handleSelectMovie}
+            onPressEnter={handleRedirect}
+            onItemSelect={handleSelectMovie}
             onInputValueChange={handleInputValueChange}
             autoFocus={autoFocus}
           />
