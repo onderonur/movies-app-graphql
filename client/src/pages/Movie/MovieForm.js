@@ -16,6 +16,7 @@ import { DialogContent } from "@material-ui/core";
 import LoadingIndicator from "components/LoadingIndicator";
 import ImageUrlInput from "components/ImageUrlInput";
 import YoutubeIdInput from "components/YoutubeIdInput";
+import YearSelect from "components/YearSelect";
 
 function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
   const { pushNotification } = useContext(NotificationContext);
@@ -49,6 +50,7 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
           <BaseFormik
             initialValues={{
               title: movie ? movie.title : "",
+              year: movie ? movie.year : "",
               description: movie ? movie.description : "",
               directorId: movie ? movie.director.id : "",
               imageUrl: movie ? movie.imageUrl : "",
@@ -56,6 +58,14 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
             }}
             validationSchema={Yup.object().shape({
               title: Yup.string().required(REQUIRED_ERROR),
+              year: Yup.number()
+                .required(REQUIRED_ERROR)
+                .test({
+                  name: "len",
+                  message: "Please enter a valid year.",
+                  test: value => value.toString().length === 4
+                }),
+              description: Yup.number().required(REQUIRED_ERROR),
               directorId: Yup.string().required(REQUIRED_ERROR),
               imageUrl: Yup.string().url(INVALID_URL)
             })}
@@ -74,6 +84,13 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
                   required
                   margin="normal"
                   autoFocus
+                />
+                <YearSelect
+                  name="year"
+                  label="Year"
+                  fullWidth
+                  required
+                  margin="normal"
                 />
                 <BaseTextField
                   name="description"

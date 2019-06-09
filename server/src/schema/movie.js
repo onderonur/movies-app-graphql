@@ -15,6 +15,7 @@ export default gql`
   type Movie {
     id: ID!
     title: String!
+    year: Int!
     description: String
     imageUrl: String
     youtubeId: String
@@ -24,6 +25,7 @@ export default gql`
 
   input MovieInput {
     title: String!
+    year: Int!
     description: String
     imageUrl: String
     youtubeId: String

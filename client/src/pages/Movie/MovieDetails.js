@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, DialogContent, Grid } from "@material-ui/core";
+import { Typography, DialogContent, Grid, makeStyles } from "@material-ui/core";
 import YouTubePlayer from "components/YoutubePlayer";
 import MovieLikeButton from "pages/Movies/MovieLikeButton";
 import paths from "constants/paths";
@@ -12,8 +12,16 @@ import MovieGridListTile from "pages/Movies/MovieGridListTile";
 import Details from "components/Details";
 import { getNonDeletedItems } from "utils";
 
+const useStyles = makeStyles(theme => ({
+  year: {
+    marginLeft: theme.spacing(0.5),
+    color: theme.palette.text.secondary
+  }
+}));
+
 function MovieDetails({ movie, loading, onEditClick }) {
   const { redirectToBack } = useModalGallery();
+  const classes = useStyles();
 
   const director = movie ? movie.director : null;
 
@@ -38,7 +46,14 @@ function MovieDetails({ movie, loading, onEditClick }) {
   ) : movie ? (
     <>
       <Details
-        title={movie.title}
+        title={
+          <>
+            <Typography variant="h6">{movie.title}</Typography>
+            <Typography className={classes.year} variant="h6">{`(${
+              movie.year
+            })`}</Typography>
+          </>
+        }
         titleExtra={
           <MovieLikeButton
             movieId={movie.id}

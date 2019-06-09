@@ -5,6 +5,7 @@ export const MOVIE_FRAGMENT = gql`
     __typename
     id
     title
+    year
     imageUrl
     viewerHasLiked
     __deleted @client

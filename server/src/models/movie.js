@@ -10,6 +10,14 @@ const movie = (sequelize, DataTypes) => {
         }
       }
     },
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1000,
+        max: 9999
+      }
+    },
     description: {
       type: DataTypes.STRING,
       allowNull: false,

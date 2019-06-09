@@ -19,7 +19,9 @@ function MovieGridListTile({
       </ModalLink>
       <GridListTileBar
         title={movie.title}
-        subtitle={movie.director ? movie.director.name : ""}
+        subtitle={`${movie.director ? `${movie.director.name} ` : ""}(${
+          movie.year
+        })`}
         actionIcon={
           <MovieLikeButton
             movieId={movie.id}

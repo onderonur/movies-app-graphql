@@ -132,6 +132,7 @@ export const seedData = async () => {
   const movies = [
     {
       title: "The Avengers",
+      year: 2012,
       description:
         "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
       imageUrl:
@@ -141,6 +142,7 @@ export const seedData = async () => {
     },
     {
       title: "Scott Pilgrim vs. the World",
+      year: 2010,
       description:
         "Scott Pilgrim must defeat his new girlfriend's seven evil exes in order to win her heart.",
       imageUrl:
@@ -150,6 +152,7 @@ export const seedData = async () => {
     },
     {
       title: "Baby Driver",
+      year: 2017,
       description:
         "After being coerced into working for a crime boss, a young getaway driver finds himself taking part in a heist doomed to fail.",
       imageUrl:
@@ -159,6 +162,7 @@ export const seedData = async () => {
     },
     {
       title: "Shaun of the Dead",
+      year: 2004,
       description:
         "A man's uneventful life is disrupted by the zombie apocalypse.",
       imageUrl:
@@ -168,6 +172,7 @@ export const seedData = async () => {
     },
     {
       title: "Fight Club",
+      year: 1999,
       description:
         "An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.",
       imageUrl:
@@ -177,6 +182,7 @@ export const seedData = async () => {
     },
     {
       title: "The Girl with the Dragon Tattoo",
+      year: 2011,
       description:
         "Journalist Mikael Blomkvist is aided in his search for a woman who has been missing for forty years by Lisbeth Salander, a young computer hacker.",
       imageUrl:
@@ -186,6 +192,7 @@ export const seedData = async () => {
     },
     {
       title: "The Social Network",
+      year: 2010,
       description:
         "Harvard student Mark Zuckerberg creates the social networking site that would become known as Facebook, but is later sued by two brothers who claimed he stole their idea, and the co-founder who was later squeezed out of the business.",
       imageUrl:
@@ -195,6 +202,7 @@ export const seedData = async () => {
     },
     {
       title: "Avengers: Age of Ultron",
+      year: 2015,
       description:
         "When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it's up to Earth's mightiest heroes to stop the villainous Ultron from enacting his terrible plan.",
       imageUrl:
@@ -204,6 +212,7 @@ export const seedData = async () => {
     },
     {
       title: "Interstellar",
+      year: 2014,
       description:
         "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
       imageUrl:
@@ -213,6 +222,7 @@ export const seedData = async () => {
     },
     {
       title: "The Lord of the Rings: The Fellowship of the Ring",
+      year: 2001,
       description:
         "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
       imageUrl:
@@ -222,6 +232,7 @@ export const seedData = async () => {
     },
     {
       title: "Star Wars: Episode IV - A New Hope",
+      year: 1977,
       description:
         "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
       imageUrl:
@@ -231,6 +242,7 @@ export const seedData = async () => {
     },
     {
       title: "Back to the Future",
+      year: 1985,
       description:
         "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.",
       imageUrl:
@@ -240,6 +252,7 @@ export const seedData = async () => {
     },
     {
       title: "The World's End",
+      year: 2013,
       description:
         "Five friends who reunite in an attempt to top their epic pub crawl from twenty years earlier unwittingly become humanity's only hope for survival.",
       imageUrl:
@@ -249,6 +262,7 @@ export const seedData = async () => {
     },
     {
       title: "Hot Fuzz",
+      year: 2007,
       description:
         "A skilled London police officer is transferred to a small town with a dark secret.",
       imageUrl:
@@ -258,6 +272,7 @@ export const seedData = async () => {
     },
     {
       title: "The Prestige",
+      year: 2006,
       description:
         "After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion while sacrificing everything they have to outwit each other.",
       imageUrl:
@@ -267,6 +282,7 @@ export const seedData = async () => {
     },
     {
       title: "The Dark Knight Rises",
+      year: 2012,
       description:
         "Eight years after the Joker's reign of anarchy, Batman, with the help of the enigmatic Catwoman, is forced from his exile to save Gotham City, now on the edge of total annihilation, from the brutal guerrilla terrorist Bane.",
       imageUrl:
@@ -276,6 +292,7 @@ export const seedData = async () => {
     },
     {
       title: "Inception",
+      year: 2010,
       description:
         "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
       imageUrl:
@@ -285,6 +302,7 @@ export const seedData = async () => {
     },
     {
       title: "The Dark Knight",
+      year: 2008,
       description:
         "When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham. The Dark Knight must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
       imageUrl:
@@ -294,6 +312,7 @@ export const seedData = async () => {
     },
     {
       title: "Batman Begins",
+      year: 2005,
       description:
         "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
       imageUrl:
@@ -303,6 +322,7 @@ export const seedData = async () => {
     },
     {
       title: "Back to the Future Part II",
+      year: 1989,
       description:
         "After visiting 2015, Marty McFly must repeat his visit to 1955 to prevent disastrous changes to 1985...without interfering with his first trip.",
       imageUrl:
