@@ -61,6 +61,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
           />
         }
         imageUrl={movie.imageUrl}
+        imageAlt={movie.title}
         topSection={
           <>
             <Typography variant="h6">Directed by</Typography>

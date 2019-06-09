@@ -21,6 +21,7 @@ function DirectorDetails({ director, loading, onEditClick }) {
     <Details
       title={director.name}
       imageUrl={director.imageUrl}
+      imageAlt={director.name}
       topSection={
         <>
           <Typography variant="h6">Biography</Typography>

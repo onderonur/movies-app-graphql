@@ -26,6 +26,7 @@ function Details({
   title,
   titleExtra,
   imageUrl,
+  imageAlt,
   topSection,
   bottomSection,
   onEditClick,
@@ -101,7 +102,7 @@ function Details({
       <DialogContent>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
-            <BaseImage src={imageUrl} aspectRatio="original" />
+            <BaseImage src={imageUrl} alt={imageAlt} aspectRatio="original" />
           </Grid>
           <Grid item xs={12} sm={8}>
             {topSection}
