@@ -25,7 +25,7 @@ function DirectorDetails({ director, loading, onEditClick }) {
       topSection={
         <>
           <Typography variant="h6">Biography</Typography>
-          <ReadMore maxLine={15}>{director.bio}</ReadMore>
+          <ReadMore maxLineCount={15}>{director.bio}</ReadMore>
         </>
       }
       bottomSection={

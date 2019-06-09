@@ -1,20 +1,15 @@
-import React, { useState } from "react";
-import useCheckOverflow from "hooks/useCheckOverflow";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { fade } from "@material-ui/core/styles";
 import { Typography, Button, Box } from "@material-ui/core";
 import clsx from "clsx";
-
-const LINE_HEIGHT = 1.5;
+import useResizeObserver from "hooks/useResizeObserver";
 
 const useStyles = makeStyles(theme => ({
   text: {
     whiteSpace: "pre-wrap",
-    overflow: "hidden",
-    fontSize: "1rem",
-    lineHeight: LINE_HEIGHT,
-    maxHeight: ({ maxLine, isExpanded }) =>
-      isExpanded ? "none" : `${maxLine * LINE_HEIGHT}rem`
+    maxHeight: ({ maxHeight }) => maxHeight,
+    overflow: "hidden"
   },
   fade: {
     background: `linear-gradient(to bottom, ${fade(
@@ -27,26 +22,51 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ReadMore({ className, maxLine, hasFade, children }) {
-  const [ref, { overflowedY }] = useCheckOverflow();
+function ReadMore({ maxLineCount, hasFade = true, children }) {
+  const [ref, { width, height }] = useResizeObserver();
+  const [showToggle, setShowToggle] = useState();
   const [isExpanded, setIsExpanded] = useState(false);
-  const classes = useStyles({ maxLine, isExpanded });
+  const [maxHeight, setMaxHeight] = useState("none");
+  const classes = useStyles({
+    maxHeight
+  });
 
   function toggleReadMore() {
     const next = !isExpanded;
     setIsExpanded(next);
   }
 
+  function getDOMNodeProperty(node, property) {
+    return window.getComputedStyle(node).getPropertyValue(property);
+  }
+
+  useEffect(() => {
+    const node = ref.current;
+    if (node) {
+      const lineHeight = getDOMNodeProperty(node, "line-height").replace(
+        "px",
+        ""
+      );
+      setMaxHeight(isExpanded ? "none" : maxLineCount * lineHeight);
+
+      const actualHeight = node.scrollHeight;
+      const lineCount = actualHeight / lineHeight;
+      setShowToggle(lineCount > maxLineCount);
+    }
+  }, [maxLineCount, ref, isExpanded, width, height]);
+
   return (
     <>
-      <Typography ref={ref} className={clsx(classes.text, className)}>
+      <Typography ref={ref} className={clsx(classes.text)}>
         {children}
       </Typography>
-      {hasFade && overflowedY ? <div className={classes.fade} /> : null}
-      {overflowedY || isExpanded ? (
+      {hasFade && showToggle && !isExpanded ? (
+        <div className={classes.fade} />
+      ) : null}
+      {showToggle ? (
         <Box display="flex" justifyContent="flex-end">
           <Button size="small" color="primary" onClick={toggleReadMore}>
-            {`Show ${overflowedY ? "More" : "Less"}`}
+            {`Show ${isExpanded ? "Less" : "More"}`}
           </Button>
         </Box>
       ) : null}
