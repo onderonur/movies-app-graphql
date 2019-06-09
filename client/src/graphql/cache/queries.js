@@ -27,3 +27,9 @@ export const GET_AUTH_MODAL_STATE = gql`
     }
   }
 `;
+
+export const GET_DARK_THEME = gql`
+  query getDarkTheme {
+    darkTheme @client
+  }
+`;

@@ -3,9 +3,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider, Query } from "react-apollo";
 import * as serviceWorker from "./serviceWorker";
-import theme from "./theme";
 import { getDefaults, schema, resolvers } from "./graphql/cache";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
@@ -13,14 +12,15 @@ import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
-import { GET_USER_INFO } from "./graphql/cache/queries";
+import { GET_USER_INFO, GET_DARK_THEME } from "./graphql/cache/queries";
 import { UNAUTHENTICATED } from "./constants/errorCodes";
 import {
-  clearUserInfoFromStorage,
   pushNotificationToCache,
   showAuthModal
 } from "./graphql/cache/resolvers";
 import { ThemeProvider } from "@material-ui/styles";
+import { getMuiTheme, removeFromLocalStorage } from "utils";
+import localStorageKeys from "constants/localStorageKeys";
 
 const httpLink = createHttpLink({
   uri: "/graphql"
@@ -58,7 +58,7 @@ const client = new ApolloClient({
         graphQLErrors.forEach(error => {
           if (error.extensions.code === UNAUTHENTICATED) {
             if (!clearedUserInfo) {
-              clearUserInfoFromStorage();
+              removeFromLocalStorage(localStorageKeys.userInfo);
 
               cache.writeData({ data: getDefaults() });
 
@@ -105,11 +105,21 @@ client.onResetStore(() => {
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <App />
-      </Router>
-    </ThemeProvider>
+    <Query query={GET_DARK_THEME}>
+      {({ data }) => {
+        const { darkTheme } = data;
+
+        const theme = getMuiTheme(darkTheme);
+
+        return (
+          <ThemeProvider theme={theme}>
+            <Router>
+              <App />
+            </Router>
+          </ThemeProvider>
+        );
+      }}
+    </Query>
   </ApolloProvider>,
   document.getElementById("root")
 );

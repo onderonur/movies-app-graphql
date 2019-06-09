@@ -43,3 +43,9 @@ export const HIDE_AUTH_MODAL = gql`
     hideAuthModal @client
   }
 `;
+
+export const TOGGLE_DARK_THEME = gql`
+  mutation toggleDarkTheme {
+    toggleDarkTheme @client
+  }
+`;

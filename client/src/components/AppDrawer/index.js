@@ -9,7 +9,7 @@ import {
 import DrawerContent from "./DrawerContent";
 import { withRouter } from "react-router-dom";
 import useDetectMobile from "hooks/useDetectMobile";
-import DrawerToggler from "./DrawerToggler";
+import DrawerToggle from "./DrawerToggle";
 import clsx from "clsx";
 
 const widthTransition = theme =>
@@ -79,7 +79,7 @@ function AppDrawer({ children, location }) {
         disableSwipeToOpen={!isMobile}
       >
         <Toolbar>
-          <DrawerToggler toggleDrawer={toggleDrawer} />
+          <DrawerToggle toggleDrawer={toggleDrawer} />
         </Toolbar>
         <Divider />
         <DrawerContent isDrawerOpen={open} />

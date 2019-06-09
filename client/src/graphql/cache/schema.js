@@ -5,6 +5,7 @@ const schema = gql`
     notifications: [NotificationInfo]!
     userInfo: UserInfo
     authModal: AuthModalState!
+    darkTheme: boolean!
   }
 
   extend type Mutation {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import UserMenu from "./UserMenu";
-import DrawerToggler from "components/AppDrawer/DrawerToggler";
+import DrawerToggle from "components/AppDrawer/DrawerToggle";
 import { GET_USER_INFO } from "graphql/cache/queries";
 import { Query } from "react-apollo";
 import { makeStyles, Box, IconButton } from "@material-ui/core";
@@ -45,7 +45,7 @@ function Header({ toggleDrawer }) {
           </>
         ) : (
           <>
-            <DrawerToggler toggleDrawer={toggleDrawer} />
+            <DrawerToggle toggleDrawer={toggleDrawer} />
 
             <Box
               flex={1}

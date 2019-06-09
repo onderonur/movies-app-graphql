@@ -1,5 +1,6 @@
 const localStorageKeys = {
-  userInfo: "userInfo"
+  userInfo: "userInfo",
+  darkTheme: "darkTheme"
 };
 
 export default localStorageKeys;

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ReadMore({ className, maxLine, hasFade = true, children }) {
+function ReadMore({ className, maxLine, hasFade, children }) {
   const [ref, { overflowedY }] = useCheckOverflow();
   const [isExpanded, setIsExpanded] = useState(false);
   const classes = useStyles({ maxLine, isExpanded });

@@ -1,4 +1,4 @@
-import { GET_NOTIFICATIONS, GET_AUTH_MODAL_STATE } from "./queries";
+import { GET_NOTIFICATIONS, GET_DARK_THEME } from "./queries";
 import {
   NotificationInfo,
   UserInfo,
@@ -7,19 +7,7 @@ import {
 import localStorageKeys from "constants/localStorageKeys";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 import { DIRECTOR_FRAGMENT } from "graphql/director/fragment";
-
-function decodeJWT(token) {
-  return JSON.parse(decodeURIComponent(escape(atob(token.split(".")[1]))));
-}
-
-function storeUserInfoToStorage(userInfo) {
-  const jsonString = JSON.stringify(userInfo);
-  localStorage.setItem(localStorageKeys.userInfo, jsonString);
-}
-
-export function clearUserInfoFromStorage() {
-  localStorage.clear(localStorageKeys.userInfo);
-}
+import { storeToLocalStorage, removeFromLocalStorage, decodeJWT } from "utils";
 
 export function pushNotificationToCache(cache, message) {
   const query = GET_NOTIFICATIONS;
@@ -45,10 +33,7 @@ export function pushNotificationToCache(cache, message) {
 }
 
 export function showAuthModal(cache, mode) {
-  const cacheData = cache.readQuery({ query: GET_AUTH_MODAL_STATE });
-
   const data = {
-    ...cacheData,
     authModal: {
       __typename: AuthModalState,
       open: true,
@@ -85,31 +70,30 @@ const resolvers = {
         notifications: notifications.slice(1)
       };
 
-      cache.writeQuery({
-        query,
+      cache.writeData({
         data: newData
       });
 
       return notifications[0];
     },
     storeUserInfo: (parent, { token }, { client, cache }) => {
+      const decodedToken = decodeJWT(token);
+
       const userInfo = {
-        ...decodeJWT(token),
+        ...decodedToken,
         token
       };
 
-      storeUserInfoToStorage(userInfo);
+      // Sometimes, you may want to reset the store entirely, such as when a user logs
+      // out. To accomplish this, use client.resetStore to clear out your Apollo cache.
+      // Since client.resetStore also refetches any of your active queries for you,
+      // it is asynchronous.
 
-      /**
-       * Sometimes, you may want to reset the store entirely, such as when a user logs
-       * out. To accomplish this, use client.resetStore to clear out your Apollo cache.
-       * Since client.resetStore also refetches any of your active queries for you,
-       * it is asynchronous.
-       *
-       * If you want to clear the store but don’t want to refetch active queries,
-       * use client.clearStore() instead of client.resetStore().
-       */
+      // If you want to clear the store but don’t want to refetch active queries,
+      // use client.clearStore() instead of client.resetStore().
       client.resetStore();
+
+      storeToLocalStorage(localStorageKeys.userInfo, userInfo);
 
       // TODO: isLoggedIn alanı vs eklenebilir.
       // Bu örneğe bi bak
@@ -126,9 +110,9 @@ const resolvers = {
       return userInfo;
     },
     clearUserInfo: (parent, args, { client, cache }) => {
-      clearUserInfoFromStorage();
-
       client.resetStore();
+
+      removeFromLocalStorage(localStorageKeys.userInfo);
 
       cache.writeData({
         data: {
@@ -149,10 +133,7 @@ const resolvers = {
       return null;
     },
     hideAuthModal: (parent, args, { client }) => {
-      const cacheData = client.readQuery({ query: GET_AUTH_MODAL_STATE });
-
       const data = {
-        ...cacheData,
         authModal: {
           __typename: AuthModalState,
           open: false,
@@ -163,6 +144,16 @@ const resolvers = {
       client.writeData({ data });
 
       return null;
+    },
+    toggleDarkTheme: (parent, args, { client }) => {
+      const cacheData = client.readQuery({ query: GET_DARK_THEME });
+      const data = {
+        darkTheme: !cacheData.darkTheme
+      };
+
+      storeToLocalStorage(localStorageKeys.darkTheme, data);
+
+      client.writeData({ data });
     }
   },
   Movie: {

@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DrawerToggler({ toggleDrawer }) {
+function DrawerToggle({ toggleDrawer }) {
   const classes = useStyles();
 
   return (
@@ -30,4 +30,4 @@ function DrawerToggler({ toggleDrawer }) {
   );
 }
 
-export default DrawerToggler;
+export default DrawerToggle;
