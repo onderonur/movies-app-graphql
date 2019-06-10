@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { fade } from "@material-ui/core/styles";
 import { Typography, Button, Box } from "@material-ui/core";
 import clsx from "clsx";
-import useResizeObserver from "hooks/useResizeObserver";
+import useMultilineTruncate from "hooks/useMultilineTruncate";
 
 const useStyles = makeStyles(theme => ({
   text: {
@@ -23,10 +23,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ReadMore({ maxLineCount, hasFade = true, children }) {
-  const [ref, { width, height }] = useResizeObserver();
-  const [showToggle, setShowToggle] = useState();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [maxHeight, setMaxHeight] = useState("none");
+  const { ref, maxHeight, hasMore } = useMultilineTruncate({
+    maxLineCount,
+    truncate: !isExpanded
+  });
   const classes = useStyles({
     maxHeight
   });
@@ -36,25 +37,7 @@ function ReadMore({ maxLineCount, hasFade = true, children }) {
     setIsExpanded(next);
   }
 
-  function getDOMNodeProperty(node, property) {
-    return window.getComputedStyle(node).getPropertyValue(property);
-  }
-
-  useEffect(() => {
-    const node = ref.current;
-    if (node) {
-      const lineHeight = getDOMNodeProperty(node, "line-height").replace(
-        "px",
-        ""
-      );
-      setMaxHeight(isExpanded ? "none" : maxLineCount * lineHeight);
-
-      const actualHeight = node.scrollHeight;
-      const lineCount = actualHeight / lineHeight;
-      setShowToggle(lineCount > maxLineCount);
-    }
-  }, [maxLineCount, ref, isExpanded, width, height]);
-
+  const showToggle = hasMore || isExpanded;
   return (
     <>
       <Typography ref={ref} className={clsx(classes.text)}>
