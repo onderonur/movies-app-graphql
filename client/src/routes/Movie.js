@@ -3,8 +3,8 @@ import React from "react";
 import paths from "constants/paths";
 import EditableDetailsDialog from "components/EditableDetailsDialog";
 import { GET_MOVIE } from "graphql/movie/queries";
-import MovieForm from "./MovieForm";
-import MovieDetails from "./MovieDetails";
+import MovieForm from "components/MovieForm";
+import MovieDetails from "components/MovieDetails";
 import { useModalGallery } from "react-router-modal-gallery";
 
 function Movie({

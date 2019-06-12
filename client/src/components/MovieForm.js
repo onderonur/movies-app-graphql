@@ -1,4 +1,3 @@
-// OK
 import React, { useContext } from "react";
 import * as Yup from "yup";
 import { NotificationContext } from "App";
@@ -10,8 +9,8 @@ import {
   BaseDialogForm
 } from "components/BaseComponents";
 import { REQUIRED_ERROR, INVALID_VALUE } from "constants/formErrors";
-import DirectorSelect from "./DirectorSelect";
-import MovieMutation from "./MovieMutation";
+import DirectorSelect from "components/DirectorSelect";
+import MovieMutation from "components/MutationComponents/MovieMutation";
 import { DialogContent } from "@material-ui/core";
 import LoadingIndicator from "components/LoadingIndicator";
 import ImageUrlInput from "components/ImageUrlInput";

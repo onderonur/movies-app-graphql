@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import Directors from "pages/Directors";
-import Movies from "pages/Movies";
+import Directors from "routes/Directors";
+import Movies from "routes/Movies";
 import paths from "constants/paths";
-import Director from "pages/Director";
-import Movie from "pages/Movie";
+import Director from "routes/Director";
+import Movie from "routes/Movie";
 import { ModalSwitch, ModalRoute } from "react-router-modal-gallery";
 
 const idRegex = "(\\d+|new)";

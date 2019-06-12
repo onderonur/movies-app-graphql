@@ -1,4 +1,3 @@
-// OK!!
 import React from "react";
 import { BaseTextField, BaseImage } from "components/BaseComponents";
 import { Box } from "@material-ui/core";

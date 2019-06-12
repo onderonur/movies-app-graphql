@@ -1,4 +1,3 @@
-// OK
 import React from "react";
 import { BaseTextField } from "components/BaseComponents";
 import YouTubePlayer from "components/YoutubePlayer";

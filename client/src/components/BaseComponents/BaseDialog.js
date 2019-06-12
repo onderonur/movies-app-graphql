@@ -1,4 +1,3 @@
-// OK!!
 import React, { useState, useEffect } from "react";
 import { Dialog, withMobileDialog } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -18,7 +17,6 @@ const useStyles = makeStyles(theme => ({
 
 export const BaseDialogContext = React.createContext();
 
-// TODO: Dialog'un min width'ini ayarla. Movie dialog, youtubeplayer yokken çok küçük oluyor.
 function BaseDialog({
   open,
   onClose,

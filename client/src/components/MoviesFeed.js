@@ -1,7 +1,6 @@
-// OK!!
 import React from "react";
 import { GET_MOVIES } from "graphql/movie/queries";
-import MovieListQuery from "./MovieListQuery";
+import MovieListQuery from "components/QueryComponents/MovieListQuery";
 import InfiniteScrollWrapper from "components/InfiniteScrollWrapper";
 
 function resolvePagingResponse(root) {
@@ -14,35 +13,35 @@ function resolvePagingResponse(root) {
   return { nodes, hasNextPage };
 }
 
-function onLoadMore(fetchMore, movies, variables) {
-  fetchMore({
-    query: GET_MOVIES,
-    variables: {
-      ...variables,
-      after: movies.pageInfo.endCursor
-    },
-    updateQuery: (previousResult, { fetchMoreResult }) => {
-      const newEdges = fetchMoreResult.movies.edges;
-      const pageInfo = fetchMoreResult.movies.pageInfo;
-
-      return {
-        // Put the new movies at the end of the list and update `pageInfo`
-        // so we have the new `endCursor` and `hasNextPage` values
-        movies: {
-          ...previousResult.movies,
-          edges: [...previousResult.movies.edges, ...newEdges],
-          pageInfo
-        }
-      };
-    }
-  });
-}
-
 function MoviesFeed({ filter, children }) {
   const variables = {
     first: 10,
     ...filter
   };
+
+  function handleLoadMore(fetchMore, movies, variables) {
+    fetchMore({
+      query: GET_MOVIES,
+      variables: {
+        ...variables,
+        after: movies.pageInfo.endCursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const newEdges = fetchMoreResult.movies.edges;
+        const pageInfo = fetchMoreResult.movies.pageInfo;
+
+        return {
+          // Put the new movies at the end of the list and update `pageInfo`
+          // so we have the new `endCursor` and `hasNextPage` values
+          movies: {
+            ...previousResult.movies,
+            edges: [...previousResult.movies.edges, ...newEdges],
+            pageInfo
+          }
+        };
+      }
+    });
+  }
 
   return (
     <MovieListQuery variables={variables}>
@@ -52,7 +51,7 @@ function MoviesFeed({ filter, children }) {
           <InfiniteScrollWrapper
             hasNextPage={hasNextPage}
             loading={loading}
-            loadMore={() => onLoadMore(fetchMore, movies, variables)}
+            loadMore={() => handleLoadMore(fetchMore, movies, variables)}
           >
             {children({ movies: nodes, loading })}
           </InfiniteScrollWrapper>

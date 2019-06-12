@@ -4,7 +4,7 @@ import { isAdmin } from "./authorization";
 export default {
   Query: {
     directors: async (parent, args, { models }) => {
-      return await models.Director.findAll({ order: [["id", "ASC"]] });
+      return await models.Director.findAll({ order: [["id", "DESC"]] });
     },
     director: async (parent, { id }, { models }) => {
       return await models.Director.findByPk(id);

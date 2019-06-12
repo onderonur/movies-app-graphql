@@ -1,4 +1,3 @@
-// OK
 import React, { useContext } from "react";
 import { NotificationContext } from "App";
 import ConfirmDialog from "components/ConfirmDialog";

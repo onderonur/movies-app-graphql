@@ -1,8 +1,7 @@
-// OK!!
 import React from "react";
 import GridListContainer from "components/GridListContainer";
-import DirectorListQuery from "./DirectorListQuery";
-import DirectorGridListTile from "./DirectorGridListTile";
+import DirectorListQuery from "components/QueryComponents/DirectorListQuery";
+import DirectorGridListTile from "components/DirectorGridListTile";
 
 function Directors() {
   return (

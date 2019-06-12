@@ -1,4 +1,3 @@
-// OK!!
 import React, { useState, useEffect, useRef } from "react";
 import {
   Divider,

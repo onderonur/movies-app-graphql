@@ -1,9 +1,8 @@
-// OK!!
 import React from "react";
 import * as Yup from "yup";
 import { BaseTextField, BaseFormik } from "components/BaseComponents";
 import { REQUIRED_ERROR } from "constants/formErrors";
-import DirectorMutation from "./DirectorMutation";
+import DirectorMutation from "components/MutationComponents/DirectorMutation";
 import LoadingIndicator from "components/LoadingIndicator";
 import { DialogContent } from "@material-ui/core";
 import { BaseDialogForm } from "components/BaseComponents";

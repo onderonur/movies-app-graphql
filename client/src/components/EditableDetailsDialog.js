@@ -1,4 +1,3 @@
-// OK!!
 import React, { useState } from "react";
 import { Query } from "react-apollo";
 import { BaseDialog } from "./BaseComponents";

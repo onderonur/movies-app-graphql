@@ -1,14 +1,14 @@
 import React from "react";
 import { Typography, DialogContent, Grid, makeStyles } from "@material-ui/core";
 import YouTubePlayer from "components/YoutubePlayer";
-import MovieLikeButton from "pages/Movies/MovieLikeButton";
+import MovieLikeButton from "components/MovieLikeButton";
 import paths from "constants/paths";
 import { BaseGridList } from "components/BaseComponents";
-import DeleteMovieConfirmDialog from "pages/Movie/DeleteMovieConfirmDialog";
+import DeleteMovieConfirmDialog from "components/DeleteMovieConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 import { BaseLink } from "components/BaseComponents";
 import { useModalGallery } from "react-router-modal-gallery";
-import MovieGridListTile from "pages/Movies/MovieGridListTile";
+import MovieGridListTile from "components/MovieGridListTile";
 import Details from "components/Details";
 import { getNonDeletedItems } from "utils";
 

@@ -1,4 +1,3 @@
-// OK!!
 import React from "react";
 import AddIcon from "@material-ui/icons/Add";
 import { roles } from "constants/roles";

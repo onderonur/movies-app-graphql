@@ -1,4 +1,3 @@
-// OK
 import React, { useContext } from "react";
 import { Mutation } from "react-apollo";
 import { GET_DIRECTORS } from "graphql/director/queries";

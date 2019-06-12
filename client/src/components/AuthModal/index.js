@@ -1,9 +1,8 @@
-// OK!!
 import React from "react";
 import { Query, Mutation } from "react-apollo";
 import { GET_AUTH_MODAL_STATE } from "graphql/cache/queries";
 import LoginForm from "./LoginForm";
-import SignUpModal from "./SignUpModal";
+import SignUpForm from "./SignUpForm";
 import { HIDE_AUTH_MODAL, STORE_USER_INFO } from "graphql/cache/mutations";
 import { BaseDialog } from "components/BaseComponents";
 
@@ -38,7 +37,7 @@ function AuthModal() {
                     case LOGIN:
                       return <LoginForm {...sharedProps} />;
                     case SIGNUP:
-                      return <SignUpModal {...sharedProps} />;
+                      return <SignUpForm {...sharedProps} />;
                     default:
                       return null;
                   }

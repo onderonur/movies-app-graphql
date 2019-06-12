@@ -1,7 +1,6 @@
-// OK
 import React from "react";
-import DirectorDetails from "./DirectorDetails";
-import DirectorForm from "./DirectorForm";
+import DirectorDetails from "components/DirectorDetails";
+import DirectorForm from "components/DirectorForm";
 import paths from "constants/paths";
 import EditableDetailsDialog from "components/EditableDetailsDialog";
 import { GET_DIRECTOR } from "graphql/director/queries";

@@ -1,8 +1,7 @@
-// OK!!
 import React from "react";
 import { Checkbox, makeStyles } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
-import MovieLikeMutation from "./MovieLikeMutation";
+import MovieLikeMutation from "components/MutationComponents/MovieLikeMutation";
 
 const useStyles = makeStyles(theme => ({
   star: ({ viewerHasLiked }) => ({

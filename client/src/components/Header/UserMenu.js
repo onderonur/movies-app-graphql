@@ -1,4 +1,3 @@
-// OK!!
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem } from "@material-ui/core";
 import AccountCircle from "@material-ui/icons/AccountCircle";

@@ -1,4 +1,3 @@
-// OK!!
 import React from "react";
 import { GridListTile, GridListTileBar } from "@material-ui/core";
 import paths from "constants/paths";

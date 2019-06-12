@@ -1,7 +1,6 @@
-// OK!!
 import React, { useState } from "react";
 import { BaseAutoSearch } from "components/BaseComponents";
-import MovieListQuery from "pages/Movies/MovieListQuery";
+import MovieListQuery from "components/QueryComponents/MovieListQuery";
 import { withRouter } from "react-router-dom";
 import paths from "constants/paths";
 import { pushToModalRoute } from "utils";

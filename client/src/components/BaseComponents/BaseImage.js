@@ -1,4 +1,3 @@
-// OK!!
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import placeholderPng from "assets/placeholder.png";

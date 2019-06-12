@@ -1,10 +1,10 @@
 import React from "react";
 import { Typography, DialogContent, Grid } from "@material-ui/core";
 import { BaseGridList } from "components/BaseComponents";
-import DeleteDirectorConfirmDialog from "./DeleteDirectorConfirmDialog";
+import DeleteDirectorConfirmDialog from "components/DeleteDirectorConfirmDialog";
 import LoadingIndicator from "components/LoadingIndicator";
 import { useModalGallery } from "react-router-modal-gallery";
-import MovieGridListTile from "pages/Movies/MovieGridListTile";
+import MovieGridListTile from "components/MovieGridListTile";
 import Details from "components/Details";
 import ReadMore from "components/ReadMore";
 import { getNonDeletedItems } from "utils";

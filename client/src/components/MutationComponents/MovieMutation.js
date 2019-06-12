@@ -1,4 +1,3 @@
-// OK
 import React from "react";
 import { Mutation } from "react-apollo";
 import { UPDATE_MOVIE, CREATE_MOVIE } from "graphql/movie/mutations";

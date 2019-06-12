@@ -1,8 +1,7 @@
-// OK!!
 import React, { useMemo } from "react";
-import MoviesFeed from "./MoviesFeed";
+import MoviesFeed from "components/MoviesFeed";
 import GridListContainer from "components/GridListContainer";
-import MovieGridListTile from "./MovieGridListTile";
+import MovieGridListTile from "components/MovieGridListTile";
 import queryString from "query-string";
 
 function Movies({ location: { search } }) {

@@ -1,4 +1,3 @@
-// OK
 import { useTheme } from "@material-ui/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 

@@ -1,4 +1,3 @@
-// OK!!
 import React, { useContext } from "react";
 import { DialogTitle, makeStyles, Typography, Box } from "@material-ui/core";
 import BaseDialogCloseButton from "./BaseDialogCloseButton";
