@@ -2,11 +2,6 @@ import { combineResolvers } from "graphql-resolvers";
 import { isAdmin } from "./authorization";
 
 export default {
-  Director: {
-    movies: async ({ id }, args, { models }) => {
-      return await models.Movie.findAll({ where: { directorId: id } });
-    }
-  },
   Query: {
     directors: async (parent, args, { models }) => {
       return await models.Director.findAll({ order: [["id", "ASC"]] });
@@ -82,6 +77,11 @@ export default {
         };
       }
     )
+  },
+  Director: {
+    movies: async ({ id }, args, { models }) => {
+      return await models.Movie.findAll({ where: { directorId: id } });
+    }
   },
   MutationResponse: {
     __resolveType: parent => {

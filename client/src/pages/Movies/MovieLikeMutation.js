@@ -8,17 +8,18 @@ import {
   MovieLikedStatus
 } from "constants/graphTypes";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
+import { getCacheKey } from "graphql/cache/resolvers";
 
-function readMovieFragment(cache, id) {
+function readMovieFragment(cache, cacheKey) {
   return cache.readFragment({
-    id: `Movie:${id}`,
+    id: cacheKey,
     fragment: MOVIE_FRAGMENT
   });
 }
 
-function writeMovieFragment(cache, id, data) {
+function writeMovieFragment(cache, cacheKey, data) {
   cache.writeFragment({
-    id: `Movie:${id}`,
+    id: cacheKey,
     fragment: MOVIE_FRAGMENT,
     data
   });
@@ -34,11 +35,12 @@ function likeMovieUpdate(
     }
   }
 ) {
-  const movieFragment = readMovieFragment(cache, movieId);
+  const cacheKey = getCacheKey("Movie", movieId);
+  const movieFragment = readMovieFragment(cache, cacheKey);
 
   const data = { ...movieFragment, viewerHasLiked };
 
-  writeMovieFragment(cache, movieId, data);
+  writeMovieFragment(cache, cacheKey, data);
 }
 
 function unlikeMovieUpdate(
@@ -51,11 +53,12 @@ function unlikeMovieUpdate(
     }
   }
 ) {
-  const movieFragment = readMovieFragment(cache, movieId);
+  const cacheKey = getCacheKey("Movie", movieId);
+  const movieFragment = readMovieFragment(cache, cacheKey);
 
   const data = { ...movieFragment, viewerHasLiked };
 
-  writeMovieFragment(cache, movieId, data);
+  writeMovieFragment(cache, cacheKey, data);
 }
 
 function MovieLikeMutation({ movieId, viewerHasLiked, children }) {

@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 export const BaseDialogContext = React.createContext();
 
+// TODO: Dialog'un min width'ini ayarla. Movie dialog, youtubeplayer yokken çok küçük oluyor.
 function BaseDialog({
   open,
   onClose,

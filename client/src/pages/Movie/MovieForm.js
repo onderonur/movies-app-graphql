@@ -9,7 +9,7 @@ import {
   BaseFormik,
   BaseDialogForm
 } from "components/BaseComponents";
-import { REQUIRED_ERROR, INVALID_URL } from "constants/formErrors";
+import { REQUIRED_ERROR, INVALID_VALUE } from "constants/formErrors";
 import DirectorSelect from "./DirectorSelect";
 import MovieMutation from "./MovieMutation";
 import { DialogContent } from "@material-ui/core";
@@ -60,14 +60,10 @@ function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
               title: Yup.string().required(REQUIRED_ERROR),
               year: Yup.number()
                 .required(REQUIRED_ERROR)
-                .test({
-                  name: "len",
-                  message: "Please enter a valid year.",
-                  test: value => value.toString().length === 4
-                }),
-              description: Yup.number().required(REQUIRED_ERROR),
-              directorId: Yup.string().required(REQUIRED_ERROR),
-              imageUrl: Yup.string().url(INVALID_URL)
+                .moreThan(999, INVALID_VALUE("year"))
+                .lessThan(10000, INVALID_VALUE("year")),
+              description: Yup.string().required(REQUIRED_ERROR),
+              directorId: Yup.string().required(REQUIRED_ERROR)
             })}
             onSubmit={handleSubmit(saveMovie)}
           >

@@ -4,13 +4,16 @@ import { NotificationContext } from "App";
 import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_MOVIE } from "graphql/movie/mutations";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
+import { getCacheKey } from "graphql/cache/resolvers";
 
 const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
   const { success, movie: deletedMovie } = deleteMovie;
 
+  const cacheKey = getCacheKey("Movie", deletedMovie.id);
+
   if (success) {
     const movie = cache.readFragment({
-      id: `Movie:${deletedMovie.id}`,
+      id: cacheKey,
       fragment: MOVIE_FRAGMENT
     });
 
@@ -21,7 +24,7 @@ const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
 
     // Write our data back to the cache.
     cache.writeFragment({
-      id: `Movie:${deletedMovie.id}`,
+      id: cacheKey,
       fragment: MOVIE_FRAGMENT,
       data: movieWithDeletedFlag
     });

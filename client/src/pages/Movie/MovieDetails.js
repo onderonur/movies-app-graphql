@@ -14,7 +14,6 @@ import { getNonDeletedItems } from "utils";
 
 const useStyles = makeStyles(theme => ({
   year: {
-    marginLeft: theme.spacing(0.5),
     color: theme.palette.text.secondary
   }
 }));
@@ -46,14 +45,7 @@ function MovieDetails({ movie, loading, onEditClick }) {
   ) : movie ? (
     <>
       <Details
-        title={
-          <>
-            <Typography variant="h6">{movie.title}</Typography>
-            <Typography className={classes.year} variant="h6">{`(${
-              movie.year
-            })`}</Typography>
-          </>
-        }
+        title="Movie"
         titleExtra={
           <MovieLikeButton
             movieId={movie.id}
@@ -64,6 +56,10 @@ function MovieDetails({ movie, loading, onEditClick }) {
         imageAlt={movie.title}
         topSection={
           <>
+            <Typography variant="h5">
+              {movie.title}
+              <span className={classes.year}>{` (${movie.year})`}</span>
+            </Typography>
             <Typography variant="h6">Directed by</Typography>
             <Typography>{directorLink}</Typography>
             <Typography variant="h6">Overview</Typography>

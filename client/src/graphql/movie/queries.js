@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 import { MOVIE_FRAGMENT } from "./fragments";
-import { DIRECTOR_FRAGMENT } from "graphql/director/fragment";
 
 export const GET_MOVIES = gql`
   query GetMovies($first: Int, $after: Cursor, $title: String) {
@@ -9,7 +8,10 @@ export const GET_MOVIES = gql`
         node {
           ...movie
           director {
-            ...director
+            __typename
+            id
+            name
+            __deleted @client
           }
         }
       }
@@ -20,7 +22,6 @@ export const GET_MOVIES = gql`
     }
   }
   ${MOVIE_FRAGMENT}
-  ${DIRECTOR_FRAGMENT}
 `;
 
 export const GET_MOVIE = gql`
@@ -30,7 +31,8 @@ export const GET_MOVIE = gql`
       description
       youtubeId
       director {
-        ...director
+        id
+        name
         movies {
           ...movie
         }
@@ -38,5 +40,4 @@ export const GET_MOVIE = gql`
     }
   }
   ${MOVIE_FRAGMENT}
-  ${DIRECTOR_FRAGMENT}
 `;

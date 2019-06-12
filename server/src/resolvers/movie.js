@@ -3,29 +3,6 @@ import { combineResolvers } from "graphql-resolvers";
 import { isAuthenticated, isAdmin } from "./authorization";
 
 export default {
-  Movie: {
-    director: async ({ directorId }, args, { loaders }) => {
-      // While the load() function takes each identifier individually,
-      // it will batch all these identifiers into one set and request all users at the same time.
-      // Instead of fetching each (duplicated) user on its own,
-      // you fetch them all at once in one batched request with the dataloader package.
-      return await loaders.directorLoader.load(directorId);
-    },
-    viewerHasLiked: async ({ id }, args, { loaders, viewer }) => {
-      if (viewer) {
-        const likedMovie = await loaders.likedMovieLoader.load(id);
-        return !!likedMovie;
-      }
-
-      return false;
-    }
-  },
-  PageInfo: {
-    startCursor: ({ startCursor }) => startCursor,
-    endCursor: ({ endCursor }) => endCursor,
-    hasPreviousPage: ({ hasPreviousPage }) => hasPreviousPage(),
-    hasNextPage: ({ hasNextPage }) => hasNextPage()
-  },
   Query: {
     movies: async (
       parent,
@@ -210,6 +187,29 @@ export default {
         }
       }
     )
+  },
+  Movie: {
+    director: async ({ directorId }, args, { loaders }) => {
+      // While the load() function takes each identifier individually,
+      // it will batch all these identifiers into one set and request all users at the same time.
+      // Instead of fetching each (duplicated) user on its own,
+      // you fetch them all at once in one batched request with the dataloader package.
+      return await loaders.directorLoader.load(directorId);
+    },
+    viewerHasLiked: async ({ id }, args, { loaders, viewer }) => {
+      if (viewer) {
+        const likedMovie = await loaders.likedMovieLoader.load(id);
+        return !!likedMovie;
+      }
+
+      return false;
+    }
+  },
+  PageInfo: {
+    startCursor: ({ startCursor }) => startCursor,
+    endCursor: ({ endCursor }) => endCursor,
+    hasPreviousPage: ({ hasPreviousPage }) => hasPreviousPage(),
+    hasNextPage: ({ hasNextPage }) => hasNextPage()
   },
   MutationResponse: {
     // TODO: Bu resolveType olayına bak gerekli mi

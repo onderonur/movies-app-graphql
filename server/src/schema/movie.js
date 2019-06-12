@@ -1,15 +1,34 @@
 import gql from "graphql-tag";
 
 export default gql`
-  type MovieEdge {
-    cursor: Cursor!
-    node: Movie
+  extend type Query {
+    movies(
+      before: Cursor
+      after: Cursor
+      first: Int
+      last: Int
+      title: String
+    ): MovieConnection
+    movie(id: ID!): Movie
+  }
+
+  extend type Mutation {
+    createMovie(movie: MovieInput!): MovieMutationResponse
+    updateMovie(id: ID!, movie: MovieInput!): MovieMutationResponse
+    deleteMovie(id: ID!): MovieMutationResponse
+    likeMovie(movieId: ID!): MovieLikedMutationResponse!
+    unlikeMovie(movieId: ID!): MovieLikedMutationResponse!
   }
 
   type MovieConnection {
     edges: [MovieEdge]
     pageInfo: PageInfo!
     totalCount: Int
+  }
+
+  type MovieEdge {
+    cursor: Cursor!
+    node: Movie
   }
 
   type Movie {
@@ -47,24 +66,5 @@ export default gql`
   type MovieLikedStatus {
     movieId: ID!
     viewerHasLiked: Boolean!
-  }
-
-  extend type Query {
-    movies(
-      before: Cursor
-      after: Cursor
-      first: Int
-      last: Int
-      title: String
-    ): MovieConnection
-    movie(id: ID!): Movie
-  }
-
-  extend type Mutation {
-    createMovie(movie: MovieInput!): MovieMutationResponse
-    updateMovie(id: ID!, movie: MovieInput!): MovieMutationResponse
-    deleteMovie(id: ID!): MovieMutationResponse
-    likeMovie(movieId: ID!): MovieLikedMutationResponse!
-    unlikeMovie(movieId: ID!): MovieLikedMutationResponse!
   }
 `;

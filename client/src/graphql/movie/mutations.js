@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
 import { MOVIE_FRAGMENT } from "./fragments";
 
-// Fragment kullan
 export const CREATE_MOVIE = gql`
   mutation CreateMovie($movie: MovieInput!) {
     createMovie(movie: $movie) {

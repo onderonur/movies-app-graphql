@@ -17,15 +17,16 @@ function DirectorSelect({ name, label, required, fullWidth, margin }) {
           required={required}
           margin={margin}
         >
-          {loading ? (
-            <LoadingIndicator />
-          ) : (
-            directors.map(director => (
-              <MenuItem key={director.id} value={director.id}>
-                {director.name}
-              </MenuItem>
-            ))
-          )}
+          <MenuItem value="">
+            {loading ? <LoadingIndicator /> : <em>None</em>}
+          </MenuItem>
+          {directors
+            ? directors.map(director => (
+                <MenuItem key={director.id} value={director.id}>
+                  {director.name}
+                </MenuItem>
+              ))
+            : null}
         </BaseTextField>
       )}
     </DirectorListQuery>

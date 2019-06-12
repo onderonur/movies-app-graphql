@@ -5,18 +5,6 @@ import userSchema from "./user";
 import customScalars from "./customScalars";
 
 const linkSchema = gql`
-  type PageInfo {
-    startCursor: Cursor
-    endCursor: Cursor
-    hasPreviousPage: Boolean!
-    hasNextPage: Boolean!
-  }
-
-  interface MutationResponse {
-    success: Boolean!
-    message: String
-  }
-
   type Query {
     _: Boolean!
   }
@@ -27,6 +15,18 @@ const linkSchema = gql`
 
   type Subscription {
     _: Boolean!
+  }
+  
+  type PageInfo {
+    startCursor: Cursor
+    endCursor: Cursor
+    hasPreviousPage: Boolean!
+    hasNextPage: Boolean!
+  }
+
+  interface MutationResponse {
+    success: Boolean!
+    message: String
   }
 `;
 

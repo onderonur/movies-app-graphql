@@ -5,9 +5,8 @@ import {
   AuthModalState
 } from "constants/graphTypes";
 import localStorageKeys from "constants/localStorageKeys";
-import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
-import { DIRECTOR_FRAGMENT } from "graphql/director/fragment";
 import { storeToLocalStorage, removeFromLocalStorage, decodeJWT } from "utils";
+import gql from "graphql-tag";
 
 export function pushNotificationToCache(cache, message) {
   const query = GET_NOTIFICATIONS;
@@ -44,13 +43,24 @@ export function showAuthModal(cache, mode) {
   cache.writeData({ data });
 }
 
-function getDeletedFlag(cache, type, id, fragment) {
-  const cachedData = cache.readFragment({
-    id: `${type}:${id}`,
-    fragment: fragment
-  });
+// TODO: Bunun apollo'dan gelen hazırı varsa onu kullan. Bi bak.
+export function getCacheKey(__typename, id) {
+  return `${__typename}:${id}`;
+}
 
-  return cachedData ? cachedData.__deleted : null;
+function getDeletedFlag(cache, __typename, id, fragment) {
+  // TODO: Buradaki exception için daha iyi bi yöntem var mı bak?
+  // Cache'de ilgili alanı bulamayınca patlıyo yoksa (new director oluştur mesela, refetch'ler patlıyo)
+  try {
+    const cachedData = cache.readFragment({
+      id: getCacheKey(__typename, id),
+      fragment: fragment
+    });
+
+    return cachedData.__deleted;
+  } catch (err) {
+    return null;
+  }
 }
 
 const resolvers = {
@@ -158,12 +168,32 @@ const resolvers = {
   },
   Movie: {
     __deleted: ({ id }, args, { cache }) => {
-      return getDeletedFlag(cache, "Movie", id, MOVIE_FRAGMENT);
+      return getDeletedFlag(
+        cache,
+        "Movie",
+        id,
+        gql`
+          fragment movieDeleted on Movie {
+            id
+            __deleted @client
+          }
+        `
+      );
     }
   },
   Director: {
     __deleted: ({ id }, args, { cache }) => {
-      return getDeletedFlag(cache, "Director", id, DIRECTOR_FRAGMENT);
+      return getDeletedFlag(
+        cache,
+        "Director",
+        id,
+        gql`
+          fragment directorDeleted on Director {
+            id
+            __deleted @client
+          }
+        `
+      );
     }
   }
 };

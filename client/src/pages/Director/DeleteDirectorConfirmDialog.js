@@ -5,6 +5,7 @@ import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_DIRECTOR } from "graphql/director/mutations";
 import { GET_DIRECTORS } from "graphql/director/queries";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
+import { getCacheKey } from "graphql/cache/resolvers";
 
 // TODO: Buradaki açıklamaları düzelt
 // When a director is deleted, it cascades and all of related movies are delete from DB.
@@ -19,8 +20,10 @@ const cleanMoviesOfDirectorFromCache = director => cache => {
     const directorMovies = director.movies;
 
     directorMovies.forEach(movie => {
+      const cacheKey = getCacheKey("Movie", movie.id);
+
       const cachedData = cache.readFragment({
-        id: `Movie:${movie.id}`,
+        id: cacheKey,
         fragment: MOVIE_FRAGMENT
       });
 
@@ -30,7 +33,7 @@ const cleanMoviesOfDirectorFromCache = director => cache => {
       };
 
       cache.writeFragment({
-        id: `Movie:${movie.id}`,
+        id: cacheKey,
         fragment: MOVIE_FRAGMENT,
         data: movieWithDeletedFlag
       });

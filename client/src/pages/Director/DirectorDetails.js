@@ -19,13 +19,16 @@ function DirectorDetails({ director, loading, onEditClick }) {
     </DialogContent>
   ) : (
     <Details
-      title={director.name}
+      title="Director"
       imageUrl={director.imageUrl}
       imageAlt={director.name}
       topSection={
         <>
+          <Typography variant="h5">{director.name}</Typography>
           <Typography variant="h6">Biography</Typography>
-          <ReadMore maxLineCount={15}>{director.bio}</ReadMore>
+          <ReadMore maxLineCount={15} hasToggle hasFade>
+            {director.bio}
+          </ReadMore>
         </>
       }
       bottomSection={

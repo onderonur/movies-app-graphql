@@ -21,6 +21,9 @@ function YearSelect({ name, label, required, fullWidth, margin }) {
       required={required}
       margin={margin}
     >
+      <MenuItem value="">
+        <em>None</em>
+      </MenuItem>
       {years.reverse().map(year => (
         <MenuItem key={year} value={year}>
           {year}

@@ -2,7 +2,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { BaseTextField, BaseFormik } from "components/BaseComponents";
-import { REQUIRED_ERROR, INVALID_URL } from "constants/formErrors";
+import { REQUIRED_ERROR } from "constants/formErrors";
 import DirectorMutation from "./DirectorMutation";
 import LoadingIndicator from "components/LoadingIndicator";
 import { DialogContent } from "@material-ui/core";
@@ -14,12 +14,12 @@ import { roles } from "constants/roles";
 function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
   const newDirector = !director;
 
-  const handleSubmit = saveDirector => (values, { setSubmitting }) => {
+  const handleSubmit = saveDirector => values => {
     const variables = newDirector
       ? { director: values }
       : { id: director.id, director: values };
 
-    saveDirector({ variables: variables }).catch(() => setSubmitting(false));
+    saveDirector({ variables: variables });
   };
 
   return loading ? (
@@ -38,8 +38,7 @@ function DirectorForm({ director, loading, onSubmitCompleted, onCancel }) {
             }}
             validationSchema={Yup.object().shape({
               name: Yup.string().required(REQUIRED_ERROR),
-              bio: Yup.string().required(REQUIRED_ERROR),
-              imageUrl: Yup.string().url(INVALID_URL)
+              bio: Yup.string().required(REQUIRED_ERROR)
             })}
             onSubmit={handleSubmit(saveDirector)}
           >

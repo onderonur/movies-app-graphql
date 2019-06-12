@@ -28,23 +28,20 @@ function BaseDialogTitle({
 
   return (
     <DialogTitle disableTypography className={classes.root}>
-      <Box display="flex" alignItems="center">
+      <Box display="flex" flexGrow={1} alignItems="center" minWidth={0}>
         {showBackButton || fullScreen ? (
           <BaseDialogCloseButton onClick={onBackButtonClick} />
         ) : null}
 
-        {children ? (
-          typeof children === "string" ? (
-            <Typography variant="h6" className={classes.title}>
-              {children}
-            </Typography>
-          ) : (
-            <>{children}</>
-          )
+        {typeof children === "string" ? (
+          <Typography variant="h6" className={classes.title} noWrap>
+            {children}
+          </Typography>
         ) : (
-          <div className={classes.title} />
+          children
         )}
       </Box>
+
       <Box display="flex" alignItems="center">
         {extra}
       </Box>
