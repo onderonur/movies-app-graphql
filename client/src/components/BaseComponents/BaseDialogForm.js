@@ -4,7 +4,24 @@ import {
   BaseDialogTitle,
   BaseFormActions
 } from "components/BaseComponents";
-import { DialogContent, DialogActions, Divider } from "@material-ui/core";
+import {
+  DialogContent,
+  DialogActions,
+  Divider,
+  makeStyles
+} from "@material-ui/core";
+
+// TODO: Mobile modal'da content'i full uzatıp action'ları en alta koymak için bu kısım
+// Daha iyi bi yöntem bulunursa o da olabilir
+const useStyles = makeStyles(theme => ({
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    flex: 1,
+    overflowX: "hidden",
+    overflowY: "auto"
+  }
+}));
 
 function BaseDialogForm({
   title,
@@ -14,8 +31,10 @@ function BaseDialogForm({
   actions,
   defaultActions
 }) {
+  const classes = useStyles();
+
   return (
-    <BaseForm>
+    <BaseForm className={classes.form}>
       <BaseDialogTitle>{title}</BaseDialogTitle>
       <DialogContent>{children}</DialogContent>
       {actions !== null ? (

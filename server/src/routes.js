@@ -11,7 +11,7 @@ routes.get("/seed-data", (req, res) => {
   if (isDevEnv) {
     seedData().then(() => {
       res.json({
-        msg: "Data is ready."
+        msg: "Data is ready"
       });
     });
   }
@@ -26,7 +26,7 @@ routes.get("/clear-data", (req, res) => {
       models.User.destroy({ where: {} })
     ]).then(() => {
       res.json({
-        msg: "Data is cleared."
+        msg: "Data is cleared"
       });
     });
   }

@@ -10,7 +10,7 @@ import { AuthenticationError, ForbiddenError } from "apollo-server";
 // next resolver (skip), or performing another action, like returning an error. In this case,
 // an error is returned when the viewer user is not available. Since it is a resolver function itself, it has the same arguments as a normal resolver.
 export const isAuthenticated = (parent, args, { viewer }) =>
-  viewer ? skip : new AuthenticationError("Not authenticated user.");
+  viewer ? skip : new AuthenticationError("Not authenticated user");
 
 // Role-based GraphQL Authorization
 // * This resolver checks to see if the authenticated user has the ADMIN role. If it doesn’t, the resolver returns an error;
@@ -23,5 +23,5 @@ export const isAdmin = combineResolvers(
   (parent, args, { viewer: { role } }) =>
     // No need to use "throw" here. This function returns the result already.
     // If we use curly brackets, we need to use "return" and "throw"
-    role === "ADMIN" ? skip : new ForbiddenError("Not authorized as admin.")
+    role === "ADMIN" ? skip : new ForbiddenError("Not authorized as admin")
 );

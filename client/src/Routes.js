@@ -6,6 +6,7 @@ import paths from "constants/paths";
 import Director from "routes/Director";
 import Movie from "routes/Movie";
 import { ModalSwitch, ModalRoute } from "react-router-modal-gallery";
+import AccountSettings from "routes/AccountSettings";
 
 const idRegex = "(\\d+|new)";
 
@@ -31,6 +32,7 @@ function Routes() {
     <ModalSwitch renderModal={() => modalRoutesArray}>
       <Route exact path={paths.MOVIES} component={Movies} />
       <Route exact path={paths.DIRECTORS} component={Directors} />
+      <Route path={paths.ACCOUNT_SETTINGS} component={AccountSettings} />
       {modalRoutesArray}
       <Route path="*" render={() => <Redirect to="/movies" />} />
     </ModalSwitch>

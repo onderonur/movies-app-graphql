@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { NotificationContext } from "App";
+import React from "react";
 import { Mutation } from "react-apollo";
 import { LIKE_MOVIE, UNLIKE_MOVIE } from "graphql/movie/mutations";
 import {
@@ -8,6 +7,7 @@ import {
 } from "constants/graphTypes";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 import { getCacheKey } from "graphql/cache/resolvers";
+import useNotifier from "hooks/useNotifier";
 
 function readMovieFragment(cache, cacheKey) {
   return cache.readFragment({
@@ -61,7 +61,7 @@ function unlikeMovieUpdate(
 }
 
 function MovieLikeMutation({ movieId, viewerHasLiked, children }) {
-  const { pushNotification } = useContext(NotificationContext);
+  const { pushNotification } = useNotifier();
 
   const optimisticResponse = {
     __typename: MovieLikedMutationResponse,

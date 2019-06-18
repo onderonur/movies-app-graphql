@@ -6,7 +6,7 @@ const movie = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: "A movie has to have a title."
+          msg: "A movie has to have a title"
         }
       }
     },

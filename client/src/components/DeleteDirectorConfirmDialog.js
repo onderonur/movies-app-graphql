@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import { NotificationContext } from "App";
+import React from "react";
 import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_DIRECTOR } from "graphql/director/mutations";
 import { GET_DIRECTORS } from "graphql/director/queries";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 import { getCacheKey } from "graphql/cache/resolvers";
+import useNotifier from "hooks/useNotifier";
 
 // TODO: Buradaki açıklamaları düzelt
 // When a director is deleted, it cascades and all of related movies are delete from DB.
@@ -43,7 +43,7 @@ const cleanMoviesOfDirectorFromCache = director => cache => {
 };
 
 function DeleteDirectorConfirmDialog({ open, director, onClose, onCompleted }) {
-  const { pushNotification } = useContext(NotificationContext);
+  const { pushNotification } = useNotifier();
 
   return (
     <ConfirmDialog

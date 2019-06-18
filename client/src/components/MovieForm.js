@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Yup from "yup";
-import { NotificationContext } from "App";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
 import {
@@ -16,9 +15,10 @@ import LoadingIndicator from "components/LoadingIndicator";
 import ImageUrlInput from "components/ImageUrlInput";
 import YoutubeIdInput from "components/YoutubeIdInput";
 import YearSelect from "components/YearSelect";
+import useNotifier from "hooks/useNotifier";
 
 function MovieForm({ movie, loading, onSubmitCompleted, onCancel }) {
-  const { pushNotification } = useContext(NotificationContext);
+  const { pushNotification } = useNotifier();
 
   function handleSubmitCompleted(data) {
     const mutationResult = movie ? data.updateMovie : data.createMovie;

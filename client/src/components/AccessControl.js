@@ -1,13 +1,10 @@
 import React from "react";
-import { Query } from "react-apollo";
-import { GET_USER_INFO } from "graphql/cache/queries";
+import UserInfoQuery from "components/QueryComponents/UserInfoQuery";
 
 function AccessControl({ allowedRoles, children }) {
   return (
-    <Query query={GET_USER_INFO}>
-      {({ data: { userInfo } }) => {
-        const isLoggedIn = !!userInfo;
-
+    <UserInfoQuery>
+      {({ isLoggedIn, userInfo }) => {
         if (!isLoggedIn) {
           return null;
         }
@@ -20,7 +17,7 @@ function AccessControl({ allowedRoles, children }) {
 
         return children;
       }}
-    </Query>
+    </UserInfoQuery>
   );
 }
 

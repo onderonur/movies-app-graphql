@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { NotificationContext } from "App";
+import React from "react";
 import ConfirmDialog from "components/ConfirmDialog";
 import { DELETE_MOVIE } from "graphql/movie/mutations";
 import { MOVIE_FRAGMENT } from "graphql/movie/fragments";
 import { getCacheKey } from "graphql/cache/resolvers";
+import useNotifier from "hooks/useNotifier";
 
 const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
   const { success, movie: deletedMovie } = deleteMovie;
@@ -31,7 +31,7 @@ const deleteMovieUpdate = () => (cache, { data: { deleteMovie } }) => {
 };
 
 function DeleteMovieConfirmDialog({ open, movie, onClose, onCompleted }) {
-  const { pushNotification } = useContext(NotificationContext);
+  const { pushNotification } = useNotifier();
 
   return (
     movie && (

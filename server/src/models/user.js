@@ -16,7 +16,12 @@ const user = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        len: [6, 42]
+        len: {
+          // TODO: hash'lenmiş hali her türlü 6'yı geçiyor.
+          // Buradaki kontrolü araştır.
+          args: [6],
+          msg: "Password length can be 6 at minimum"
+        }
       }
     },
     firstname: {
@@ -51,11 +56,6 @@ const user = (sequelize, DataTypes) => {
     return user;
   };
 
-  // a hook function that is executed every time a user entity is created:
-  User.beforeCreate(async user => {
-    user.password = await user.generatePasswordHash();
-  });
-
   User.findByIdAndDelete = async id => {
     // To return the deleted record, we get it first.
     // Because "destroy" method only returns the count of affected rows.
@@ -75,7 +75,8 @@ const user = (sequelize, DataTypes) => {
       attributes: ["id"],
       include: [
         {
-          model: models.Movie
+          model: models.Movie,
+          attributes: ["id"]
         }
       ]
     });
@@ -85,8 +86,20 @@ const user = (sequelize, DataTypes) => {
 
   User.prototype.generatePasswordHash = async function() {
     const saltRounds = 10;
-    return await bcrypt.hash(this.password, saltRounds);
+    const passwordHash = await bcrypt.hash(this.password, saltRounds);
+    return passwordHash;
   };
+
+  // a hook function that is executed every time a user entity is created:
+  User.beforeCreate(async user => {
+    user.password = await user.generatePasswordHash();
+  });
+
+  User.beforeUpdate(async user => {
+    if (user.changed("password")) {
+      user.password = await user.generatePasswordHash();
+    }
+  });
 
   User.prototype.validatePassword = async function(password) {
     return await bcrypt.compare(password, this.password);

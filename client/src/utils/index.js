@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme, colors } from "@material-ui/core";
 
 export function getNonDeletedItems(items) {
   return items.filter(item => !item.__deleted);
@@ -13,17 +13,17 @@ export function pushToModalRoute(history, pathname) {
   });
 }
 
-// TODO: material-ui/color'u dene
 export function getMuiTheme(darkTheme) {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: "#00796b",
-        contrastText: "#fff"
+        // TODO: Bu dark tema için tonlamanın değişmesinin başka yolu var mı bi bak
+        main: colors.teal[darkTheme ? 400 : 500],
+        contrastText: colors.common.white
       },
       secondary: {
-        main: "#d32f2f",
-        contrastText: "#fff"
+        main: colors.red[darkTheme ? 400 : 500],
+        contrastText: colors.common.white
       },
       type: darkTheme ? "dark" : "light"
     }

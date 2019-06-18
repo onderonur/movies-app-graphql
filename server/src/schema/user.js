@@ -11,6 +11,7 @@ export default gql`
     signUp(input: SignUpInput!): Token!
     signIn(username: String!, password: String!): Token!
     deleteUser(id: ID!): UserMutationResponse!
+    changePassword(input: ChangePasswordInput!): PasswordMutationResponse!
   }
 
   input SignUpInput {
@@ -21,6 +22,12 @@ export default gql`
     passwordConfirmation: String!
   }
 
+  input ChangePasswordInput {
+    currentPassword: String!
+    newPassword: String!
+    newPasswordConfirmation: String!
+  }
+
   type Token {
     token: String!
   }
@@ -29,6 +36,11 @@ export default gql`
     success: Boolean!
     message: String
     user: User
+  }
+
+  type PasswordMutationResponse implements MutationResponse {
+    success: Boolean!
+    message: String
   }
 
   type User {

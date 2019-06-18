@@ -3,8 +3,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import UserMenu from "./UserMenu";
 import DrawerToggle from "components/AppDrawer/DrawerToggle";
-import { GET_USER_INFO } from "graphql/cache/queries";
-import { Query } from "react-apollo";
 import { makeStyles, Box, IconButton } from "@material-ui/core";
 import ButtonWithMutation from "components/ButtonWithMutation";
 import { SHOW_LOGIN_MODAL, SHOW_SIGNUP_MODAL } from "graphql/cache/mutations";
@@ -12,6 +10,7 @@ import useDetectMobile from "hooks/useDetectMobile";
 import SearchIcon from "@material-ui/icons/Search";
 import CloseIcon from "@material-ui/icons/Close";
 import MovieAutoSearch from "components/MovieAutoSearch";
+import UserInfoQuery from "components/QueryComponents/UserInfoQuery";
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -63,10 +62,8 @@ function Header({ toggleDrawer }) {
               )}
             </Box>
 
-            <Query query={GET_USER_INFO}>
-              {({ data: { userInfo } }) => {
-                const isLoggedIn = !!userInfo;
-
+            <UserInfoQuery>
+              {({ isLoggedIn }) => {
                 return isLoggedIn ? (
                   <UserMenu />
                 ) : (
@@ -86,7 +83,7 @@ function Header({ toggleDrawer }) {
                   </>
                 );
               }}
-            </Query>
+            </UserInfoQuery>
           </>
         )}
       </Toolbar>

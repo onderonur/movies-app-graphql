@@ -5,7 +5,7 @@ import {
   ApolloError
 } from "apollo-server";
 import { combineResolvers } from "graphql-resolvers";
-import { isAdmin } from "./authorization";
+import { isAdmin, isAuthenticated } from "./authorization";
 
 const accessTokenExpiresIn = "1d";
 
@@ -70,7 +70,7 @@ export default {
         }
       }
 
-      throw new AuthenticationError("Invalid login credentials.");
+      throw new AuthenticationError("Invalid login credentials");
     },
     deleteUser: combineResolvers(
       isAdmin,
@@ -89,6 +89,37 @@ export default {
           success: false,
           message: "Failed to delete user"
         };
+      }
+    ),
+    changePassword: combineResolvers(
+      isAuthenticated,
+      async (parent, { input }, { models, viewer }) => {
+        const { currentPassword, newPassword, newPasswordConfirmation } = input;
+
+        if (newPassword === newPasswordConfirmation) {
+          const { id } = viewer;
+          const user = await models.User.findByPk(id);
+
+          const isValid = await user.validatePassword(currentPassword);
+
+          if (isValid) {
+            await user.update({
+              password: newPassword
+            });
+
+            return {
+              success: true,
+              message: "Password has been updated succesfully"
+            };
+          }
+
+          return {
+            success: false,
+            message: "Current password is invalid"
+          };
+        }
+
+        throw new UserInputError("Passwords don't match");
       }
     )
   },

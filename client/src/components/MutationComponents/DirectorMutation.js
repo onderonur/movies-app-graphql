@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Mutation } from "react-apollo";
 import { GET_DIRECTORS } from "graphql/director/queries";
 import { CREATE_DIRECTOR, UPDATE_DIRECTOR } from "graphql/director/mutations";
-import { NotificationContext } from "App";
 import AccessControl from "components/AccessControl";
 import { roles } from "constants/roles";
+import useNotifier from "hooks/useNotifier";
 
 function DirectorMutation({ director, onCompleted, children }) {
-  const { pushNotification } = useContext(NotificationContext);
+  const { pushNotification } = useNotifier();
 
   const newDirector = !director;
 

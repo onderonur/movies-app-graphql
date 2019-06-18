@@ -1,13 +1,13 @@
-import React, { useMemo } from "react";
+import React from "react";
 import MoviesFeed from "components/MoviesFeed";
 import GridListContainer from "components/GridListContainer";
 import MovieGridListTile from "components/MovieGridListTile";
-import queryString from "query-string";
+import useQueryString from "hooks/useQueryString";
 
-function Movies({ location: { search } }) {
-  const searcyQuery = useMemo(() => queryString.parse(search), [search]);
+function Movies({ location }) {
+  const { title } = useQueryString({ location });
   const filter = {
-    title: searcyQuery.title
+    title
   };
 
   return (

@@ -8,6 +8,7 @@ export default gql`
       first: Int
       last: Int
       title: String
+      viewerHasLiked: Boolean
     ): MovieConnection
     movie(id: ID!): Movie
   }

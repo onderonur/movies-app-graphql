@@ -19,13 +19,13 @@ export default {
         if (!newDirector) {
           return {
             success: false,
-            message: "Failed to create director."
+            message: "Failed to create director"
           };
         }
 
         return {
           success: true,
-          message: "Created director successfully.",
+          message: "Created director successfully",
           director: newDirector
         };
       }
@@ -54,7 +54,7 @@ export default {
 
         return {
           success: false,
-          message: "Failed to update director."
+          message: "Failed to update director"
         };
       }
     ),
@@ -66,7 +66,7 @@ export default {
         if (!deletedDirector) {
           return {
             success: false,
-            message: "Failed to delete director."
+            message: "Failed to delete director"
           };
         }
 

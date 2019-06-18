@@ -10,10 +10,7 @@ import {
 import { GET_NOTIFICATIONS } from "./graphql/cache/queries";
 import AuthModal from "./components/AuthModal";
 import { CssBaseline } from "@material-ui/core";
-
-// Creating a context to use pushNotification mutation globally without
-// writing the same Mutation component every time we need it.
-export const NotificationContext = React.createContext();
+import { NotificationContext } from "hooks/useNotifier";
 
 function App() {
   return (
