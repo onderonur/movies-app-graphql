@@ -1,4 +1,4 @@
-import models from "./models";
+import models from "../app/app.models";
 import { AuthenticationError } from "apollo-server";
 import jwt from "jsonwebtoken";
 

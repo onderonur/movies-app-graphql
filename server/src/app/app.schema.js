@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
-import directorSchema from "./director";
-import movieSchema from "./movie";
-import userSchema from "./user";
-import customScalars from "./customScalars";
+import directorSchema from "../directors/director.schema";
+import movieSchema from "../movies/movie.schema";
+import userSchema from "../users/user.schema";
+import customScalars from "../shared/customScalars.schema";
 
 const linkSchema = gql`
   type Query {

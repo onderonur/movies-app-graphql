@@ -1,4 +1,7 @@
 import Sequelize from "sequelize";
+import userModel from "../users/user.model";
+import movieModel from "../movies/movie.model";
+import directorModel from "../directors/director.model";
 
 /**
  * You will see the DATABASE_URL environment variable isn’t there. But you should see that it is set as Heroku environment
@@ -15,18 +18,18 @@ if (process.env.DATABASE_URL) {
     process.env.DATABASE_PASSWORD,
     {
       dialect: "postgres",
-      logging: false
+      logging: false,
     }
   );
 }
 
 const models = {
-  Movie: sequelize.import("./movie"),
-  Director: sequelize.import("./director"),
-  User: sequelize.import("./user")
+  Movie: movieModel(sequelize, Sequelize.DataTypes),
+  Director: directorModel(sequelize, Sequelize.DataTypes),
+  User: userModel(sequelize, Sequelize.DataTypes),
 };
 
-Object.keys(models).forEach(key => {
+Object.keys(models).forEach((key) => {
   if ("associate" in models[key]) {
     models[key].associate(models);
   }

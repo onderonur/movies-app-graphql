@@ -1,5 +1,5 @@
 import { combineResolvers } from "graphql-resolvers";
-import { isAdmin } from "./authorization";
+import { isAdmin } from "../shared/authorization.utils";
 
 export default {
   Query: {
