@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import { combineResolvers } from "graphql-resolvers";
-import { isAuthenticated, isAdmin } from "./authorization";
+import { isAuthenticated, isAdmin } from "../shared/authorization.utils";
 
 export default {
   Query: {

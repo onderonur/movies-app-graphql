@@ -1,6 +1,6 @@
-import { seedData } from "./utils";
+import { seedData } from "../shared/shared.utils";
 import express from "express";
-import models from "./models";
+import models from "./app.models";
 
 const isDevEnv = process.env.NODE_ENV === "development";
 
@@ -11,7 +11,7 @@ routes.get("/seed-data", (req, res) => {
   if (isDevEnv) {
     seedData().then(() => {
       res.json({
-        msg: "Data is ready"
+        msg: "Data is ready",
       });
     });
   }
@@ -23,10 +23,10 @@ routes.get("/clear-data", (req, res) => {
     Promise.all([
       models.Movie.destroy({ where: {} }),
       models.Director.destroy({ where: {} }),
-      models.User.destroy({ where: {} })
+      models.User.destroy({ where: {} }),
     ]).then(() => {
       res.json({
-        msg: "Data is cleared"
+        msg: "Data is cleared",
       });
     });
   }

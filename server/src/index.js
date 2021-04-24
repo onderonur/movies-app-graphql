@@ -1,18 +1,15 @@
 // To use .env files
 import "dotenv/config";
-
 import express from "express";
-import routes from "./routes";
+import routes from "./app/app.routes";
 import path from "path";
-
 import { ApolloServer } from "apollo-server-express";
-import schema from "./schema";
-import resolvers from "./resolvers";
-import models, { sequelize } from "./models";
-import { seedData, getViewer } from "./utils";
-
+import schema from "./app/app.schema";
+import resolvers from "./app/app.resolvers";
+import models, { sequelize } from "./app/app.models";
+import loaders from "./app/app.loaders";
+import { seedData, getViewer } from "./shared/shared.utils";
 import DataLoader from "dataloader";
-import loaders from "./loaders";
 
 const server = new ApolloServer({
   // It can happen that the GraphQL schema is not available in GraphQL Playground for application in production.
@@ -34,16 +31,16 @@ const server = new ApolloServer({
         // DataLoader allows you to decouple unrelated parts of your application without sacrificing the performance of
         // batch data-loading. While the loader presents an API that loads individual values, all concurrent requests
         // will be coalesced and presented to your batch loading function.
-        directorLoader: new DataLoader(keys =>
+        directorLoader: new DataLoader((keys) =>
           loaders.director.batchDirectors(keys, { models })
         ),
-        likedMovieLoader: new DataLoader(keys =>
+        likedMovieLoader: new DataLoader((keys) =>
           loaders.movie.batchLikedMovies(keys, { models, viewer })
-        )
-      }
+        ),
+      },
     };
   },
-  formatError: error => {
+  formatError: (error) => {
     // remove the internal sequelize error message
     // leave only the important validation error
     const message = error.message
@@ -52,9 +49,9 @@ const server = new ApolloServer({
 
     return {
       ...error,
-      message
+      message,
     };
-  }
+  },
 });
 
 const app = express();
@@ -70,7 +67,7 @@ if (isProduction) {
   // Serve any static files
   app.use(express.static(path.join(__dirname, clientBuildPath)));
   // Handle React routing, return all requests to React app
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, clientBuildPath, "index.html"));
   });
 }
@@ -88,9 +85,7 @@ sequelize.sync({ force: isProduction }).then(async () => {
   }
 
   app.listen({ port }, () => {
-    if (!isProduction) {
-      // eslint-disable-next-line no-console
-      console.log(`🚀 Server is listening on http://localhost:${port}`);
-    }
+    // eslint-disable-next-line no-console
+    console.log(`🚀 Server is listening on http://localhost:${port}`);
   });
 });

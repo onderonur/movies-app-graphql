@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import {
   AuthenticationError,
   UserInputError,
-  ApolloError
+  ApolloError,
 } from "apollo-server";
 import { combineResolvers } from "graphql-resolvers";
-import { isAdmin, isAuthenticated } from "./authorization";
+import { isAdmin, isAuthenticated } from "../shared/authorization.utils";
 
 const accessTokenExpiresIn = "1d";
 
@@ -15,7 +15,7 @@ const createToken = async (user, secret, expiresIn) => {
     { id, username, firstname, lastname, role },
     secret,
     {
-      expiresIn
+      expiresIn,
     }
   );
   return token;
@@ -35,7 +35,7 @@ export default {
       }
 
       return await models.User.findByPk(viewer.id);
-    }
+    },
   },
 
   Mutation: {
@@ -81,13 +81,13 @@ export default {
           return {
             success: true,
             message: "Successfully deleted user",
-            user: deletedUser
+            user: deletedUser,
           };
         }
 
         return {
           success: false,
-          message: "Failed to delete user"
+          message: "Failed to delete user",
         };
       }
     ),
@@ -104,30 +104,30 @@ export default {
 
           if (isValid) {
             await user.update({
-              password: newPassword
+              password: newPassword,
             });
 
             return {
               success: true,
-              message: "Password has been updated succesfully"
+              message: "Password has been updated succesfully",
             };
           }
 
           return {
             success: false,
-            message: "Current password is invalid"
+            message: "Current password is invalid",
           };
         }
 
         throw new UserInputError("Passwords don't match");
       }
-    )
+    ),
   },
   MutationResponse: {
-    __resolveType: parent => {
+    __resolveType: (parent) => {
       if (parent.user) {
         return "User";
       }
-    }
-  }
+    },
+  },
 };
